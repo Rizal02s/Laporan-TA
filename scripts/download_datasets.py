@@ -20,14 +20,18 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 # Konfigurasi
 # ---------------------------------------------------------------------------
-OUTPUT_DIR = Path("data")
+# PENTING: path dihitung berdasarkan LOKASI FILE INI (scripts/download_datasets.py),
+# bukan berdasarkan posisi terminal saat script dijalankan. Ini mencegah data
+# tersimpan di folder yang salah (mis. scripts/data/) meskipun kamu menjalankan
+# script ini dari dalam folder scripts/ sekalipun.
+SCRIPT_DIR = Path(__file__).resolve().parent      # -> .../VAEP-Track/scripts
+PROJECT_ROOT = SCRIPT_DIR.parent                   # -> .../VAEP-Track
+OUTPUT_DIR = PROJECT_ROOT / "data"                 # -> .../VAEP-Track/data (SELALU di sini)
 METRICA_DIR = OUTPUT_DIR / "metrica_sample"
 SPORTEC_DIR = OUTPUT_DIR / "sportec_idsse"
 
 # 7 match ID resmi Sportec Open DFL Dataset (Bassek et al., 2025)
-SPORTEC_MATCH_IDS = [
-    "J03WPY", "J03WMX", "J03WN1", "J03WOH", "J03WOY", "J03WQQ", "J03WR9",
-]
+SPORTEC_MATCH_IDS = ["J03WPY", "J03WMX", "J03WN1", "J03WOH", "J03WOY", "J03WQQ", "J03WR9"]
 
 # Metrica Sample Data: 3 pertandingan tersedia (match_id 1, 2, 3)
 METRICA_MATCH_IDS = [1, 2, 3]
@@ -100,6 +104,9 @@ def verify():
 
 
 if __name__ == "__main__":
+    print(f"Root proyek terdeteksi di: {PROJECT_ROOT}")
+    print(f"Data akan disimpan ke     : {OUTPUT_DIR}")
+    print("(Path ini SELALU sama, tidak peduli dari folder mana kamu menjalankan script ini)\n")
     ensure_dirs()
     download_metrica()
     download_sportec()
