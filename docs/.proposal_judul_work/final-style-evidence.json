@@ -1,0 +1,118 @@
+{
+  "input": "C:\\VAEP-Track\\docs\\Proposal_Judul_VAEP-Track.docx",
+  "fonts_by_char_count": {},
+  "direct_run_formatting_runs": 99,
+  "direct_paragraph_formatting_paragraphs": 39,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 40,
+      "text": "Event + Tracking",
+      "style": "Normal"
+    },
+    {
+      "para_index": 41,
+      "text": "Turnover + Episode",
+      "style": "Normal"
+    },
+    {
+      "para_index": 42,
+      "text": "Anotasi Behavior",
+      "style": "Normal"
+    },
+    {
+      "para_index": 43,
+      "text": "Baseline + Temporal GNN",
+      "style": "Normal"
+    },
+    {
+      "para_index": 44,
+      "text": "Outcome + Valuasi",
+      "style": "Normal"
+    },
+    {
+      "para_index": 50,
+      "text": "Aspek",
+      "style": "Normal"
+    },
+    {
+      "para_index": 51,
+      "text": "Keterangan",
+      "style": "Normal"
+    },
+    {
+      "para_index": 68,
+      "text": "Aspek",
+      "style": "Normal"
+    },
+    {
+      "para_index": 69,
+      "text": "Bauer dan Anzer (2021)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 70,
+      "text": "VAEP-Track",
+      "style": "Normal"
+    }
+  ],
+  "examples": {
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 1,
+        "text": "VAEP-Track: Deteksi dan Analisis Efektivitas Gegenpressing pada Transisi Kehilangan Bola Menggunakan Temporal Graph Neur",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "text": "1. Judul Penelitian",
+        "style": "Heading 1"
+      },
+      {
+        "para_index": 3,
+        "text": "Judul yang direkomendasikan: VAEP-Track: Deteksi dan Analisis Efektivitas Gegenpressing pada Transisi Kehilangan Bola Me",
+        "style": "Normal"
+      },
+      {
+        "para_index": 4,
+        "text": "2. Latar Belakang dan Gambaran Metode",
+        "style": "Heading 1"
+      },
+      {
+        "para_index": 5,
+        "text": "Permasalahan: Gegenpressing adalah respons tekanan segera setelah sebuah tim kehilangan bola. Perilaku ini bersifat kole",
+        "style": "Normal"
+      }
+    ],
+    "direct_run_formatting": [
+      {
+        "para_index": 1,
+        "run_text": "VAEP-Track: Deteksi dan Analisis Efektivitas Gegenpressing pada Transisi Kehilan",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "run_text": "Judul yang direkomendasikan: ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "run_text": "VAEP-Track: Deteksi dan Analisis Efektivitas Gegenpressing pada Transisi Kehilan",
+        "style": "Normal"
+      },
+      {
+        "para_index": 5,
+        "run_text": "Permasalahan: ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 5,
+        "run_text": "Gegenpressing adalah respons tekanan segera setelah sebuah tim kehilangan bola. ",
+        "style": "Normal"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}

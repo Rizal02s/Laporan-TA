@@ -1,0 +1,46 @@
+{
+  "final_run": false,
+  "device": "cuda",
+  "random_state": 42,
+  "best_epoch": 15,
+  "epochs_run": 21,
+  "batch_size": 4,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "feature_normalizer": {
+    "indices": [
+      0,
+      1,
+      2
+    ],
+    "mean": [
+      0.5747831463813782,
+      0.47271183133125305,
+      8.953420639038086
+    ],
+    "std": [
+      0.25114116072654724,
+      0.22469156980514526,
+      7.816908359527588
+    ],
+    "fit_split": "train"
+  },
+  "usable_samples": 26,
+  "split_counts": {
+    "train": 20,
+    "validation": 3,
+    "test": 3
+  },
+  "readiness": {
+    "all_annotations_completed": false,
+    "all_labels_valid": true,
+    "candidate_id_unique": true,
+    "confidence_complete": true,
+    "confidence_valid": true,
+    "uncertain_have_notes": true,
+    "annotator_complete": true,
+    "both_classes_in_every_split": true,
+    "minimum_per_class_in_every_split": false,
+    "uncertain_excluded": true
+  }
+}

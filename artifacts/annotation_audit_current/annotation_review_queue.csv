@@ -1,0 +1,3 @@
+candidate_id,match_id,split,period_id,loss_timestamp,loss_frame,is_gegenpressing,annotation_confidence,annotation_notes,annotated_at_utc,annotator,review_reason
+J03WOH_P2_F116224,J03WOH,train,2,0 days 00:10:48.960000,116224,-1.0,2.0,telat melakukan pressing,2026-10-01T07:51:14.951834+00:00,rizal,uncertain
+J03WR9_P1_F70062,J03WR9,train,1,0 days 00:40:02.480000,70062,-1.0,2.0,"sepertinya tim merah sedang menguasai bola, tetapi terrebut kembali dan terjadi serangan ke gawang",2026-10-01T07:52:31.792096+00:00,rizal,uncertain

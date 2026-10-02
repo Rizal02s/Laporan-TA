@@ -190,6 +190,108 @@ def initialize_annotation_manifest(
     return result
 
 
+def ensure_pilot_selection(
+    annotation_manifest,
+    output_path,
+    target_total=28,
+    random_state=42,
+):
+    """Create a reproducible cross-match pilot without discarding prior labels."""
+
+    result = annotation_manifest.copy()
+    if "pilot_selected" in result.columns and result["pilot_selected"].fillna(
+        False
+    ).astype(bool).any():
+        result["pilot_selected"] = result["pilot_selected"].fillna(False).astype(bool)
+        result["pilot_order"] = pd.to_numeric(
+            result["pilot_order"], errors="coerce"
+        ).astype("Int64")
+        return result
+
+    result["pilot_selected"] = False
+    result["pilot_order"] = pd.Series(pd.NA, index=result.index, dtype="Int64")
+
+    completed_indices = result.index[result["is_gegenpressing"].notna()].tolist()
+    if len(completed_indices) > target_total:
+        raise ValueError(
+            "Jumlah anotasi yang sudah selesai melebihi target pilot. "
+            "Naikkan target_total agar semua keputusan lama dipertahankan."
+        )
+
+    selected_indices = list(completed_indices)
+    remaining_slots = target_total - len(selected_indices)
+    completed_matches = set(result.loc[completed_indices, "match_id"])
+    available_matches = [
+        match_id
+        for match_id in sorted(result["match_id"].unique())
+        if match_id not in completed_matches
+    ]
+    if not available_matches and remaining_slots:
+        available_matches = sorted(result["match_id"].unique())
+
+    base_quota, extra = divmod(remaining_slots, len(available_matches))
+    match_quotas = [
+        base_quota + int(position < extra)
+        for position in range(len(available_matches))
+    ]
+    completed_positive = int(
+        result.loc[completed_indices, "quick_regain_success"].astype(int).sum()
+    )
+    target_positive = target_total // 2
+    remaining_positive = target_positive - completed_positive
+    base_positive = sum(quota // 2 for quota in match_quotas)
+    extra_positive = remaining_positive - base_positive
+    odd_quotas = sum(quota % 2 for quota in match_quotas)
+    if extra_positive < 0 or extra_positive > odd_quotas:
+        raise ValueError(
+            "Outcome label yang sudah selesai tidak dapat diseimbangkan dalam "
+            f"pilot berukuran {target_total}."
+        )
+    rng = np.random.default_rng(random_state)
+
+    for match_position, match_id in enumerate(available_matches):
+        match_quota = match_quotas[match_position]
+        if match_quota == 0:
+            continue
+
+        match_pool = result[
+            result["match_id"].eq(match_id)
+            & result["is_gegenpressing"].isna()
+            & ~result.index.isin(selected_indices)
+        ]
+        positive_quota = match_quota // 2
+        if match_quota % 2 and extra_positive > 0:
+            positive_quota += 1
+            extra_positive -= 1
+        negative_quota = match_quota - positive_quota
+
+        match_selection = []
+        for outcome, quota in ((1, positive_quota), (0, negative_quota)):
+            outcome_pool = match_pool[
+                match_pool["quick_regain_success"].astype(int).eq(outcome)
+            ]
+            if len(outcome_pool) < quota:
+                raise ValueError(
+                    f"{match_id} tidak memiliki {quota} sampel outcome={outcome} "
+                    "untuk pilot."
+                )
+            chosen = rng.choice(outcome_pool.index.to_numpy(), size=quota, replace=False)
+            match_selection.extend(chosen.tolist())
+
+        rng.shuffle(match_selection)
+        selected_indices.extend(match_selection)
+
+    if len(selected_indices) != target_total:
+        raise ValueError(
+            f"Pilot menghasilkan {len(selected_indices)} sampel, bukan {target_total}."
+        )
+
+    result.loc[selected_indices, "pilot_selected"] = True
+    result.loc[selected_indices, "pilot_order"] = np.arange(1, target_total + 1)
+    result.to_csv(output_path, index=False)
+    return result
+
+
 def _player_ids(tracking):
     return sorted({
         column[:-2]

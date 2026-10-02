@@ -1,0 +1,23 @@
+{
+  "final_run": false,
+  "models": [
+    "logistic_regression",
+    "temporal_gnn",
+    "xgboost"
+  ],
+  "checks": {
+    "at_least_two_models": true,
+    "unique_model_candidate_pairs": true,
+    "identical_candidate_sets": true,
+    "identical_candidate_records": true,
+    "all_splits_per_model": true,
+    "test_split_present": true,
+    "threshold_present": true,
+    "one_threshold_per_model": true,
+    "one_split_per_match": true,
+    "binary_ground_truth": true,
+    "probabilities_in_unit_interval": true,
+    "predictions_match_threshold": true
+  },
+  "test_candidates": 3
+}
