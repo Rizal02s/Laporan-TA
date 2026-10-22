@@ -1,0 +1,11 @@
+# Article progress handoff
+
+User requested delivery in stages after interruption. Deliverable stage 1 consists only of the three DOCX files in ../tahap_1/: Pendahuluan (3 pages), Tinjauan Pustaka (3 pages), Metode (6 pages). They use Arial throughout, author Rizal Andi Pranata, Program Studi Teknik Informatika, Institut Asia Malang. All pages rendered with Word COM and inspected; fonts, author, and absence of decorative title borders verified.
+
+Latest detailed section content is in detailed_sections.json and build_parts_detailed.py. build_article.py contains the older complete draft and the data-driven tables, reference list, abstracts, results and conclusion to extend for stage 2. Parent-folder full/part documents are initial drafts, not final deliverables; some inherited title borders remain there. Do not deliver them without updating and QA.
+
+Next requested-form parts are IV Hasil dan Pembahasan, V Simpulan, VI Daftar Pustaka dan Abstraksi. Keep shared bibliography numbering [1]-[8]. Tables 1-4 are already used in detailed parts II and III, so renumber results tables starting at 5 when continuing. Final combined manuscript should use the detailed first three sections.
+
+Facts verified 19 October 2026: 2353 candidates,1873 strict-valid,264 annotation queue;132 completed=105 positive16 negative11 uncertain;121 binary labels. Train115 usable,validation3,test3. Only smoke-training artifacts (26 pilot labels20/3/3) exist. Final training NOT_READY. Do not represent smoke metrics as final model findings. There are seven matches. Graph101x23x6,kNN4,92 directed edges/frame; graph distances normalized coordinates, baseline assumes105x68 meters. Actual annotation panel uses five static snapshots, not match video. Final experiment, interrater assessment, ablations, and VAEP valuation remain future work.
+
+Runtime: C:/Users/rizal/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe. Native Word export script render_word.ps1 accepts -articleDir. qa_pages.py accepts root directory and uses bundled Poppler. The prescribed render_docx.py was attempted and failed because no bundled/available soffice on Windows; rendering used Word COM invisible with read-only documents and PDF export, followed by Poppler PNGs. Do not use desktop LibreOffice. No files have been uploaded to Google Drive and no form submitted.

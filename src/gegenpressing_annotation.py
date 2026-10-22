@@ -190,6 +190,116 @@ def initialize_annotation_manifest(
     return result
 
 
+def initialize_full_annotation_manifest(
+    episode_manifest_path,
+    output_path,
+):
+    """Expand the manual queue to every strict-valid episode, keeping labels.
+
+    Existing annotations and pilot metadata are joined by ``candidate_id``.
+    New rows are left unlabeled and appended after the existing annotation
+    order. The prior manifest is copied to a timestamped backup before its
+    first expansion.
+    """
+
+    output_path = Path(output_path)
+    episode_manifest = pd.read_csv(episode_manifest_path)
+    strict_mask = episode_manifest["strict_valid"].astype(str).str.lower().isin(
+        {"true", "1"}
+    )
+    source = episode_manifest.loc[strict_mask].copy()
+    if "quick_regain_success" not in source and "label_regain_5s" in source:
+        source = source.rename(columns={"label_regain_5s": "quick_regain_success"})
+    if source["candidate_id"].duplicated().any():
+        raise ValueError("candidate_id episode strict-valid harus unik.")
+
+    if output_path.exists():
+        existing = pd.read_csv(output_path)
+        if existing["candidate_id"].duplicated().any():
+            raise ValueError("Manifest anotasi lama memiliki candidate_id duplikat.")
+        source_ids = set(source["candidate_id"])
+        unknown_ids = set(existing["candidate_id"]) - source_ids
+        if unknown_ids:
+            raise ValueError(
+                "Manifest lama memiliki kandidat yang tidak lagi strict-valid: "
+                f"{sorted(unknown_ids)[:5]}"
+            )
+
+        if (
+            len(existing) == len(source)
+            and set(existing["candidate_id"]) == source_ids
+            and "quick_regain_success" in existing.columns
+        ):
+            for column in ("is_gegenpressing", "annotation_confidence"):
+                existing[column] = pd.to_numeric(
+                    existing[column], errors="coerce"
+                ).astype("Int64")
+            return existing
+
+        old_count = len(existing)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        backup_dir = output_path.parent.parent.parent / "artifacts" / "annotation_manifest_backups"
+        backup_dir.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        backup_path = backup_dir / (
+            f"{output_path.stem}_before_full_expansion_{timestamp}{output_path.suffix}"
+        )
+        existing.to_csv(backup_path, index=False)
+    else:
+        existing = pd.DataFrame(columns=["candidate_id"])
+        old_count = 0
+
+    source = source.sort_values(
+        ["match_id", "period_id", "loss_timestamp", "loss_frame"]
+    ).reset_index(drop=True)
+    result = source.copy()
+    existing_by_id = existing.set_index("candidate_id", drop=False)
+
+    preserved_columns = [
+        "annotation_order",
+        *ANNOTATION_COLUMNS,
+        "pilot_selected",
+        "pilot_order",
+        "sample_target_per_outcome",
+        "within_match_order",
+    ]
+    for column in preserved_columns:
+        if column in existing_by_id.columns:
+            result[column] = result["candidate_id"].map(existing_by_id[column])
+        else:
+            result[column] = pd.NA
+
+    old_orders = pd.to_numeric(result["annotation_order"], errors="coerce")
+    if old_orders.loc[old_orders.notna()].duplicated().any():
+        raise ValueError("annotation_order pada manifest lama harus unik.")
+    next_order = int(old_orders.max()) + 1 if old_orders.notna().any() else 1
+    new_indices = result.index[old_orders.isna()]
+    result.loc[new_indices, "annotation_order"] = np.arange(
+        next_order, next_order + len(new_indices)
+    )
+    result["annotation_order"] = result["annotation_order"].astype(int)
+    result["is_gegenpressing"] = pd.to_numeric(
+        result["is_gegenpressing"], errors="coerce"
+    ).astype("Int64")
+    result["annotation_confidence"] = pd.to_numeric(
+        result["annotation_confidence"], errors="coerce"
+    ).astype("Int64")
+    if "pilot_selected" in result:
+        result["pilot_selected"] = result["pilot_selected"].fillna(False).astype(bool)
+    result = result.sort_values("annotation_order").reset_index(drop=True)
+
+    temp_path = output_path.with_suffix(output_path.suffix + ".tmp")
+    result.to_csv(temp_path, index=False)
+    temp_path.replace(output_path)
+    print(
+        f"Manifest anotasi diperluas: {old_count} dipertahankan, "
+        f"{len(result) - old_count} episode baru, total {len(result)}."
+    )
+    if old_count:
+        print(f"Cadangan manifest sebelumnya: {backup_path}")
+    return result
+
+
 def ensure_pilot_selection(
     annotation_manifest,
     output_path,

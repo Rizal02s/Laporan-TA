@@ -1,0 +1,125 @@
+{
+  "author": "Rizal Andi Pranata",
+  "affiliation": "Program Studi Teknik Informatika, Institut Asia Malang",
+  "date": "19 Oktober 2026",
+  "files": [
+    "C:\\VAEP-Track\\docs\\artikel_progres_2026-10-19\\Artikel_Lengkap_Gegenpressing_Rizal_2026-10-19.docx",
+    "C:\\VAEP-Track\\docs\\artikel_progres_2026-10-19\\Bagian_I_Pendahuluan.docx",
+    "C:\\VAEP-Track\\docs\\artikel_progres_2026-10-19\\Bagian_II_Tinjauan_Pustaka.docx",
+    "C:\\VAEP-Track\\docs\\artikel_progres_2026-10-19\\Bagian_III_Metode.docx",
+    "C:\\VAEP-Track\\docs\\artikel_progres_2026-10-19\\Bagian_IV_Hasil_dan_Pembahasan.docx",
+    "C:\\VAEP-Track\\docs\\artikel_progres_2026-10-19\\Bagian_V_Simpulan.docx",
+    "C:\\VAEP-Track\\docs\\artikel_progres_2026-10-19\\Bagian_VI_Daftar_Pustaka_dan_Abstraksi.docx"
+  ],
+  "counts": {
+    "0": 16,
+    "1": 105,
+    "-1": 11,
+    "": 132
+  },
+  "matched_rows": [
+    [
+      "J03WMX",
+      "Train",
+      "408",
+      "408",
+      "40",
+      "40"
+    ],
+    [
+      "J03WN1",
+      "Train",
+      "394",
+      "33",
+      "24",
+      "24"
+    ],
+    [
+      "J03WOH",
+      "Train",
+      "301",
+      "298",
+      "40",
+      "40"
+    ],
+    [
+      "J03WOY",
+      "Train",
+      "344",
+      "342",
+      "40",
+      "19"
+    ],
+    [
+      "J03WPY",
+      "Test",
+      "324",
+      "323",
+      "40",
+      "3"
+    ],
+    [
+      "J03WQQ",
+      "Validation",
+      "304",
+      "195",
+      "40",
+      "3"
+    ],
+    [
+      "J03WR9",
+      "Train",
+      "278",
+      "274",
+      "40",
+      "3"
+    ],
+    [
+      "Total",
+      "",
+      "2.353",
+      "1.873",
+      "264",
+      "132"
+    ]
+  ],
+  "split_rows": [
+    [
+      "Train",
+      "184",
+      "101",
+      "14",
+      "11",
+      "58",
+      "115"
+    ],
+    [
+      "Validation",
+      "40",
+      "2",
+      "1",
+      "0",
+      "37",
+      "3"
+    ],
+    [
+      "Test",
+      "40",
+      "2",
+      "1",
+      "0",
+      "37",
+      "3"
+    ],
+    [
+      "Total",
+      "264",
+      "105",
+      "16",
+      "11",
+      "132",
+      "121"
+    ]
+  ],
+  "word_count_full": 3704
+}

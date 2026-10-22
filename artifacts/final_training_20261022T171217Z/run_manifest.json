@@ -1,0 +1,20 @@
+{
+  "created_at_utc": "20261022T171217Z",
+  "annotation_sha256": "e2b72a4d9928dbfe0a03bc134af412a05dc1708c4c938585f500e0b0533dff1b",
+  "feature_sha256": "aceca0fb16cd0c1c71031e37e1ee387e25d3f5a85a2fd3c78619bb63a661628e",
+  "graph_cache_manifest_sha256": "0ab12ce4c752339e41edb57345b80f9cc84eb3b139bf0a72624596809927e218",
+  "random_state": 42,
+  "status": "final_training_complete",
+  "artifact_sha256": {
+    "frozen_annotations.csv": "e2b72a4d9928dbfe0a03bc134af412a05dc1708c4c938585f500e0b0533dff1b",
+    "annotation_audit_summary.csv": "11529553e23ecf5e248b79b9cefaf264f8c83997fe6bf79e4059b51ca40bc3bf",
+    "annotation_review_queue.csv": "d6ebd4c4bed1bb7cf67985779bc47a8a876bc9860bd739c91a2f33e43404f840",
+    "data\\processed\\gegenpressing_baseline_features.csv": "aceca0fb16cd0c1c71031e37e1ee387e25d3f5a85a2fd3c78619bb63a661628e",
+    "data\\processed\\graph_cache_manifest.csv": "0ab12ce4c752339e41edb57345b80f9cc84eb3b139bf0a72624596809927e218",
+    "baseline\\logistic_regression.joblib": "0bb133cda26c9e8848263f573bbb315dbaea255833c47870839e469d3fa369ea",
+    "baseline\\xgboost.joblib": "fa2b51eb7bbe24d0b88bc615d66bb511b5fd81507c9889e97d2125647904a66b",
+    "temporal_gnn\\temporal_gnn.pt": "7e1b041d498468c19fb7c51c51d08a8462365dd4e5db26169cdbd387ea50d64c",
+    "evaluation\\split_metrics.csv": "2c30357f61a501eb683b05edc515d12592ee93a038541bd5b1a9d90cdec5134b",
+    "evaluation\\match_metrics.csv": "6342d60461fb5a07f051d68abadc50eae885d4147ecf5c502bcfb189d443be05"
+  }
+}

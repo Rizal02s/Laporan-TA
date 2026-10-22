@@ -1,0 +1,18 @@
+{
+  "revision_time_utc": "2026-10-20T16:40:13.941110+00:00",
+  "source_sha256_before": "be5c23dbfec1713acf7f82e2dcfb575d5992c7b5b6901e7d03e90392d979f780",
+  "source_sha256_after": "3f45ea9724231b7465af2d8671f0d61cff554611fc987561cf9dcd412b18dece",
+  "rows_changed": 13,
+  "reviewer": "codex_ai_review",
+  "training_run": false,
+  "backup_map": {
+    "C:\\VAEP-Track\\data\\processed\\gegenpressing_annotation_manifest.csv": "C:\\VAEP-Track\\artifacts\\label_review_2026-10-20\\revision_20261020T164013Z\\backups\\00_gegenpressing_annotation_manifest.csv",
+    "C:\\VAEP-Track\\data\\processed\\model_episode_manifest.csv": "C:\\VAEP-Track\\artifacts\\label_review_2026-10-20\\revision_20261020T164013Z\\backups\\01_model_episode_manifest.csv",
+    "C:\\VAEP-Track\\data\\processed\\match_split_manifest.csv": "C:\\VAEP-Track\\artifacts\\label_review_2026-10-20\\revision_20261020T164013Z\\backups\\02_match_split_manifest.csv",
+    "C:\\VAEP-Track\\artifacts\\annotation_audit_current\\annotation_audit_summary.csv": "C:\\VAEP-Track\\artifacts\\label_review_2026-10-20\\revision_20261020T164013Z\\backups\\03_annotation_audit_summary.csv",
+    "C:\\VAEP-Track\\artifacts\\annotation_audit_current\\annotation_review_queue.csv": "C:\\VAEP-Track\\artifacts\\label_review_2026-10-20\\revision_20261020T164013Z\\backups\\04_annotation_review_queue.csv",
+    "C:\\VAEP-Track\\artifacts\\annotation_audit_current\\annotation_audit_checks.json": "C:\\VAEP-Track\\artifacts\\label_review_2026-10-20\\revision_20261020T164013Z\\backups\\05_annotation_audit_checks.json"
+  },
+  "evidence_scope": "Prior audit + visual interpretation; not verified video ground truth.",
+  "application_status": "applied_and_verified"
+}

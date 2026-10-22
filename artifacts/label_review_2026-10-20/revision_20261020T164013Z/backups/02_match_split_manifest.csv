@@ -1,0 +1,8 @@
+split,match_id,strict_valid_episodes,quick_regain_positive,quick_regain_negative,annotated_usable,annotated_uncertain
+test,J03WPY,323,147,176,3,0
+train,J03WMX,408,211,197,10,0
+train,J03WN1,33,19,14,3,0
+train,J03WOH,298,136,162,2,1
+train,J03WOY,342,170,172,3,0
+train,J03WR9,274,110,164,2,1
+validation,J03WQQ,195,72,123,3,0

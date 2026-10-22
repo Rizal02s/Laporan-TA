@@ -18,7 +18,9 @@ nb["cells"] = [
     nbf.v4.new_markdown_cell(
         """# Anotasi penuh gegenpressing
 
-Notebook ini melanjutkan pilot ke seluruh queue 264 transisi strict-valid.
+Notebook ini melanjutkan 264 label yang sudah ada ke seluruh 1.873 transisi
+strict-valid dari tujuh pertandingan. Label lama dipertahankan; 1.609 episode
+baru tetap kosong sampai ditinjau manual.
 Metodologi tidak berubah: keputusan perilaku hanya memakai window `T0` sampai
 `T0+2s`, sedangkan quick regain lima detik tetap menjadi outcome terpisah dan
 disembunyikan selama pengambilan keputusan.
@@ -42,6 +44,7 @@ bantu. Cue tidak boleh digunakan sebagai label otomatis."""
     ),
     nbf.v4.new_code_cell(
         """from functools import lru_cache
+import importlib
 from pathlib import Path
 import math
 import sys
@@ -57,14 +60,14 @@ if not (PROJECT_ROOT / 'src').exists():
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.gegenpressing_annotation import (
-    AnnotationConfig,
-    annotation_progress,
-    compute_annotation_context,
-    initialize_annotation_manifest,
-    plot_annotation_context,
-    record_annotation,
-)
+import src.gegenpressing_annotation as annotation_module
+importlib.reload(annotation_module)
+AnnotationConfig = annotation_module.AnnotationConfig
+annotation_progress = annotation_module.annotation_progress
+compute_annotation_context = annotation_module.compute_annotation_context
+initialize_full_annotation_manifest = annotation_module.initialize_full_annotation_manifest
+plot_annotation_context = annotation_module.plot_annotation_context
+record_annotation = annotation_module.record_annotation
 from src.idsse_episode_dataset import load_match
 
 DATA_DIR = PROJECT_ROOT / 'data' / 'sportec_idsse'
@@ -76,12 +79,9 @@ ANNOTATOR = 'rizal'
 BATCH_SIZE = 25"""
     ),
     nbf.v4.new_code_cell(
-        """annotations = initialize_annotation_manifest(
+        """annotations = initialize_full_annotation_manifest(
     EPISODE_MANIFEST_PATH,
     ANNOTATION_PATH,
-    samples_per_match=40,
-    random_state=42,
-    min_spacing_seconds=2.0,
 )
 full_queue = annotations.sort_values('annotation_order').copy()
 total_batches = math.ceil(len(full_queue) / BATCH_SIZE)
@@ -279,7 +279,9 @@ invalid_labels = completed[~completed['is_gegenpressing'].isin([-1, 0, 1])]
 duplicate_candidates = int(saved['candidate_id'].duplicated().sum())
 
 quality_gate = pd.Series({
-    'all_264_completed': len(completed) == len(saved),
+    'all_strict_valid_episodes_completed': (
+        len(completed) == len(saved) == int(saved['strict_valid'].astype(bool).sum())
+    ),
     'both_binary_classes_present': {0, 1}.issubset(set(completed['is_gegenpressing'])),
     'uncertain_have_notes': len(uncertain_without_notes) == 0,
     'confidence_complete': len(missing_confidence) == 0,
@@ -291,7 +293,7 @@ display(quality_gate.to_frame())
 
 usable = completed[completed['is_gegenpressing'].isin([0, 1])]
 print('Usable binary labels:', len(usable))
-if quality_gate['all_264_completed']:
+if quality_gate['all_strict_valid_episodes_completed']:
     print('Queue selesai. Bekukan manifest sebelum training baseline.')
 else:
     print('Belum siap training final. Selesaikan anotasi yang tersisa.')"""
@@ -299,7 +301,7 @@ else:
     nbf.v4.new_markdown_cell(
         """## Syarat menuju training
 
-Setelah semua 264 sampel selesai:
+Setelah semua 1.873 episode strict-valid selesai:
 
 1. Tinjau ulang semua label ragu dan confidence rendah.
 2. Bekukan salinan manifest beserta tanggal dan checksum.

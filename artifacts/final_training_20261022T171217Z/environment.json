@@ -1,0 +1,12 @@
+{
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch": "2.12.0+cu130",
+  "torch_geometric": "2.8.0.post1",
+  "cuda_available": true,
+  "cuda_device": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+  "scikit_learn": "1.9.1",
+  "xgboost": "3.4.1",
+  "git_commit": "f52ddaa51aade6afab364c31f0f8775fdb0d0db3",
+  "git_dirty": true
+}

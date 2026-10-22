@@ -1,0 +1,8 @@
+split,match_id,queue,completed,usable,positive,negative,uncertain,low_confidence
+test,J03WPY,40,3,3,2,1,0,0
+train,J03WMX,40,10,10,9,1,0,0
+train,J03WN1,24,3,3,2,1,0,0
+train,J03WOH,40,3,2,2,0,1,0
+train,J03WOY,40,3,3,2,1,0,0
+train,J03WR9,40,3,2,2,0,1,0
+validation,J03WQQ,40,3,3,2,1,0,0

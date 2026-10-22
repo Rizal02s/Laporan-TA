@@ -1,0 +1,8 @@
+{
+  "source": "C:\\VAEP-Track\\data\\processed\\gegenpressing_annotation_manifest.csv",
+  "sha256": "be5c23dbfec1713acf7f82e2dcfb575d5992c7b5b6901e7d03e90392d979f780",
+  "records_screened": 264,
+  "priority_records": 65,
+  "source_labels_modified": false,
+  "method": "Fresh pressure cues from tracking; triage only, not automatic ground truth. No model or quick-regain outcome used for screening."
+}
