@@ -1,0 +1,14 @@
+{
+  "all_expected_files_nonempty": true,
+  "baseline_marked_final": true,
+  "gnn_marked_final": true,
+  "evaluation_marked_final": true,
+  "expected_models_present": true,
+  "evaluation_checks_passed": true,
+  "annotation_checks_passed": true,
+  "frozen_annotations_complete": true,
+  "run_manifest_complete": true,
+  "critical_hashes_listed": true,
+  "artifact_hashes_match": true,
+  "summary_marked_final": true
+}

@@ -1,0 +1,4 @@
+split,episode,positif,jumlah_pertandingan,pertandingan,negatif,persen_positif
+train,1355,1162,5,"J03WMX, J03WN1, J03WOH, J03WOY, J03WR9",193,85.75645756457564
+validation,195,163,1,J03WQQ,32,83.58974358974359
+test,323,256,1,J03WPY,67,79.25696594427245

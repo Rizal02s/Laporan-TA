@@ -1,0 +1,3 @@
+match_id,temporal_gnn,xgboost,selisih_gnn_minus_xgboost
+J03WMX,0.4957983193277311,0.4375,0.05829831932773111
+rata_rata_bobot_setara,0.4957983193277311,0.4375,0.05829831932773111

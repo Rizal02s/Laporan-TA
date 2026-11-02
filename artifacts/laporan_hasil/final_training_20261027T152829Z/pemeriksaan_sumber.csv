@@ -1,0 +1,19 @@
+pemeriksaan,lulus
+ID episode unik,True
+ID anotasi unik,True
+Pasangan model dan episode unik,True
+Satu pertandingan hanya dalam satu split,True
+Semua split tersedia,True
+Label anotasi biner,True
+Probabilitas valid,True
+Keputusan sesuai threshold tersimpan,True
+Satu threshold tersimpan per model,True
+Label manifest sama dengan anotasi beku,True
+logistic_regression: episode lengkap,True
+logistic_regression: label/split/pertandingan sama,True
+xgboost: episode lengkap,True
+xgboost: label/split/pertandingan sama,True
+temporal_gnn: episode lengkap,True
+temporal_gnn: label/split/pertandingan sama,True
+Ada hash artefak run yang diperiksa,True
+Hash artefak run cocok,True

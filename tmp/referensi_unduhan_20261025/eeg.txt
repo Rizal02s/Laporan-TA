@@ -1,0 +1,362 @@
+MIND (Multimedia Artificial Intelligent Networking Database) Journal  
+ 
+MIND Journal | ISSN (p): 2528-0015  | ISSN (e): 2528-0902 | Vol. 9 | No.  1 | Halaman 42 - 51 
+DOI :  https://doi.org/10.26760/mindjournal.v9i1.42-51 Juni 2024  
+ 
+MIND – 42 
+ 
+Identifikasi Emosi Melalui Sinyal 
+Elektroensephalogram Menggunakan Graph 
+Convolutional Network 
+ 
+VENA MEILINDA LIONITAMA, ESMERALDA CONTESSA DJAMAL, FATAN 
+KASYIDI 
+Program Studi Informatika, Universitas Jenderal Achmad Yani 
+Email: esmeralda.contessa@lecture.unjani.ac.id 
+ 
+Received 27 November 2023 | Revised  22 Januari 2024 | Accepted 15 Februari 2024 
+ 
+ABSTRAK 
+Emosi merupakan bentuk respon manusia terhadap sesuatu. Pengenalan emosi 
+menggunakan komputer dapat membantu para dokter untuk me ngetahui emosi 
+yang sedang dirasakan oleh seseorang berdasarkan aktivitas otak . Aktivitas otak 
+dapat diketahui dengan  cara merekam aktivitas  sinyal Electroensephalogram 
+(EEG). Sinyal EEG memiliki karakteristik yang berubah -ubah dan non stasioner 
+sehingga membutuhkan metode yang dapat mengintegrasikan karakteristik 
+temporal dan spasial. Pengenalan emosi menggunakan sinyal  EEG berkaitan erat 
+dengan pola konektivitas pada belahan otak manusia, karena setiap emosi akan 
+memiliki pola konektivitas yang berbeda dalam belahan otak. Maka dari itu 
+mempelajari pola konektivitas dalam belahan otak akan membantu dalam 
+pengenalan emosi. Dan untuk menangani hal itu dibutuhkan metode deep learning 
+yang dapat mengintegrasikan karakteristik temporal dan spasial dan dapat 
+menerima masukan berupa pola konektivitas tersebut, metode yang dapat 
+menanganinya yaitu, Graph Convolutional Network (GC N). Penelitian ini telah 
+membuat sistem identifikasi emosi dengan tiga kelas menggunakan GCN dan 
+menghasilkan akurasi data uji sebesar 35,52%. 
+Kata kunci: Emosi; Deep Learning; Sinyal EEG; Spasial; Temporal; GCN 
+ABSTRACT 
+Emotion is a form of human response to something. Emotion recognition using 
+computers can help doctors to see the emotions that are being felt by a person 
+based on brain activity. Brain activity can be known by recording 
+electroencephalogram (EEG) signal a ctivity. EEG signals have changing and non -
+stationary characteristics, requiring a method t o integrate temporal and spatial 
+characteristics. Emotion recognition using EEG signals is closely related to 
+connectivity patterns in the human brain hemispheres be cause each emotion will 
+have different connectivity patterns in the brain hemispheres. Therefore, studying 
+the connectivity patterns in the cerebral hemispheres will help in emotion 
+recognition. Moreover, a deep learning method is needed t o integrate tempo ral 
+and spatial characteristics and  receive input in the form of connectivity patterns, 
+a method that can handle Graph Convolutional Network (GCN). This research has 
+created an emotion identification system with three classes using GCN and 
+produced an accuracy of 35.52% of testing data. 
+Keywords: Emotion; Deep Learning; EEG Signal; Spatial; Temporal; GCN
+Lionitama, dkk 
+MIND – 43 
+1. PENDAHULUAN 
+Emosi menjadi hal yang menarik untuk diteliti karena, ia adalah bukti respon dari manusia 
+terhadap sesuatu. Emosi dapat dikelompokan menjadi emosi positif, netral, dan negatif. Emosi 
+positif merupakan emosi yang menghadirkan rasa positif seperti bahagia, dan keyakinan. 
+Emosi negatif adalah emosi yang dapat menghadirkan rasa yang tidak menyenangkan seperti 
+takut, sedih, kecewa, gelisah, dan bersalah. Adapun yang mengelompokan emosi berdasarkan 
+dimensi valensi dan arousalnya. Emosi seseorang dapat ditebak dengan mudah oleh manusia 
+tetapi bagi mesin, ini menjadi hal yang tidak mudah untuk dimengerti. Untuk membangkitkan 
+emosi seseorang dapat melalui banyak cara, yaitu dengan mendengarkan musik (Gonzalez 
+& McMullen, 2020), menonton movie clips (Y. Li, dkk, 2021), dan video clips (Algarni, 
+dkk, 2022) (J. Li, dkk, 2020) 
+Salah satu cara untuk mengidentifikasi emosi adalah mengetahui aktivitas otak melalui sinyal 
+Electroensephalogram (EEG). EEG telah banyak digunakan dalam penelitian dan ilmu medis. 
+Dalam ilmu medis EEG dapat membantu dalam mendiagnosis epilepsi, gangguan tidur, bahkan 
+dapat digunakan untuk menganalisis emosi. Sinyal EEG merupakan sinyal bioelektrik ya ng 
+dihasilkan dari aktivitas otak manusia. Sinyal EEG memiliki amplitudo yang sangat rendah serta 
+pola yang kompleks. Selain itu, sinyal EEG memiliki sifat non stationer serta mudah dipengaruhi 
+oleh rangsangan dari luar yang dapat menambah kompleksitas dalam pemrosesan sinyal EEG. 
+Informasi yang didapat dari sinyal EEG tergantung pada letak elektroda EEG di otak. Bahkan 
+belahan otak kanan dan kiri pun akan menghasilkan informasi yang berbeda. Di dalam sinyal 
+EEG terdapat fitur spasial dan temporal yang akan sangat dibutuhkan saat pemrosesan sinyal 
+EEG. Spasial adalah sinyal antar kanal, dan temporal adalah waktu. Pada penelitian terdahulu 
+menggunakan metode 3D CNN  (Kim, dkk, 2022) dan adapula peneliti yang menggunaan 
+algoritma deep forest (Cheng, dkk, 2021) untuk mengesktraksi fitur spatiotemporal, dimana 
+fitur spasial dan temporal akan langsung diekstraksi dengan metode yang sama. Kelemahan 
+dari ekstraksi fitu r spatiotemporal adalah fitur spasial dan temporal tidak diekstraksi secara 
+efisien. Untuk mengatasi masalah tersebut digunakanlah metode paralel, dimana fitur spasial 
+dan temporal akan diekstraksi menggunakan dua deep learning yang berbeda. Adapun peneliti 
+yang menggunakan paralel hybrid 2D CNN untuk ekstraksi fitur spasial dan Recurrent Neural 
+Network (RNN) untuk ekstraksi fitur temporal  (Putri, dkk , 2022) (Liang, dkk , 2021) . 
+Kemudian peneliti selanjutnya menggunakan metode paralel 3D CNN untuk ekstraksi fitur 
+spasial dan transformer untuk ekstraksi fitur temporal  (Sun, dkk, 2022). Adapula peneliti 
+yang menggunakan Multidimensional Graph Convolutional Network (MD -GCN) dengan hasil 
+akurasi 92,15% untuk dataset  SEED dan 90,19% untuk dataset SEED -IV. Pada penelitian 
+disebutkan bahwa matriks ketetanggaan didapatkan dari hasil korelasi matriks spasial dan 
+matriks komunikasi. Matriks komunikasi menggunakan 9 pasang elektroda yang didapat dari 
+penelitian sebelumnya yaitu (FP1, FP2), (AF3, AF4), (F5, F6), (FC5, FC6), (C5, C6), (CP5, CP6), 
+(P5, P6), (PO5, PO6), dan (O1, O2)  (Du, dkk , 2022) . Penelitian (Gao, dkk , 2022)  
+mengungkapkan bahwa matriks ketetanggaan yang didapat dari penelitian sebelumnya 
+dianggap lemah oleh karena itu untuk menyempurnakannya matriks ketetanggaan dibuat dari 
+hasil self-learning. Penelitian tersebut menggunakan DEAP dan SEED dataset. Adapula peneliti 
+menggunakan Dynamic Graph Convolutional Neural Network  (DGCNN) dimana model yang 
+dibangun dapat mempelajari fitur -fitur diskriminatif untuk meningkatkan kemampuan 
+pengenalan emosi, tetapi penelitian tersebut mengabaikan bahwa belahan otak manusia akan 
+menghasilkan emosi yang berbeda (Song, dkk, 2020).  
+ 
+Sinyal EEG memiliki terlalu banyak noise sehingga untuk menggunakannya dibutuhkan sebuah 
+proses filtrasi. Proses filtrasi merupakan proses untuk mendapatkan rentang gelombang yang 
+akan ditin jau. Wavelet merupakan sebuah metode untuk memfilter frequensi dan metode 
+Identifikasi Emosi Melalui Sinyal EEG Menggunakan Graph Convolutional Network 
+ 
+MIND – 44 
+untuk menghilangkan noise sehingga sinyal tidak terganggu oleh hal lainnya. Penelitian 
+sebelumnya menggunakan filter wavelet untuk mendapatkan rentang frequensi  4-45 Hz  
+(Haqque, dkk, 2021). 
+Untuk mengidentifikasi emosi ti dak hanya melalui sinyal EEG tetapi melalui video ekspresi 
+wajah, seperti yang dilakukan oleh peneliti terdahulu dengan menggabungkan sinyal EEG dan 
+video ekspresi wajah dengan menggunakan metode Library Support Vector Machine (LIBSVM), 
+penelitian tersebut  menghasilkan akurasi 85,71%  (Zhang, 2020) .Penelitian ini  membuat 
+sistem yang dapat mengidentifikasi emosi melalui sinyal EEG menggunakan GCN hasil dari 
+penelitian ini diklasifikasikan ke dalam 3 kelas yaitu, “positif, netral, dan negatif”.  Kompleksitas 
+pemrosesan sinyal EEG memberikan tantangan tersendiri untuk identifikasi. Meskipun 
+penelitian terdahulu sudah banyak, namun perlu mencoba kemungkinan kombinasi metode 
+lain untuk mencoba. 
+2. METODE PENELITIAN 
+2.1. Arsitektur Sistem 
+Arsitektur Sistem Identif ikasi Emosi Sinyal EEG dengan menggunakan metode GCN 
+ditunjukkan pada Gambar 1. 
+ 
+ 
+Gambar 1. Sistem Identifikasi Emosi 
+Dari Gambar 1 dapat dilihat bahwa tahap pertama  yaitu perolehan data. Data yang akan 
+digunakan pada penelitian i ni didapat dari public dataset yaitu SJTU Emotion EEG Dataset 
+(SEED). Dimana data diperoleh dari hasil perekaman 15 siswa (7 pria dan 8 wanita) dengan 
+penglihatan dan pendengaran yang normal. Perekamaan menggunakan ESI Neurascan EEG 
+device dengan frekuensi sampling 200 Hz. Perekaman pun menggunakan stimulus 15 cuplikan 
+film China dengan durasi 4 menit dalam 5 sesi. Penelitian sebelumya menggunakan 12 kanal 
+dari 62 kanal yang terdiri dari FT7, FT8, T7, T8, C5, C6, TP7, TP8, CP5, CP6, P7, P8 (Haqque, 
+dkk, 2021). Peletakan kanal yang dig unakan ditunjukkan pada Gambar 2. Data tersebut 
+kemudian dibagi menjadi set data latih dan set data uji. 
+
+Lionitama, dkk 
+MIND – 45 
+ 
+Gambar 2. Peletakan Kanal 
+Tahap kedua yaitu pra proses. Pra-proses dilakukan untuk mendapatkan informasi yang akan 
+digunakan saat proses identifikasi. Pra-proses dalam penelitian ini terdiri dari segmentasi dan 
+filterisasi wavelet.Data sinyal EEG memiliki durasi sepanjang 185 detik. Setiap sinyal 
+disegmentasi setiap 5 detik. Sehingga set data berjumlah 15 subjek x 3 sesi x 15 percobaan x 
+37 segmentasi atau berjumlah 24.975 set data. Dari 24.975 set data akan dibagi 80% atau 
+19.980 set data untuk data latih dan 20% atau 4.995 set data set data uji. Sementara itu, 
+untuk titik pa da kanal berjumlah 200 Hz x 5 detik atau sebanyak 1000 titik.  Pada tahap  
+selanjutnya sinyal akan di filter menggunakan wavelet dengan rentang frekuensi 4-45 Hz. 
+ 
+Tahap ketiga yaitu sistem identifikasi sinyal EEG. Pada tahap identifikasi sinyal terdiri dari dua 
+bagian yaitu, ekstraksi fitur dan identifikasi. Sinyal yang telah melalui pra proses diidentifikasi 
+menggunakan GCN dan akan menghasilkan 3 kelas emosi yaitu, negatif, netral, dan positif. 
+ 
+2.2. Perolehan Data 
+Data yang digunakan merupakan  data public yaitu SJTU Emotion EEG Dataset (SEED). Data 
+diperoleh dari hasil perekaman 15 siswa (7 pria dan 8 wanita) dengan penglihatan dan 
+pendengaran yang normal. Perekaman menggunakan ESI Neuroscan EEG device dengan 
+frekuensi sampling 1000 Hz yang dik urangi menjadi 200 Hz. Perekaman menggunakan 
+stimulus 15 cuplikan film China dengan durasi 4 menit dalam 5 sesi  (Zheng & Lu, 2015) . 
+Data yang diperoleh di segmentasi setiap 5 detik sehingga didapatkan 200 Hz x 5 detik = 1000 
+titik data pada setiap segmen, dengan total 15 subjek x 3 sesi x 15 perulangan x 37 segmentasi 
+= 24.975 set data. Data sinyal EEG tersebut merupakan file bertipe *.csv. Dari jumlah set data 
+akan dibagi menjadi data latih dan data uji, dimana 80% atau 19.980 set data untuk data latih 
+dan 20% atau 4.995 set data untuk data uji. 
+ 
+2.3. Filter Wavelet 
+Ekstraksi Wavelet digunakan untuk mendapatkan komponen frekuensi dalam rentang 
+gelombang yang akan ditinjau. Dalam frekuensi 1 -200 Hz memungkinkan informasi sinyal 
+berada di 1-200/2 Hz atau sering disebut dengan frekuensi Nyquist. Filter Wavelet digunakan 
+untuk mendapatkan rentang frekuensi yang diinginkan yaitu 4 -45 Hz menggunakan 
+dekomposisi seperti Gambar 3. Pada penelitian ini menggunakan Wavelet Daubechies4. Fungsi 
+Wavelet dasar dapat dinyatakan menggunakan Persamaan (1). 
+𝜓𝜎,𝜏(𝑛) =  
+1
+√|𝜎| 𝜓 (
+𝑛−𝜏
+𝜎 ) (1) 
+
+Identifikasi Emosi Melalui Sinyal EEG Menggunakan Graph Convolutional Network 
+ 
+MIND – 46 
+ 
+Gambar 3. Ekstraksi Wavelet 
+Filter wavelet terdiri dari 2 proses utama, yaitu dekomposisi dan rekontruksi. Dekomposi 
+adalah proses ekstraksi sinyal ke dalam frequensi tertentu, sedangkan rekontruksi adalah 
+proses penggabungan kembali sinyal ke bentuk semula. Dekomposisi menghasilkan 
+aproksimasi dan detil. Aproksimasi adalah hasil proses konvolusi sinyal asli terhadap low-pass 
+filter, dan detil adalah hasil proses konvolusi sinyal  asli terhadap high -pass filter . Untuk 
+memperoleh aproksimasi dijelaskan pada Persamaan (2) dan untuk detil pada Persamaan (3). 
+𝑦𝑙𝑜𝑤(𝑖) =  ∑ 𝑥(𝑛). 𝑔(2𝑖 − 𝑛)𝑛  (2) 
+𝑦ℎ𝑖𝑔ℎ(𝑖) =  ∑ 𝑥(𝑛). ℎ(𝑖 − 𝑛)𝑛  (3) 
+Dimana 𝑔(2𝑖 − 𝑛) merupakan koefisien low-pass filter, dan ℎ(𝑖 − 𝑛)merupakan koefisien high-
+pass filter. Selanjutnya Gambar 4 dan Gambar 5 akan menunjukkan perbedaan sinyal sebelum 
+dan sesudah filterisasi menggunakan Wavelet. 
+ 
+Gambar 4. Sinyal Asli EEG 
+
+Lionitama, dkk 
+MIND – 47 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2.4. Graph Convolutional Network 
+GCN merupakan inovasi dari CNN . GCN menerima masukan berupa data dan matriks 
+adjacency, matriks adjacency merupakan matriks yang merepresentasikan konektivitas antar 
+node, node disini merupakan fitur dari setiap kanal. GCN memiliki arsitektur seperti CNN yaitu, 
+lapisan konvolusi, pooling, dan lapisan identifikasi. 
+ 
+Di dalam graph, sinyal EEG di representasikan sebagai G = {V, E, A}. Dimana V merupakan 
+representasi dari kanal, E merupaka n hubungan antar kanal, dan A merupakan matriks 
+adjacency. Setelah ditentukan graph, maka selanjutnya adalah membangun matriks Laplacian 
+menggunakan Persamaan (4).  
+                 𝐿 = 𝐷 − 𝐴 (4) 
+Dimana D merupakan matriks Degree. Selanjutnya matriks Laplac ian yang sebelumnya 
+dibentuk akan diubah menjadi diagonal menggunakan Persamaan (5). 
+                 𝐿 = 𝑈 ⋀ 𝑈𝑇 (5) 
+Dimana U merupakan orthogonal dari L, dan ⋀ merupakan eigencalues dari L. Jika sudah maka 
+selanjutnya adalah proses konvolusi. 
+Lapisan konvolusi merupakan lapisan yang mengubah data dengan operasi perkalian matriks 
+atau dot product antara data masukan dengan matriks adjacency. Operasi konvolusi 
+menggunakan Persamaan (6). 
+                 𝑐 ∗ 𝑥 = 𝑔(𝐿)𝑥 (6) 
+Dimana c merupakan kernel, dan x merupakan graph data.  
+3. HASIL DAN PEMBAHASAN 
+Penelitian ini melakukan filter sinyal EEG menggunakan Wavelet pada rentang frekuensi 4 -45 
+Hz. Kemudian dari 24.975 set data dibagi menjadi 80% atau 19.980 set data yang digunakan 
+untuk pelatihan, sedan gkan 20% atau 4.995 set data digunakan untuk pengujian. Dengan 
+jumlah kanal yang digunakan adalah 12 kanal yang digunakan meliputi FT7, FT8, T7, T8, C5, 
+C6, TP7, TP8, CP5, CP6, P7, dan P8. Wavelet mengurangi sinyal dari 12.000 menjadi 5.088 
+titik data untu k setiap saluran. Hasil dari filter Wavelet digunakan sebagai input dalam 
+identifikasi sinyal EEG yang digunakan dalam metode GCN menjadi tiga kelas, yaitu: Positif, 
+Netral, dan Negatif 
+ 
+Gambar 5. Sinyal hasil Wavelet 
+Identifikasi Emosi Melalui Sinyal EEG Menggunakan Graph Convolutional Network 
+ 
+MIND – 48 
+3.1  Teknik Koreksi Bobot  
+Eksperimen ini membandingkan empat jenis teknik pengoptimalan. Ini menggunakan 
+Stochastic Gradient Descent  (SGD), Adaptive Moment  (Adam), dan Adaptive Moment with 
+Maximum (AdaMax) untuk meninjau koreksi bobot kinerja parameter yang diperbarui dalam 
+metode yang diusulkan dengan hasil yang ditunjukkan pada Tabel 1. 
+Tabel 1. Perbandingan Teknik Koreksi Bobot 
+Teknik Pengoptimalan Akurasi 
+(%) Loss Waktu 
+(menit) 
+SGD 33.02 1.09 0.55 
+Adam 34.12 1.09 0.66 
+AdaMax 34.12 1.09 0.46 
+ 
+Dari Tabel 1 dapat dilihat bahwa akurasi menggunakan SGD lebih rendah dibandingkan 
+dengan Adam dan AdaMax. Untuk Adam dan AdaMax hasil akurasi sama tetapi dilihat dari 
+waktunya AdaMax membutuhkan waktu learning lebih cepat dibandingkan dengan Adam. 
+Pada Gambar 6 akurasi menggunakan AdaMax hanya mengalami satu kali penurunan setelah 
+itu kembali stabil. Dan untuk perbandingan loss dapat dilihat pada Gambar 7, Adam dan 
+AdaMax menurun secara perlahan, tetapi model optimasi AdaMax lebih cepat konvergen 
+dibandingkan SGD dan Adam. 
+ 
+Gambar 6. Perbandingan Akurasi SGD, Adam, AdaMax 
+
+Lionitama, dkk 
+MIND – 49 
+ 
+Gambar 7. Perbandingan Loss SGD, Adam, AdaMax 
+ 
+3.2  Perbandingan Dengan Metode Sebelumnya Menggunakan Dataset yang Sama 
+Beberapa penelitian sebelumnya menggunakan dataset SEED dengan metode yang berbeda 
+untuk mengidentifikasi emosi, seperti pada Tabel 2. 
+Tabel 2. Perbandingan dengan Penelitian Sebelumnya 
+Metode Akurasi 
+MDGCN (Du et al., 2022) 92,15 
+EEG-GCN (Gao et al., 2022) 85,65 
+GCN 
+(metode yang diajukan) 
+34,12 
+ 
+Seperti yang dilihat pada Tabel 2, Peneliti terdahulu yang menggunakan metode MDGCN 
+menghasilkan akurasi lebih tinggi karena menggunakan matriks adjacency 9 pasang kanal 
+sesuai dengan penelitian sebelumnya. Untuk peneliti terdahulu yang menggunakan EEG-GCN, 
+matriks adjacency terbentuk dari keterhubungan antar kanal yang ditinjau. Walaupun akurasi 
+yang rendah, namun GCN memberikan kelebihan dalam kecepatan kesetabilan, seperti pada 
+Gambar 7. 
+4. KESIMPULAN 
+Penelitian ini menggunakan metode GCN un tuk identifikasi emosi melalui sinyal EEG. GCN 
+dapat mempelajari pola konektivitas otak sesuai dengan emosi yang dirasa. Oleh karena itu, 
+GCN digunakan untuk identifikasi emosi dengan akurasi 35,52%. Pada penelitian ini digunakan 
+metode ekstrasi kanal yait u Wavelet inilah yang menjadi kebaharuan dari penelitian  
+sebelumnya. Wavelet digunakan untuk mendapatkan rentang frekuensi yang diinginkan yaitu 
+4-45 Hz. Metode koreksi bobot yang digunakan dalam penelitian ini adalah AdaMax. Pada 
+dasarnya Adam dan AdaMax hampir sama, hanya saja AdaMax lebih cepat konvergen 
+dibandingkan Adam.  
+ 
+ 
+
+Identifikasi Emosi Melalui Sinyal EEG Menggunakan Graph Convolutional Network 
+ 
+MIND – 50 
+DAFTAR RUJUKAN 
+Algarni, M., Saeed, F., Al-Hadhrami, T., Ghabban, F., & Al-Sarem, M. (2022). Deep Learning-
+Based Approach for Emotion Recognition Using Electroencephalography (EEG) Signals 
+Using Bi -Directional Long Short -Term Memory (Bi -LSTM). Sensors, 22(8). 
+https://doi.org/10.3390/s22082976 
+Cheng, J., Chen, M., Li, C., Liu, Y., Song, R., Liu, A., & Chen, X. (2021). Emotion Recognition 
+from Multi -Channel EEG via Deep Forest. IEEE Journal of Biomedical and Health 
+Informatics, 25(2), 453–464. https://doi.org/10.1109/JBHI.2020.2995767 
+Du, G., Su, J., Zhang, L., Su, K., Wang, X., Teng, S., & Liu, P. X. (2022). A Multi -Dimensional 
+Graph Convolution Network for EEG Emotion Recognition. IEEE Transactions on 
+Instrumentation and Measurement, 71. https://doi.org/10.1109/TIM.2022.3204314 
+Gao, Y., Fu, X., Ouyang, T., & Wang, Y. (2022). EEG-GCN: Spatio-Temporal and Self-Adaptive 
+Graph Convolutional Networks for Single and Multi-View EEG-Based Emotion Recognition. 
+IEEE Signal Processing Letters , 29, 1574 –1578. 
+https://doi.org/10.1109/LSP.2022.3179946 
+Gonzalez, E. J. S., & McMullen, K. (2020). The Design of an Algorithmic Modal Music Platform 
+for Eliciting and Detecting Emotion. 8th International Winter Conference on Brain -
+Computer Interface, BCI 2020, 58–60. https://doi.org/10.1109/BCI48061.2020.9061664 
+Haqque, R. H. D., Djamal, E. C., & Wulandari, A. (2021). Emotion Recognition of EEG Signals 
+Using Wavelet Filter and Convolutional Neural Networks. Proceedings - 2021 8th 
+International Conference on Advanced Informatics: Concepts, Theory, a nd Application, 
+ICAICTA 2021. https://doi.org/10.1109/ICAICTA53211.2021.9640279 
+Kim, S., Kim, T. S., & Lee, W. H. (2022). Accelerating 3D Convolutional Neural Network with 
+Channel Bottleneck Module for EEG -Based Emotion Recognition. Sensors, 22(18), 1–16. 
+https://doi.org/10.3390/s22186813 
+Li, J., Qiu, S., Du, C., Wang, Y., & He, H. (2020). Domain adaptation for eeg emotion 
+recognition based on latent representation similarity. IEEE Transactions on Cognitive and 
+Developmental Systems, 12(2), 344–353. https://doi.org/10.1109/TCDS.2019.2949306 
+Li, Y., Zheng, W., Zong, Y., Cui, Z., Zhang, T., & Zhou, X. (2021). A Bi -Hemisphere Domain 
+Adversarial Neural Network Model for EEG Emotion Recognition. IEEE Transactions on 
+Affective Computing, 12(2), 494–504. https://doi.org/10.1109/TAFFC.2018.2885474 
+Liang, Z., Zhou, R., Zhang, L., Li, L., Huang, G., Zhang, Z., & Ishii, S. (2021). EEGFuseNet: 
+Hybrid Unsupervised Deep Feature Characterization and Fusion for High-Dimensional EEG 
+with an Application to Emotion Recognition.  IEEE Transactions on Neural Systems and 
+Lionitama, dkk 
+MIND – 51 
+Rehabilitation Engineering , 29(1), 1913 –1925. 
+https://doi.org/10.1109/TNSRE.2021.3111689 
+Putri, N. A., Contessa Djamal, E., Nugraha, F., & Kasyidi, F. (2022). EEG Emotion Recognition 
+using Parallel Hybrid Convolutional -Recurrent Neural Networks. 2022 International 
+Conference on Data Science and Its Applications, ICoDSA 2022 , 24 –29. 
+https://doi.org/10.1109/ICoDSA55874.2022.9862853 
+Song, T., Zheng, W., Song, P., & Cui, Z. (2020). EEG Emotion Recognition Using Dynamical 
+Graph Convolutional Neural Networks. IEEE Transactions on Affective Computing, 11(3), 
+532–541. https://doi.org/10.1109/TAFFC.2018.2817622 
+Sun, J., Wang, X., Zhao, K., Hao, S., & Wang, T. (2022). Multi -Channel EEG Emotion 
+Recognition Based on Parallel Transformer and 3D -Convolutional Neural Network. 
+Mathematics, 10(17). https://doi.org/10.3390/math10173131 
+Zhang, H. (2020). Expressio n-eeg based collaborative multimodal emotion recognition using 
+deep autoencoder. IEEE Access , 8, 164130 –164143. 
+https://doi.org/10.1109/ACCESS.2020.3021994 
+Zheng, W. L., & Lu, B. L. (2015). Investigating Critical Frequency Bands and Channels for EEG-
+Based Emotion Recognition with Deep Neural Networks. IEEE Transactions on 
+Autonomous Mental Development , 7(3), 162 –175. 
+https://doi.org/10.1109/TAMD.2015.2431497 
+ 
+ 
+ 

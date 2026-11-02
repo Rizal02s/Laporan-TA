@@ -1,0 +1,154 @@
+{
+  "hash": "805c8db341ffd5f8ffbd4c00bd8853b71f124253a252211d0404ae7847e5206a",
+  "role": "kesepakatan",
+  "person": "C",
+  "answers": {
+    "J03WPY_P2_F152650": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:22:37.162Z"
+    },
+    "J03WOH_P2_F109895": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:23:02.662Z"
+    },
+    "J03WPY_P2_F135477": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:23:11.298Z"
+    },
+    "J03WR9_P1_F69031": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:23:18.324Z"
+    },
+    "J03WOH_P2_F144413": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:23:26.250Z"
+    },
+    "J03WOY_P2_F113162": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:23:34.800Z"
+    },
+    "J03WN1_P1_F12725": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:23:45.908Z"
+    },
+    "J03WN1_P1_F11356": {
+      "person": "C",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah melakukan gerakan blocking",
+      "utc": "2026-11-02T17:24:16.322Z"
+    },
+    "J03WN1_P1_F18331": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:24:31.590Z"
+    },
+    "J03WMX_P1_F23089": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:24:38.353Z"
+    },
+    "J03WMX_P2_F119897": {
+      "person": "C",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah hanya mengikuti pergerakan lawan tanpa melakukan pressing",
+      "utc": "2026-11-02T17:25:01.485Z"
+    },
+    "J03WQQ_P1_F34290": {
+      "person": "C",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah melakukan kesalhan blunder di kotak penalti",
+      "utc": "2026-11-02T17:25:22.148Z"
+    },
+    "J03WMX_P2_F115687": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:25:30.436Z"
+    },
+    "J03WOH_P2_F136947": {
+      "person": "C",
+      "label": 0,
+      "confidence": 3,
+      "notes": "bola masih dalam penguasaan kiper lawan",
+      "utc": "2026-11-02T17:25:47.877Z"
+    },
+    "J03WQQ_P1_F68330": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan setelah kehilangan bola",
+      "utc": "2026-11-02T17:26:06.751Z"
+    },
+    "J03WMX_P1_F18417": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:26:14.437Z"
+    },
+    "J03WMX_P1_F51445": {
+      "person": "C",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim sedang melakukan defense normal",
+      "utc": "2026-11-02T17:26:29.011Z"
+    },
+    "J03WQQ_P1_F65601": {
+      "person": "C",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah melakukan intersep dan counter attack, bukan akibat gegenpressing",
+      "utc": "2026-11-02T17:26:59.312Z"
+    },
+    "J03WR9_P1_F16153": {
+      "person": "C",
+      "label": 0,
+      "confidence": 3,
+      "notes": "penguasaan bola di kiper lawan",
+      "utc": "2026-11-02T17:27:14.680Z"
+    },
+    "J03WOY_P2_F110487": {
+      "person": "C",
+      "label": 0,
+      "confidence": 3,
+      "notes": "penguasaan berada di kiper lawan",
+      "utc": "2026-11-02T17:27:28.306Z"
+    },
+    "J03WN1_P1_F18114": {
+      "person": "C",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:27:36.164Z"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+candidate_id,match_id,split,period_id,loss_timestamp,loss_frame,is_gegenpressing,annotation_confidence,annotation_notes,annotated_at_utc,annotator,review_reason
+J03WMX_P1_F12133,J03WMX,train,1,0 days 00:01:25.320000,12133,1,1,,2026-10-26T14:13:08.934406+00:00,rizal,low_confidence
+J03WMX_P1_F72996,J03WMX,train,1,0 days 00:41:59.840000,72996,1,1,,2026-10-26T14:50:54.564451+00:00,rizal,low_confidence
+J03WMX_P1_F73826,J03WMX,train,1,0 days 00:42:33.040000,73826,0,1,,2026-10-26T15:37:24.877780+00:00,rizal,low_confidence
+J03WMX_P1_F73879,J03WMX,train,1,0 days 00:42:35.160000,73879,0,1,,2026-10-26T15:37:36.802847+00:00,rizal,low_confidence
+J03WMX_P2_F119897,J03WMX,train,2,0 days 00:13:15.880000,119897,1,1,,2026-10-26T15:40:59.985341+00:00,rizal,low_confidence
+J03WOH_P2_F103255,J03WOH,train,2,0 days 00:02:10.200000,103255,0,1,,2026-10-27T08:05:07.478700+00:00,rizal,low_confidence

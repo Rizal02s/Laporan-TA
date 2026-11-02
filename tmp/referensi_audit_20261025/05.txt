@@ -1,0 +1,2611 @@
+PAGE 1
+Abstrak  
+Mendeteksi  tekanan  balik  (counterpressing)  adalah  tugas  penting  bagi  setiap  analis  pertandingan  profesional  
+dalam  sepak  bola,  tetapi  saat  ini  dilakukan  secara  eksklusif  secara  manual  dengan  mengamati  rekaman  video.
+Pascal  Bauer1,2  ·  Gabriel  Anzer1,3
+Tujuan  makalah  ini  bukan  hanya  untuk  mengidentifikasi  strategi  ini  secara  otomatis,  tetapi  juga  untuk  
+menurunkan  metrik  yang  mendukung  pelatih  dalam  menganalisis  situasi  transisi.  Selain  itu,  kami  ingin  
+menyimpulkan  faktor-faktor  pengaruh  objektif  untuk  keberhasilannya  dan  menilai  validitas  aturan  praktis  
+yang  dibuat  oleh  praktisi.  Berdasarkan  kombinasi  data  posisi  dan  kejadian,  kami  mendeteksi  situasi  
+counterpressing  sebagai  tugas  pembelajaran  mesin  terawasi.  Bersama  dengan  para  ahli  analisis  
+pertandingan  profesional,  kami  membahas  dan  mengkonsolidasikan  definisi  yang  konsisten,  mengekstrak  
+134  fitur,  dan  secara  manual  memberi  label  lebih  dari  20.000  situasi  transisi  defensif  dari  97  pertandingan  
+sepak  bola  profesional.  Model  extreme  gradient  boosting—dengan  area  di  bawah  kurva  sebesar  87,4%  pada  
+data  uji  berlabel—memungkinkan  kami  untuk  menilai  seberapa  cepat  tim  dapat  merebut  kembali  bola  dengan  
+strategi  counterpressing,  berapa  banyak  tembakan  yang  mereka  ciptakan  atau  izinkan  segera  setelahnya,  
+dan  untuk  menentukan  apa  pendorong  keberhasilan  yang  paling  penting.  Kami  menerapkan  deteksi  otomatis  
+ini  pada  semua  pertandingan  dari  enam  musim  penuh  Bundesliga  Jerman  dan  mengukur  konsekuensi  
+defensif  dan  ofensif  ketika  menerapkan  counterpressing  untuk  setiap  tim.  Mengotomatiskan  tugas  tersebut  
+menghemat  banyak  waktu  analis.
+Tugas  pembelajaran  mesin  terawasi  berdasarkan  data  posisi  dan  
+peristiwa  yang  disinkronkan  dengan  ekstraksi  fitur  berbasis  ahli.
+B.  Pascal  Bauer
+Diterima:  17  Agustus  2020 /  Diterima:  4  Mei  2021 /  Diterbitkan  daring:  8  Juli  2021  ©  Penulis(s)  
+2021
+Penambangan  Data  dan  Penemuan  Pengetahuan  (2021)  35:2009–2049  
+https://doi.org/10.1007/s10618-021-00763-7
+Editor  yang  bertanggung  jawab:  Albrecht  Zimmermann.
+Gabriel  Anzer  
+gabriel.anzer@sportec-solutions.de
+pascal.bauer@dfb.de
+Departemen  Psikologi  Olahraga  dan  Metode  Penelitian,  Institut  Ilmu  Olahraga,  Universitas  Tübingen,  Tübingen,  Jerman
+Sportec  Solutions  AG,  anak  perusahaan  Deutsche  Fußball  Liga  (DFL),  Munich,  Jerman
+Akademi  DFB,  Asosiasi  Sepak  Bola  Jerman  (DFB),  Frankfurt,  Jerman
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  
+profesional
+123
+3
+1
+2
+Machine Translated by Google
+
+PAGE 2
+1
+Oleh  karena  itu,  detik-detik  pertama  setelah  kehilangan  bola  sangat  penting  dari  perspektif  pertahanan.  
+Beberapa  studi  membuktikan  bahwa  fase  transisi  merupakan  faktor  penting  bagi  kinerja  keseluruhan  
+tim:  Sejak  tahun  1968,  Reep  dan  Benjamin  (1968)  menunjukkan  dalam  studi  analitik  sepak  bola  pertama  
+yang  diketahui,  bahwa  30%  dari  semua  penguasaan  bola  yang  direbut  kembali  menghasilkan  tembakan  
+ke  gawang  dan  25%  dari  semua  gol  berasal  dari  penguasaan  bola  yang  direbut  kembali  di  kuarter  
+serang.  Grant  dkk.  (1999)  mengkonfirmasi  temuan  ini  untuk  Piala  Dunia  1998.  Kedua  hasil  tersebut  
+selaras  sempurna  dengan  pernyataan  Jürgen  Klopp  bahwa  merebut  kembali  bola  segera  setelah  
+kehilangannya,  berpotensi  melalui  counterpressing  yang  sukses,  "...adalah  yang  terbaik
+Terdapat  perbedaan  signifikan  dalam  susunan  taktik  bertahan  dan  menyerang  tim  (Bialkowski  et  al.  
+2014,  2015;  Andrienko  2019;  Shaw  dan  Mark  2019).  Fase  transisi  menggambarkan  periode  setelah  
+kemenangan  atau  kehilangan  penguasaan  bola  di  mana  tim  beralih  antara  susunan  taktik  menyerang  
+dan  bertahan,  dan  sebaliknya.
+Kata  kunci:  Analisis  olahraga  ·  Sepak  bola  ·  Analisis  kinerja  taktis  ·
+Dengan  menghabiskan  banyak  waktu,  metode  ini  menstandarisasi  tugas  yang  sebelumnya  subjektif,  
+dan  memungkinkan  identifikasi  tren  dalam  kumpulan  data  yang  lebih  besar.  Kami  menyajikan  cara  efektif  
+bagaimana  deteksi  dan  pelajaran  yang  dipetik  dari  investigasi  ini  diintegrasikan  secara  efektif  ke  dalam  
+proses  analisis  pencocokan  umum.
+Pembelajaran  mesin  terapan  ·  Data  posisi  dan  kejadian
+Ketika  suatu  tim  menguasai  bola  setidaknya  dalam  jangka  waktu  tertentu,  kita  dapat  berasumsi  bahwa  
+secara  umum  formasi  taktisnya  dioptimalkan  untuk  permainan  menyerang  dan,  akibatnya,  kurang  
+optimal  dalam  hal  mempertahankan  gawangnya  sendiri  (Andrienko  2019;  Shaw  dan  Mark  2019).
+Setiap  tim  sepak  bola  profesional  menghabiskan  banyak  waktu  untuk  menganalisis  dan  memantau  
+strategi  seperti  counterpressing—  strategi  tim  yang  kompleks  untuk  situasi  transisi—baik  tim  mereka  
+sendiri  maupun  tim  lawan.  Navarro  dan  Javier  (2018)  mendefinisikan  counterpressing  sesederhana  “[..]  
+tekanan  setelah  kehilangan  bola”.  Terkait  dengan  hal  ini,  Pep  Guardiola  mempopulerkan  'aturan  lima  
+detik'  untuk  counterpressing.1  Pelatih  lain  yang  mengalami  kesuksesan  luar  biasa  dalam  beberapa  
+musim  terakhir  adalah  manajer  Liverpool  FC,  Jürgen  Klopp.  Ia  secara  umum  diakui  sebagai  pencetus  
+istilah  'Gegenpressing',  yang  terkenal  baik  dalam  versi  Jermannya  maupun  terjemahan  bahasa  
+Inggrisnya.2  Jelas  bagi  para  ahli  sepak  bola  bahwa  konsep  counterpressing  Klopp  sangat  terkait  dengan  
+strategi  Guardiola  untuk  merebut  kembali  bola  dalam  lima  detik  pertama.
+Memperoleh  data  posisi  dan  kejadian  yang  akurat  dan  berfrekuensi  tinggi  adalah  hal  biasa  di  sebagian  
+besar  liga  sepak  bola  profesional  papan  atas  dunia.  Data  kejadian  yang  dianotasi  secara  manual  hanya  
+memberikan  informasi  tentang  satu  pemain  yang  membawa  bola  pada  saat  aksi  yang  relevan  dengan  
+pertandingan,  sedangkan  yang  disebut  data  posisi  dapat  menangkap  posisi  yang  sangat  akurat  dari  
+semua  22  pemain  hingga  25  kali  per  detik.
+2695408-2,  Diakses  pada  20/06/2020.
+“[..]  setelah  kehilangan  bola,  tim  memiliki  waktu  lima  detik  untuk  merebut  kembali  bola,  atau,  jika  tidak  berhasil,  melakukan  pelanggaran  taktis  terhadap  
+lawan  dan  mundur”,  Pep  Guardiola;  https://www.theblizzard.co.uk/article/peps-four-golden-rules ,  diakses  20/06/2020.  2  https://www.sueddeutsche.de/sport/
+premier-league-bei-klopps-liverpoolern-
+klemmt-das-gaspedal-1.
+Tahun  2010 P.  Bauer,  G.  Anzer
+1  Pendahuluan
+123
+Machine Translated by Google
+
+PAGE 3
+4
+5
+sebagai  proses  kompleks  yang  dihasilkan  dari  jaringan  parameter  yang  saling  bergantung  (Kempe
+sebuah  gol  daripada  penyelamatan  yang  dibangun  dari  separuh  lapangan  tim  sendiri  (Vogelbein  et  al.  2014;  Hobbs  et  al.).
+pengatur  permainan".
+penerapan  teknik  pembelajaran  mesin  yang  canggih  pada  data  sepak  bola  dan  membutuhkan  efisiensi.
+peluang  melalui  nilai  kepemilikan  (Link  et  al.  2016;  Spearman  2018;  Fernan-dez  dan  Bornn  2018;  Decroos  et  al.  
+2020).  Selain  itu,  ada  banyak  pendekatan
+di  mana  keputusan  para  pelatih  didukung  oleh  beberapa  laporan  analisis  kinerja  dari
+adaptasi  selama  permainan  (Rein  dan  Daniel  2016).  Sesuai  dengan  itu  dijelaskan
+permainan,  tim  dan  pemain  (Travassos  et  al.  2013)  dan  menunjukkan  bahwa  taktik  tim
+dan  mencetak  gol
+permainan:  metrik  evaluasi  umpan  diperiksa  (Steiner  et  al.  2019;  Goes  et  al.  2019),
+Klub-klub  tersebut  memengaruhi  perkembangan  strategi  canggih  ini,  dan  tidak  ada  bukti  objektif  yang  dapat  membuktikannya.
+Kebutuhan  akan  analisis  taktis  yang  cepat  dan  terperinci  menandakan  potensi  besar  bagi  penerapannya.
+atau  bahkan  menggabungkan  statistik  sederhana  (misalnya  tingkat  keberhasilan  umpan)  dari  satu  atau  beberapa  data.
+strategi  agresif.  Studi  terbaru  menunjukkan  bahwa  merebut  kembali  bola  dalam  permainan  terbuka  lebih  mungkin  mengarah  pada
+Goes  et  al.  2019),  dan  bahkan  pendekatan  yang  bertujuan  untuk  mengukur  tekanan  (Bojinov  dan  Luke
+Ini  berkaitan  dengan  liga  dan  kompetisi  top  dunia  di  mana  tim-tim  perlu  berhadapan.
+situasi—menyoroti  relevansinya  sekali  lagi.  Meskipun  banyak  pelatih  dan
+Dioperasionalkan  berdasarkan  sistem  notasi,  yang  digambarkan  sebagai  metode  pencatatan  kinerja  olahraga  yang  
+dapat  direplikasi  dan  konsisten.  Literatur  terkini  menjelaskan  kerangka  kerja,
+2018;  Brefeld  et  al.  2019)  dan  beberapa  studi  mengevaluasi  metrik  tembakan  (Lucey  et  al.
+untuk  mengukur  perilaku  defensif  tim  (Santos  et  al.  2018;  Andrienko  2019;
+adegan-adegan  mendesak  secara  umum.5  Beberapa  pendekatan  juga  menunjukkan  bahwa  menganalisis  KPI  ini
+metrik  untuk  mengukur  ruang  terkontrol  telah  didefinisikan  (Kim  2004;  Fernandez  dan  Bornn)
+et  al.  2014).  Proses-proses  ini  dilakukan  dalam  pengaturan  yang  sangat  sensitif  terhadap  waktu,  terutama  ketika
+Meskipun  terkait  erat,  keduanya  merupakan  dua  fenomena  yang  berbeda.  Sebuah  prosiding  konferensi  yang  menarik  
+menjelaskan  bagaimana  situasi  penekanan  balik  tertentu  dapat  diturunkan  dari  yang  terdeteksi.
+2014;  Rathke  2017;  Fairchild  dkk.  2018;  Anzer  dan  Bauer  2021)
+Terdeteksi  penguasaan  bola  kembali  di  dekat  gawang  lawan—potensi  tekanan  balik.
+Perkembangan  terkini  ini—ketersediaan  data  kinerja  yang  akurat  dan
+2020;  Rein  dan  Daniel  2016).  Banyak  penelitian  ilmiah  baru-baru  ini  bertujuan  untuk  menetapkan  indikator  kinerja  
+utama  (KPI)  baru—metrik  yang  mengukur  aspek-aspek  tertentu  dari
+Dalam  sepak  bola,  hal  ini  merujuk  pada  keputusan  yang  dibuat  sebelum  pertandingan  (a  priori)  dan  juga  keputusan  yang  dibuat  secara  langsung  (real-time).
+Literatur  belum  menyajikan  analisis  mengenai  efisiensinya,  maupun  penggunaannya  di  liga-liga  papan  atas.
+kolaborasi  ilmu  komputer  dan  pakar  bidang  (Herold  et  al.  2019;  Goes  et  al.
+Klopp  dengan  ini  menyatakan  bahwa  counterpressing  juga  dapat  dilihat  sebagai  serangan.
+2018).  Berdasarkan  data  pelacakan  dari  Liga  Premier  Inggris,  Hobbs  dkk.  (2018)
+dan  keterbatasan  sumber  daya  selama  pertandingan  memaksa  tim  untuk  mencari  cara  untuk  mengotomatiskan  proses  dan
+Dapatkan  wawasan  lebih  cepat  untuk  meraih  keunggulan  kompetitif.
+Hughes  dan  Ian  (2015)  menunjukkan  bahwa  analisis  kinerja  olahraga  tim  cenderung
+2016;  Andrienko  2017;  Robberechts  2019).  Meskipun  menekan  dan  menekan  balik
+lawan  yang  berbeda  beberapa  kali  seminggu.  Meskipun  banyak  klub  memperluas  departemen  analisis  pertandingan  
+mereka  secara  signifikan  dalam  beberapa  tahun  terakhir,  keterbatasan  waktu
+Tahun  2011Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+3  https://tactical-times.com/the-history-and-evolution-of-jurgen-klopp/,  Diakses  pada  20/06/2020.
+Will  Gürpinar-Morgen  (2018).  "Bagaimana  data  StatsBomb  membantu  mengukur  counterpressing",  Konferensi  Inovasi  
+Statsbomb  dalam  Sepak  Bola  2018;  https://statsbomb.com/2018/05/how-statsbomb-data-helps-measure-counter-pressing/ ,  
+Diakses  pada  11/11/2020.
+Sering  disebut  sebagai  nilai  expected  goals  (xG) .
+4
+3
+123
+Machine Translated by Google
+
+PAGE 4
+123
+8
+6
+7
+Jerman  U21  melawan  Belgia  U21;  17  November  2019,  Schwarzbaldstadion  Freiburg.
+Karun  Singh  (2020).  "Belajar  menonton  sepak  bola:  representasi  yang  diawasi  sendiri  untuk  melacak  data"  Dalam  OptaPro  
+Analytics  Forum,  London;  https://www.youtube.com/watch?v=H1iho17lnoI,  Diakses  pada  11/11/2020.
+Tahun  2012 P.  Bauer,  G.  Anzer
+Jerman  melawan  Irlandia  Utara;  19  November  2019,  Commerzbankarena  Frankfurt.
+–  Dapatkah  kita  membedakan  berbagai  strategi  merebut  kembali  bola  dan  menentukan  alasan  waktu  reaksi  
+defensif  yang  singkat  (definisi  di  Bagian  2.1.2),  yaitu  sejauh  mana  perebutan  kembali  bola  yang  cepat  
+sebenarnya  disebabkan  oleh  tekanan  balik  (RQ1)?
+Selain  itu,  deteksi  otomatis  memungkinkan  kami  untuk  menganalisis  sejumlah  besar  data  yang  akan  melebihi  
+kapasitas  pemrosesan  manual.  Akibatnya,  pendekatan  kami  memungkinkan  kami  untuk  melakukan  analisis  
+jangka  panjang  yang  tidak  memihak  terhadap  musim-musim  terbaru  Bundesliga  Jerman  dengan  menyelidiki  
+pertanyaan  penelitian  berikut:
+Musim  memberikan  indikasi  yang  bermanfaat  bagi  para  praktisi  (Power  et  al.  2018;  Pappalardo  et  al.  2019).  
+Tujuan  utama  dari  semua  pendekatan  ini  adalah  untuk  memperoleh  wawasan  baru  dengan  memproses  
+sejumlah  besar  informasi.  Decroos  et  al.  (2018)  menyajikan  pendekatan  pertama  untuk  mendeteksi  fase  
+pertandingan  yang  menarik  berdasarkan  data  kejadian.  Sejauh  pengetahuan  kami,  belum  ada  studi  yang  
+ditinjau  oleh  rekan  sejawat  yang  berfokus  pada  otomatisasi  sebagian  dari  kehidupan  sehari-hari  analis  kinerja  
+dengan  mendeteksi  pola  taktis  kompleks  berdasarkan  data  posisi  dan  kejadian.
+Namun,  pendekatan  penting  yang  bertujuan  untuk  mendeteksi  serangan  balik  telah  dipresentasikan  dalam  
+konferensi  analitik  sepak  bola  yang  mapan.6  Dengan  
+mempertimbangkan  kebutuhan  praktis  akan  optimasi  proses  ini,  isu  utama  studi  ini  adalah  mendeteksi  
+situasi  tekanan  balik  tanpa  bantuan  manusia  dan  menyediakan  beberapa  laporan  ad-hoc  untuk  analis  
+pertandingan  dalam  waktu  hampir  nyata.  Hasilnya  dioptimalkan  untuk  memenuhi  kebutuhan  praktis  mereka  
+dan  sesuai  dengan  ekosistem  alat  mereka.
+–  Apakah  aturan  praktis  yang  sudah  ada  sesuai  dengan  data  (yaitu,  counterpressing  lebih  efektif  di  dekat  
+garis  samping)  (RQ3)?
+–  Sejauh  mana  strategi  counterpressing  tim  berbeda  di  Jerman?
+–  Dapatkah  kita  menetapkan  tolok  ukur  objektif  untuk  mengukur  strategi  counterpressing  (jumlah  dan  
+efektivitas)  pada  tingkat  pertandingan  dan  musim  serta  menunjukkan  korelasinya  dengan  kesuksesan  
+keseluruhan  tim  (RQ2)?
+Secara  keseluruhan,  menjawab  pertanyaan-pertanyaan  penelitian  ini  membantu  kita  untuk  menentukan  
+landasan  bagi  diskusi  kualitatif  dengan  para  ahli,  dan  dengan  demikian  memungkinkan  mereka  untuk  
+merumuskan  persyaratan  untuk  pengaturan  aplikasi  praktis  (PA) .
+Sisa  makalah  ini  disusun  sebagai  berikut:  Bagian  2  memberikan  deskripsi  rinci  tentang  data  yang  
+digunakan,  aturan  dan  definisi  yang  mendasarinya,  proses  pelabelan,  dan  fitur  yang  diekstrak.  Hasil  di  Bagian  
+3  dibagi  menjadi  tiga  bagian:  Pertama,  di  Bagian  3.1,  kami  menjelaskan  evaluasi  statistik  dari  model  deteksi.  
+Bagian  3.2  menyajikan  evaluasi  spesifik  subjek  dengan  menafsirkan  hasil  kami  pada  enam  musim  Bundesliga  
+Jerman.  Terakhir,  di  Bagian  3.3,  kami  menunjukkan  bagaimana  pendekatan  ini  dapat  dioperasionalkan  dalam  
+proses  analisis  kinerja.  Aplikasi  ini  didasarkan  pada  dua  pertandingan  tim  nasional  Jerman.7,8  Semua  bagian  
+dari  penelitian  ini  dikembangkan  dalam  kerja  sama  erat  dengan  analis  pertandingan  dan  pelatih  profesional  
+(lihat  Ucapan  Terima  Kasih).
+Matikan  (RQ4)?
+Machine Translated by Google
+
+PAGE 5
+2  Metode
+https://www.sportec-solutions.de/en/index.html,  Diakses  pada  20/06/2020.
+Tahun  2013Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+https://chyronhego.com/products/sports-tracking/tracab-optical-tracking/,  Diakses  pada  20/06/2020.
+2.1.2  Definisi
+mendefinisikan  sekitar  30  peristiwa  dengan  lebih  dari
+Studi  ini  menggunakan  data  posisi  dan  kejadian  yang  dikumpulkan  dalam  lebih  dari  enam  musim  (4118  
+pertandingan)  Bundesliga  Jerman  dan  Bundesliga  2,  serta  dua  pertandingan  tim  nasional  Jerman  yang  
+disebutkan  di  atas.  Data  posisi  ditangkap  oleh  sistem  pelacakan  optik9  dan  data  kejadian  terdiri  dari  anotasi  
+manual  berdasarkan
+2.1  Data  dan  definisi
+2.1.1  Pengumpulan  data
+Karena  kedua  sumber  data  dikumpulkan  secara  independen  satu  sama  lain,  keduanya  perlu  
+disinkronkan  sebelum  dapat  diproses  bersama.  Meskipun  beberapa  langkah  manajemen  kualitas  dari  
+lembaga  independen  dilakukan  pada  data  kejadian  yang  dikumpulkan  secara  manual,  stempel  waktu  yang  
+ditetapkan  untuk  suatu  kejadian  dapat  berbeda  secara  signifikan  dengan  stempel  waktu  pada  data  posisi.  
+Sinkronisasi  data  posisi  dan  kejadian  dilakukan  dengan  aturan  khusus  (per  kejadian)  yang  mengekstrak  
+stempel  waktu  yang  tepat  dan  lokasi  yang  tepat  di  lapangan  dari  data  pelacakan  yang  diberikan  untuk  
+kejadian  yang  ditandai  secara  manual.  Misalnya,  saat  menyinkronkan  umpan,  peningkatan  jarak  yang  tiba-
+tiba  antara  pemain  yang  mengumpan  dan  bola,  yang  ditangkap  oleh  pelacakan  optik,  dapat  digunakan  
+untuk  menyelaraskan  lokasi  dan  stempel  waktu  umpan.  Data  posisi  dikumpulkan  pada  frekuensi  25  Hz  dan  
+mencakup  posisi  longitudinal,  latitudinal,  dan  dalam  kasus  bola,  juga  posisi  altitudinal  pemain,  bola,  dan  
+wasit  yang  terkait  dengan  penandaan  lapangan.
+Katalog  data  pertandingan  resmi  yang  
+didedikasikan ,  100  atribut.  Data  kejadian  dapat  dilihat  sebagai  catatan  tindakan  yang  relevan  dengan  bola  
+(misalnya  umpan,  tembakan,  tekel,  atau  pelanggaran),  namun,  data  ini  tidak  mencakup  perilaku  taktik  tim  
+yang  kompleks  seperti  counterpressing.
+Informasi  tentang  tim  mana  yang  saat  ini  menguasai  bola  (selanjutnya  disebut  sebagai  penguasaan  
+bola)  dan  apakah  pertandingan  sedang  berlangsung  atau  sedang  dihentikan  (selanjutnya  disebut  sebagai  
+status  bola)  sangat  penting  untuk  survei  kami.  Kedua  nilai  tersebut  dikumpulkan  secara  langsung  di  
+stadion  untuk  setiap  frame  pertandingan  oleh  operator  terampil  yang  fokus  secara  eksklusif  pada  tugas  ini.
+Karena  terdapat  definisi  penguasaan  bola  yang  saling  bertentangan  dalam  literatur  (Kempe  et  al.  2014),  
+kami  memutuskan  untuk  mengadopsi  definisi  yang  telah  dipublikasikan  dengan  masukan  dari  para  ahli.  
+Operator  yang  disebutkan  di  atas,  yang  bertugas  memperoleh  informasi  tentang  penguasaan  dan  status  
+bola,  diberi  pengarahan  untuk  menandai  penguasaan  bola  untuk  satu  tim,  jika  dan  sejak  saat  itu  seorang  
+pemain  dari  tim  tersebut  menyentuh  bola  dengan  kontrol  bola,  hingga  bola  keluar  dari  permainan,  atau  
+pemain  lawan  menyentuh  bola  dengan  kontrol  bola.  Kontrol  bola  didefinisikan  dalam  konteks  ini  sebagai  
+kemampuan  untuk  melakukan  tindakan  yang  direncanakan  dengan  bola.  Setiap  kali  umpan  dimainkan  
+antara  dua  pemain  dari  satu  tim,  penguasaan  bola  menjadi  milik  tim  tersebut  selama  tidak  ada  pemain  
+lawan  yang  mencegat  umpan  tersebut  atau  merebut  bola  dalam  waktu  tertentu.
+10
+9
+123
+10
+Machine Translated by Google
+
+PAGE 6
+123
+11
+P.  Bauer,  G.  AnzerTahun  2014
+Statsbomb  adalah  penyedia  data  acara  sepak  bola  yang  berbasis  di  Inggris,  https://statsbomb.com/,  Diakses  pada  17/12/2020.  12  Data  peristiwa  
+StatsBomb,  
+termasuk  tag  pressing,  dapat  diakses  untuk  banyak  liga  profesional  di  https://statsbomb.com/data/.
+Untuk  mengukur  keberhasilan  counterpressing,  kami  menganggapnya  berhasil  jika  bola  berhasil  direbut  
+kembali  dalam  waktu  lima  detik  dan  tembakan  serta  gol,  baik  yang  dicetak  maupun  yang  diterima,  dianggap  
+sebagai  bagian  dari  fase  counterpressing  sebelumnya  jika  terjadi  dalam  20  detik  berikutnya.
+Perlu  dicatat  bahwa  terdapat  banyak  definisi  berbeda  untuk  pressing:  StatsBomb11  mendefinisikan  
+pressing  sebagai  pemain  bertahan  yang  berada  dalam  radius  lima  yard  dari  lawan  yang  membawa  bola.12  
+Mirip  dengan  itu,  definisi  yang  lebih  rinci  dan  non-biner,  yang  menggabungkan  tekanan  dari  beberapa  pemain  
+bertahan,  disajikan  oleh  Andrienko  (2017).  Berdasarkan  definisi  pressing  ini,  counterpressing  dapat  
+didefinisikan  sebagai  situasi  di  mana  pressing  dilakukan  segera  setelah  perubahan  penguasaan  bola  
+(Navarro  dan  Javier  2018).  Kedua  definisi  berbasis  aturan  ini  digunakan  sebagai  model  dasar  untuk  
+investigasi  kami.
+(2014).  Semua  situasi  di  mana  bola  berada  di  luar  garis  lapangan  atau  permainan  dihentikan  oleh  wasit  
+(misalnya  karena  pelanggaran)  diberi  label  sebagai  keluar  lapangan.  Oleh  karena  itu,  jika  bola  keluar  batas  
+lapangan,  biasanya  harus  ada  perubahan  kepemilikan  bola.
+Duel  individu.  Menurut  definisi  dari  Link  dan  Hoernig  (2017) ,  kami  juga  menghitung  penguasaan  bola  pada  
+tingkat  pemain  (penguasaan  bola  individu).  Dalam  kasus  intersepsi,  perubahan  penguasaan  bola  terdeteksi  
+tepat  pada  saat  sentuhan  bola  pertama  pemain  yang  melakukan  intersepsi.  Kami  menggunakan  istilah  waktu  
+reaksi  defensif  —waktu  yang  dibutuhkan  untuk  merebut  kembali  penguasaan  bola  setelah  kehilangannya—
+seperti  yang  didefinisikan  dalam  Vogelbein  dkk.
+Situasi  di  mana  sentuhan  pemain  yang  membawa  bola  di  luar  garis  penanda  tidak  dinyatakan  sebagai  
+penguasaan  bola  karena  kehilangan  kendali  (misalnya  tembakan  yang  dibelokkan),  atau  ketika  model  
+penguasaan  bola  individu  tidak  sesuai  dengan  bendera  penguasaan  bola  tim,  dikecualikan.  Untuk  semua  
+investigasi  lebih  lanjut,  hanya  waktu  bermain  efektif  (juga  disebut  sebagai  waktu  bermain  bersih )—yang  
+didefinisikan  sebagai  semua  situasi  saat  permainan  berlangsung—yang  dipertimbangkan.  Tembakan,  
+misalnya,  selalu  mewakili  akhir  dari  fase  penguasaan  bola  sesuai  definisi.  Fase  penguasaan  bola  yang  
+berakhir  dengan  peluit  babak  pertama,  atau  peluit  akhir,  atau  bola  wasit,  dikecualikan  dari  analisis  kami.
+Suatu  tim  melakukan  counterpressing  jika  setidaknya  satu  pemain  memberikan  tekanan  (spasial  dan/
+atau  temporal)  pada  pembawa  bola,  atau  pada  lawan  yang  berada  dekat  dengan  bola.
+Namun,  menurut  para  analis  pertandingan  yang  terlibat  dalam  proyek  ini,  berada  dekat  dengan  pemain  
+yang  menguasai  bola  bukanlah  satu-satunya  cara  untuk  memberikan  tekanan.  Menyerang  atau  memblokir  
+opsi  umpan  termudah,  misalnya,  juga  dapat  dianggap  sebagai  bentuk  pemberian  tekanan.
+Selain  aturan  umum  ini,  kami  mengembangkan  definisi  terkait  transisi  berikut  ini  setelah  berkonsultasi  
+dengan  para  ahli  analisis  pertandingan:  Fase  transisi  defensif  didefinisikan  sebagai  rentang  waktu  ketika  
+sebuah  tim  kehilangan  penguasaan  bola,  tetapi  belum  berada  dalam  formasi  defensif  ideal  mereka.  Dalam  
+fase  transisi  defensif  ini,
+Selanjutnya,  permainan  dibagi  menjadi  fase  penguasaan  bola  yang  dapat  dimulai  dan  diakhiri  dengan  
+perubahan  penguasaan  bola  dalam  permainan  atau  penghentian  seperti  bola  mati.  Perlu  dicatat  bahwa  
+pengaturan  perubahan  penguasaan  bola  dalam  permainan,  seperti  transisi  defensif,  mungkin  bukan  satu-
+satunya  faktor  yang  memengaruhi  waktu  reaksi  defensif—hal  itu  juga  dapat  terjadi  karena  penguasaan  bola  
+yang  pendek  dan  tidak  terkontrol  atau  umpan  berisiko  dari  lawan.  Fase  penguasaan  bola  apa  pun  yang  
+dimulai  dengan  bola  mati  atau  diakhiri  dengan  penghentian  permainan  tidak  akan  dipertimbangkan  lebih  
+lanjut.  Gambar  1  menunjukkan  peta  panas  yang  menampilkan  kejadian
+Machine Translated by Google
+
+PAGE 7
+123
+Gambar  1.  Gambaran  umum  lokasi  paling  sering  terjadinya  turnover  di  lapangan  (dari  perspektif  tim  yang  bermain  dari  kiri  ke  kanan)
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional Tahun  2015
+Sebagai  informasi  tambahan,  para  ahli  mencoba  mendeteksi  kerangka  awal  dan  akhir  yang  tepat  dari  
+situasi  transisi  masing-masing.  Durasi  rata-rata  semua  fase  transisi  adalah  9,34  detik,  9,89  detik  untuk  
+counterpressing,  sedangkan  semua  pergantian  pemain  non-counterpressing  membutuhkan  waktu  rata-rata  
+9,11  detik.
+2.2  Pengaturan  pembelajaran  mesin  terawasi
+Situasi  transisi  yang  terkait  dengan  lapangan.  Ini  menunjukkan  bahwa  sebagian  besar  pergantian  kepemilikan  
+bola  terjadi  di  separuh  lapangan  lawan,  terutama  di  dekat  garis  samping.  Perubahan  kepemilikan  bola  karena  
+bola  keluar  batas  lapangan  ditambahkan  ke  area  yang  menyentuh  garis  samping.  Mudah  diidentifikasi  adalah  
+proporsi  pergantian  kepemilikan  bola  yang  tinggi  di  kotak  enam  yard  lawan.  Ini  mungkin  karena  baik  tembakan  
+yang  diselamatkan  maupun  tembakan  yang  meleset  dari  gawang  dihitung  sebagai  perubahan  kepemilikan  
+bola  segera  setelah  penjaga  gawang  menerima  bola.
+2.2.1  Pelabelan  buatan  tangan  pada  situasi  transisi  defensif
+Untuk  mengukur  reliabilitas  antar-pelabel,  20  pertandingan  diberi  label  oleh  tiga  mahasiswa  yang  berbeda.  
+Untuk  menghitung  akurasi  berpasangan  untuk  setiap  pergantian  kepemilikan  bola  defensif,  kami  memeriksa  
+apakah  kedua  mahasiswa  telah  mengidentifikasi  tekanan  lawan  dalam  dua  detik  berikutnya.  Ini  menghasilkan  
+akurasi  berpasangan  sebesar  82,01%,  yaitu  dalam  82,01%  pergantian  kepemilikan  bola  defensif,  kedua  
+mahasiswa  sepakat  tentang  sifat  tindakan  setelah  pergantian  kepemilikan  bola.
+Karena  pendekatan  berbasis  aturan  untuk  mendeteksi  tekanan  balik  yang  kami  teliti  menghasilkan  akurasi  
+yang  tidak  memadai  (lihat  Bagian  3.1),  kami  melakukan  prosedur  penandaan  manual  dengan  analis  mahasiswa  
+terlatih.  Tugas  mereka  adalah  memberi  label  pada  situasi  dengan  strategi  tekanan  balik  yang  dapat  dideteksi.  
+Secara  total,  dari  11.108  pergantian  pemain  bertahan  yang  relevan,  3.196  situasi  diberi  label  sebagai  tekanan  
+balik.  Pemberian  label  dilakukan  untuk  sebelas  pertandingan  Bundesliga  pertama  musim  2018/2019  dari  
+perspektif  tim  tuan  rumah.  Persentase  tekanan  balik  yang  terdeteksi  per  transisi  berbeda  secara  signifikan  per  
+tim.  Borussia  Mönchengladbach  menunjukkan  nilai  tertinggi  (40,07%),  sedangkan  hanya  21,80%  transisi  
+Hannover  96  yang  diberi  label  sebagai  tekanan  balik.  Hasil  agregat  dari  proses  pemberian  label  per  tim  
+Bundesliga  Jerman  ditampilkan  pada  Tabel  7  di  Lampiran  A.
+Machine Translated by Google
+
+PAGE 8
+123
+P.  Bauer,  G.  AnzerTahun  2016
+2.3.1  Deteksi  penekanan  balik  sebagai  tugas  pembelajaran  mesin  terawasi
+Kami  mendefinisikan  daftar  134  fitur  yang  bertujuan  untuk  mengkarakterisasi  transisi  tersebut.  Fitur-fitur  
+tersebut  menggambarkan  lokasi  perubahan  kepemilikan  bola,  beberapa  faktor  relevan  yang  
+menggambarkan  posisi  tepat  kedua  tim  pada  saat  pergantian  kepemilikan  bola  dan  pergerakan  mereka  
+dalam  dua  detik  pertama  setelah  kehilangan  bola.  Jendela  waktu  yang  lebih  lama  dari  dua  detik  
+bermasalah,  karena  akan  menghilangkan  terlalu  banyak  situasi  di  mana  kepemilikan  bola  berubah  
+dalam  waktu  tersebut.
+2.2.2  Ekstraksi  fitur  berbasis  ahli
+Keputusan  tim  untuk  melakukan  counterpressing  sangat  dipengaruhi  oleh  situasi  penguasaan  bola  itu  
+sendiri.  Untuk  mempertimbangkan  hal  ini,  semua  fitur  juga  dihitung  pada  saat  perubahan  penguasaan  
+bola.  Menurut  para  ahli  sepak  bola,  kehilangan  bola  tanpa  kesempatan  untuk  melakukan  counterpressing  
+sering  kali  ditandai  dengan  sapuan  bola  langsung  atau  duel  udara.  Oleh  karena  itu,  kami  memasukkan  
+posisi  bola,  ketinggian  bola,  dan  waktu  penguasaan  bola  individu  (Link  dan  Hoernig  2017)—yang  
+menggambarkan  waktu  seorang  pemain  dari  tim  yang  menguasai  bola  berada  dalam  kendali  langsung  
+atas  bola.  Para  ahli  sepak  bola  yang  terlibat  menyarankan  bahwa  counterpressing  sering  kali  ditandai  
+dengan  pencapaian  kekompakan  lokal  di  dekat  bola.  Kami  bertujuan  untuk  mencakup  hal  ini  dengan  
+beberapa  metrik  yang  mengukur  posisi  tim  yang  merebut  kembali  bola.  Misalnya,  kami  menggunakan  
+area  yang  dicakup  tim,  indeks  peregangan  global  dan  lokal  (Bourbousson  dan  Carole  Sève  2010;  Santos  
+dkk.  2018)  sebagai  fitur  dalam  model  kami.  Sebuah  tim  yang  terutama  bertujuan  untuk  mempertahankan  
+gawangnya  sendiri  setelah  kehilangan  penguasaan  bola  biasanya  melakukannya  dengan  kecepatan  
+tinggi  menuju  gawangnya  sendiri,  sedangkan  counterpressing  seringkali  hanya  membutuhkan  pemain  
+yang  dekat  dengan  bola  untuk  menyerang  lawan  mereka  dengan  kecepatan  tinggi  menuju  pembawa  
+bola.  Hal  ini  diatasi  dengan  menghitung  beberapa  nilai  kecepatan  dan  mempertimbangkan  posisi  rata-
+rata  setiap  tim,  yang  disebut  pusat  tim  (Bourbousson  dan  Carole  Sève  2010;  Andrienko  2017).  Berbeda  
+dengan  strategi  transisi  yang  lebih  konservatif,  tujuan  utama  counterpressing  bukanlah  untuk  menempatkan  
+banyak  pemain  dalam  unit  kompak  di  belakang  bola  dengan  cepat,  tetapi  lebih  untuk  bertahan  lebih  
+agresif  di  lapangan.  Oleh  karena  itu,  kami  menghitung  jumlah  pemain  di  depan  dan  di  belakang  bola,  
+serta  kekompakan  masing-masing.  Meskipun  definisi  press-ing  dari  Andrienko  (2017)  tidak  cukup  sebagai  
+kriteria  deteksi  counterpressing  berbasis  aturan  yang  berdiri  sendiri  (lihat  Bagian  3.1),  definisi  tersebut  
+dimasukkan  dalam  berbagai  fitur  model  kami.
+2.3  Pelatihan  model
+Kami  melatih  beberapa  algoritma  klasifikasi  berdasarkan  11.108  situasi  pergantian  kepemilikan  bola  
+defensif  yang  diberi  label  dari  97  pertandingan  yang  memenuhi  kriteria  inklusi  kami  (lihat  Gambar  1).
+Semua  fitur  dibahas,  dikonsolidasikan,  dan  terus  ditingkatkan  dalam  lokakarya  dan  berdasarkan  
+beberapa  langkah  evaluasi  deteksi.  Daftar  dan  deskripsi  fitur  secara  rinci  disajikan  dalam  Tabel  1,  video  
+yang  menjelaskan  beberapa  fitur  dapat  diakses  di  sini.
+Machine Translated by Google
+
+PAGE 9
+123
+Jumlah  pemain  dari  masing-masing  tim  yang  lebih  dekat  ke  gawang  sendiri.
+Perubahan  hanya  tercantum  sekali.
+setelah  BPC  (0  s,  1  s,  2  s);  dihitung  untuk  setiap  tim  secara  terpisah.
+(BPC)  (0  detik,  1  detik,  2  detik)
+Jumlah  pemain  dalam  beberapa  lingkaran  (10  m,  20  m,  30  m)  di  sekitar
+Koordinat  z  bola  yang  dilacak  pada  beberapa  titik  waktu  setelahnya
+2  detik);  dihitung  untuk  kedua  tim  secara  terpisah.
+dikecualikan.
+Tim  cepat
+Indeks  peregangan  yang  dinormalisasi  dari  setiap  tim  (tidak  termasuk
+2  detik);  dihitung  untuk  kedua  tim  secara  terpisah.
+Durasi  fase  penguasaan  bola  sebelumnya;  urutan
+di  mana  bola  berada  di  luar  permainan  (status  bola)  telah
+Tim  area  yang  tercakup
+1  detik,  2  detik);  dihitung  untuk  kedua  tim  secara  terpisah.
+poin  setelah  BPC  (0  detik,  1  detik,  2  detik)  dan  untuk  setiap  tim  secara  terpisah.
+Sève  (2010)  menghitung  pada  beberapa  titik  waktu  setelah  BPC  (0  s,
+Penguasaan  bola  individu  (relatif)
+penjaga  gawang)  berdasarkan  definisi  dalam  Bourbousson  dan  Carole
+Total  waktu  penguasaan  bola  individu  dari  setiap  pemain  dari
+(0  detik,  1  detik,  2  detik);  dihitung  untuk  kedua  tim.
+Fitur
+Jumlah  pemain  untuk  setiap  tim  yang  lebih  jauh  dari
+dua  pemain  dalam  dua  dimensi  (x,y)  dan  pada  beberapa  titik  waktu
+Pemain  di  belakang  bola
+Lokasi  (koordinat  x,y)  bola  pada  titik  waktu  bola
+Merebut  kembali  tim  dalam  waktu  hingga  3  detik  pertama  setelah  BPC  sebagai
+Tahun  2017
+dianggap  sebagai  jendela  waktu,  jadi  dibagi  3  detik  atau  dengan
+(tidak  termasuk)  dihitung  untuk  kedua  dimensi  (x,y)  dan  pada  beberapa
+Jumlah  pemain  yang  dekat  dengan  bola
+Durasi  penguasaan  bola  sebelumnya
+didefinisikan  dalam  Link  dan  Hoernig  (2017).
+terpisah.
+Tinggi  bola
+titik  waktu  setelah  BPC  (0  s,  1  s,  2  s);  dihitung  untuk  kedua  tim
+Posisi  pergantian  kepemilikan
+koordinat  lapangan  (horizontal  dan  vertikal)  dan  untuk  titik  waktu  yang  berbeda  setelah  penguasaan  bola  awal.
+Pusat  tim
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+setelah  BPC  (0  s,  1  s,  2  s);  dihitung  untuk  kedua  tim  secara  terpisah.
+Pemain  di  depan  bola
+Definisi
+perubahan  kepemilikan  (BPC),  selanjutnya  disebut  0  s.
+Penguasaan  bola  individu  (absolut)
+titik  waktu  setelah  BPC  (0  s,  1  s,  2  s)  dan  untuk  setiap  tim
+Kecepatan  pemain  yang  paling  dekat  dengan  bola  dihitung  pada  waktu  yang  berbeda.
+Jarak  pemain  terdekat  ke  bola  dihitung  pada  titik  yang  berbeda.
+bola  dihitung  pada  titik  waktu  yang  berbeda  setelah  BPC  (0  s,  1  s,
+Pemain  lebih  dekat  ke  bola Jumlah  pemain  dari  sebuah  tim  yang  lebih  dekat  ke  bola  daripada  pemain  berikutnya.
+Posisi  rata-rata  semua  pemain  dari  setiap  tim  (penjaga  gawang)
+Kecepatan  pemain  terdekat
+tengah  gawang  sendiri  daripada  bola  pada  titik  waktu  yang  berbeda  setelahnya
+Area  yang  dicakup  tim  diukur  sebagai  jarak  terluas  antara
+Tabel  1  Fitur-fitur  yang  diekstrak  yang  digunakan  untuk  deteksi  penekanan  balik.  Fitur  yang  digunakan  dalam  kedua  dimensi
+Tim  kekompakan  global
+lebih  tengah  daripada  bola  pada  titik  waktu  yang  berbeda  setelah  BPC  (0  s,  1  s,
+Tim  jarak  jauh
+pemain  dari  tim  lawan  dihitung  pada  titik  waktu  yang  berbeda
+Kecepatan  rata-rata  setiap  tim  pada  titik  waktu  yang  berbeda  setelah  BPC.
+(menentang,  mendapatkan  kembali).
+Total  penguasaan  bola  individu  dibagi  dengan  panjang
+Durasi  penguasaan  bola  berubah  jika  lebih  pendek.
+BPC  (0  s,  1  s,  2  s);  dihitung  untuk  kedua  tim  secara  terpisah.
+Machine Translated by Google
+
+PAGE 10
+123
+Tahun  2018
+mengembalikan  penguasaan  bola  tim  pada  berbagai  titik  waktu.
+Indeks  peregangan  lokal  yang  dinormalisasi  dari  kelompok  pemain  yang  berbeda  (3,4
+setelah  BPC  (0  s,  1  s,  2  s).
+Tekanan  kembali  menguasai  bola  bagi  tim.
+lebih  jauh  dari  pusat  gawang  sendiri  daripada  bola  di
+dan  5  pemain  terdekat  dengan  bola)  pada  titik  waktu  yang  berbeda  setelahnya
+titik  waktu  berbeda  setelah  BPC  (0  s,  1  s,  2  s);  dihitung  untuk
+Fitur
+Tekanan  pada  pemain  yang  menguasai  bola
+Ruang  bermain  yang  efektif
+(2018);  dihitung  untuk  setiap  tim  secara  terpisah.
+Definisi
+BPC  (0  s,  1  s,  2  s)  seperti  yang  ditunjukkan  dalam  Santos  et  al.  (2018);  dihitung
+pada  titik  waktu  yang  berbeda  setelah  BPC  (0  s,  1  s,  2  s);  dihitung  untuk
+titik  waktu  berbeda  setelah  BPC  (0  s,  1  s,  2  s).
+Kekompakan  di  belakang  bola
+P.  Bauer,  G.  Anzer
+Tabel  1  (lanjutan)
+Kekompakan  lokal
+tim  (tidak  termasuk  penjaga  gawang)  dihitung  pada  waktu  yang  berbeda
+kedua  tim  secara  terpisah.
+Kekompakan  di  depan  bola
+titik  setelah  BPC  (0  s,  1  s,  2  s)  seperti  yang  ditunjukkan  pada  Santos  et  al.
+setiap  tim  yang  lebih  dekat  ke  tengah  gawang  sendiri  daripada  bola
+Tekanan  ternormalisasi  (definisi  Andrienko  ( 2017))
+Tim  yang  merebut  kembali  bola  melakukan  penguasaan  bola  terhadap  pemain  yang  memegang  bola.
+Indeks  peregangan  lokal  yang  dinormalisasi  dari  semua  pemain  dari  pemain-pemain  tersebut
+Mendefinisikan  ruang  yang  dicakup  oleh  selubung  cembung  dari  semua  pemain  suatu  permainan.
+Indeks  peregangan  lokal  yang  dinormalisasi  dari  semua  pemain  setiap  tim  yang
+Tekanan  ternormalisasi  (definisi  Andrienko  ( 2017))
+untuk  kedua  tim  secara  terpisah.
+kedua  tim  secara  terpisah.
+Dengan  menggunakan  serangkaian  fitur  kami  yang  luas  tanpa  mengambil  risiko  overfitting,  istilah  regularisasi  
+tambahan  ditambahkan  ke  fungsi  kerugian.  Selain  itu,  (b)  XGboost
+25%  dari  semua  transisi  keluar  dari  setiap  pertandingan  untuk  menghindari  representasi  tim,  skor,  atau
+Di  antara  berbagai  model  dasar,  kami  menerapkan  penguatan  gradien  ekstrem  (selanjutnya  disebut
+(disebut  sebagai  XGBoost),  sebuah  sistem  peningkatan  pohon  yang  dapat  diskalakan,  diperkenalkan  oleh  
+Chen  dan  Car-los  (2016),  yang  mengungguli  algoritma  pembelajaran  mesin  tradisional  dalam  berbagai  hal.
+Menerapkan  model  pada  kumpulan  data  uji  kami.
+Pendekatan  optimasi  hiperparameter  estimator  untuk  mendapatkan  akurasi  setinggi  mungkin  dan  menghindari  
+overfitting.  Dengan  menggunakan  Estimator  Parzen  berstruktur  pohon  (Bergstra  2011)
+didefinisikan.  Seperti  yang  disajikan  dalam  Wang  (2019),  kami  menerapkan  Parzen  berbasis  pohon  Bayesian.
+Kami  menggunakan  fitur-fitur  yang  telah  didefinisikan  di  atas  (bagian  2.2.2  atau  Tabel  1)  dan  mengevaluasi  yang  terbaik.
+hasil.
+Kami  membagi  dataset  berlabel  (75%  data  pelatihan,  25%  data  uji)  dengan  mengambil  secara  acak.
+adalah  model  pembelajaran  mesin  yang  dapat  diskalakan,  yang  dapat  diperluas  dengan  mudah  dengan
+lebih  banyak  data  atau  lebih  banyak  fitur  yang  tersedia.  Selanjutnya,  (c)  tidak  ada  normalisasi
+diperlukan.
+Sebelum  melatih  model  kita,  serangkaian  hyperparameter  (ditunjukkan  pada  Tabel  2)  harus  ditentukan  terlebih  dahulu.
+aplikasi  (Li  et  al.  2019;  Liu  et  al.  2020;  Zhang  et  al.  2020).  Untuk  investigasi  kami,  kami  ingin  menunjukkan  
+tiga  keunggulan  utama  XGBoost:  (a)  Untuk  membuat
+Machine Translated by Google
+
+PAGE 11
+2.5(0,ÿ)
+5
+0,05
+400
+Subsampel
+Keterangan
+[0,  1]
+Membatasi  kedalaman  pohon
+0,419
+[0,ÿ)  57  (0,  1]
+Hiperparameter
+Membatasi  jumlah  iterasi
+0,045
+nrounds
+Tabel  2  Pemilihan  hiperparameter  model  XGBoost
+Berat  badan  minimum  anak
+Jangkauan
+3
+[0,ÿ)
+1
+400
+Mengontrol  keseimbangan  bobot  negatif  dan  positif.
+1
+Tingkat  pembelajaran
+6
+1–400
+Penyeimbang  kelas
+Mengontrol  bobot  instans  suatu  node.
+Kedalaman  maksimum
+0,279
+XGB-M2
+2
+(Jumlah  kasus  negatif /  Jumlah  kasus  positif)
+XGB-M1
+1
+0,855
+Mengontrol  ukuran  langkah  yang  digunakan  per  pembaruan.
+Mengontrol  jumlah  sampel  yang  diterapkan  pada  pohon.
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional Tahun  2019
+123
+Machine Translated by Google
+
+PAGE 12
+123
+Untuk  menentukan  metrik  keberhasilan  suatu  fase  transisi,  sifat  sepak  bola  yang  minim  gol  menyebabkan  
+kita  memeriksa  tindakan-tindakan  selanjutnya  secara  lebih  rinci,  daripada  hanya  memeriksa  apakah  
+tindakan  tersebut  diikuti  oleh  gol.  Untuk  kedua  kasus—perebutan  bola  yang  berhasil  dan  tidak  berhasil  
+melalui  counterpressing—kami  mengekstrak  tembakan  yang  dilakukan,  expected  goals14 ,  dan  gol  aktual  
+setelah  fase  transisi.  Untuk  menyelidiki  masalah  ini,  dua  definisi  harus  dibuat:  Latensi  perebutan  bola  
+mana  dari  strategi  counterpressing  yang  harus  dianggap  berhasil,  dan  berapa  lama  tindakan  defensif  
+dan  ofensif  akan  dikaitkan  dengan  perebutan  bola  sebelumnya  (strategi).  Sebagai  titik  awal  untuk  
+ambang  batas  potensial  keberhasilan  counterpressing,  indikator  pertama  diberikan  oleh  aturan  lima  detik  
+Pep  Guardiola.  Kami  menanyakan  adegan  video  yang  relevan  dengan  perebutan  penguasaan  bola  
+setelah  3,  4,  5,  6,  7,  dan  8  detik  dan  mendiskusikannya  dengan  sekelompok  analis  pertandingan  
+profesional.  Prosedur  yang  sama  dilakukan  untuk  menyelidiki  peluang  mencetak  gol  selanjutnya.  Di  sini  
+dibahas  adegan-adegan  dengan  pengambilan  gambar  10,  15,  17,  20  dan  25  detik  setelah  kehilangan  
+bola  awal.  Melalui  prosedur  ini,  kami  akhirnya  menyepakati  definisi  yang  dijelaskan  di  Bagian  2.1.2.
+2.3.2  Efektivitas  untuk  counterpressing  dan  merebut  kembali  penguasaan  bola  dengan  cepat
+Perhatikan  bahwa  hyperparameter  nrounds  diatur  ke  maksimum  400  iterasi.
+Sebagai  model  pengganti  dalam  optimasi  Bayesian  (Dewnacker  et  al.  2016),  kami  mengurangi  waktu  eksekusi  
+penyetelan  hyperparameter  dan  mencapai  skor  yang  lebih  baik  pada  set  pengujian.
+Untuk  lebih  menjamin  stabilitas  model  kami  dan  menghindari  overfitting,  kami  menerapkan  validasi  silang  lima  
+kali  lipat  pada  data  pelatihan.
+diklasifikasikan  sebagai  kontra-press  (selanjutnya  disebut  sebagai  pendekatan  berbasis  aturan  yang  naif).
+Pendekatan  kedua  (selanjutnya  disebut  sebagai  pendekatan  Andrienko)  mendefinisikan  counter-pressing  sebagai  
+semua  turnover  setiap  kali  pemain  pertama  yang  menguasai  bola  menerima  tekanan  yang  melebihi  ambang  batas  
+tertentu  menurut  definisi  tekanan  dalam  Andrienko  (2017),  di  mana  ambang  batas  akhir  0,74  diperoleh  dengan  
+memaksimalkan  skor  F1  pada  set  pelatihan.
+Seperti  yang  dijelaskan  di  Bagian  2.1.2,  kami  juga  menerapkan  dua  model  dasar  berbasis  aturan  yang  berfungsi  
+sebagai  tolok  ukur  untuk  deteksi  kami.  Pendekatan  sederhana  mendefinisikan  counterpressing  sebagai  berikut:  setiap  
+kali  satu  atau  lebih  pemain  berada  dalam  radius  lima  yard  di  sekitar  pembawa  bola  selama  fase  penguasaan  bola  
+individu  pertama  setelah  turnover,  maka
+P.  Bauer,  G.  AnzerTahun  2020
+Pendekatan  ini  telah  disarankan  pada  Konferensi  Inovasi  Sepak  Bola  Statsbomb  oleh  Will  Gürpinar-Morgen  (https://statsbomb.com/
+2018/05/how-statsbomb-data-helps-measure-counter-pressing/ ),  Diakses  pada  11/11/2020.
+Nilai  “Expected  Goal”  (xG)  dari  sebuah  tembakan  menunjukkan  probabilitas  a  priori  sebuah  tembakan  yang  akan  dikonversi  
+menjadi  gol.  Oleh  karena  itu,  nilainya  berkisar  antara  [0,  1].  Probabilitas  ini  diestimasi  menggunakan  data  pelacakan  dan  data  kejadian  
+serta  menerapkan  model  pembelajaran  mesin  yang  telah  dilatih  pada  lebih  dari  100.000  tembakan.  Detail  mengenai  model  xG  yang  
+digunakan  dapat  ditemukan  di  Anzer  dan  Bauer  (2021).
+13
+14
+13
+Machine Translated by Google
+
+PAGE 13
+15
+Akurasi.  Pendekatan  berbasis  aturan  sederhana  (Tabel  3,  baris  5)  mengklasifikasikan  72,41%  dari  keseluruhan
+Skor  F1  menghasilkan  persentase  prediksi  situasi  counterpressing  yang  lebih  realistis.
+tetapi  juga  oleh  Lundberg  dan  Su  (2017),  yang  menggunakan  konsep  tersebut  untuk  menafsirkan  fitur-fiturnya
+3.1  Evaluasi  statistik
+positif  palsu.  Untuk  pendekatan  Andrienko,  pemilihan  ambang  batas  dilakukan  dengan  mengoptimalkan
+Bagian  3.3).  Tabel  3  menunjukkan  evaluasi  statistik  dari  berbagai  model,  dari  mana
+pendekatan  pembelajaran  mesin.
+untuk  model  pembelajaran  mesin.  Dibandingkan  dengan  model  kepentingan  fitur  tradisional.
+(misalnya  metode  gain  atau  Saabas),  nilai  SHAP  menyajikan  hasil  yang  konsisten  dan  akurat  secara  lokal.
+analisis  pertandingan  sendiri  atau  beberapa  pertandingan  lawan  berikutnya  (PA,  Bagian.
+Model  XGBoost  dengan  penyeimbang  kelas  (Tabel  3,  baris  4)  memiliki  recall  yang  lebih  tinggi  yaitu  80%  dengan
+Keunggulan  lain  dari  pendekatan  XGboost  adalah  pengaruh  individual  dari
+dalam  set  pengujian  (25,65%),  namun  demikian,  secara  signifikan  dikalahkan  oleh  salah  satu  dari
+Tingkat  positif  palsu  yang  masih  dapat  diterima.  Dengan  demikian,  dapat  diterapkan  untuk  kinerja  tertentu.
+situasi  penekanan  balik  dengan  akurasi  yang  cukup  untuk  aplikasi  praktis  (lihat  juga
+Dengan  pengaturan  pembelajaran  mesin  terawasi  yang  dijelaskan  di  atas,  kita  dapat  mendeteksi
+Kumpulan  fitur  yang  kaya  dapat  dikuantifikasi  dan  diinterpretasikan  sampai  batas  tertentu  dengan  menganalisis  masing-masing  fitur  tersebut.
+3.1.1  Deteksi  penekanan  balik
+pergantian  kepemilikan  bola  sebagai  bentuk  tekanan  balik,  yang  menghasilkan  daya  ingat  yang  tinggi  tetapi  juga  sejumlah  besar
+XGBoost  memberikan  performa  terbaik.  Per  tim  dan  per  pertandingan,  kami  mendeteksi  sekitar  20  hingga  30.
+situasi  tekanan  balik,  dari  sekitar  90  hingga  200  situasi  transisi.
+Tujuannya  adalah  untuk  mengidentifikasi  tren  dan  mendukung  aturan  praktisi  ( RQ1-RQ4,  Bagian  3.2).
+Dengan  meneliti  hasil  dari  dua  pendekatan  dasar,  keduanya  menunjukkan  tingkat  keseluruhan  yang  sangat  rendah.
+Nilai  SHAP.15  Penamaan  ini  dicetuskan  oleh  pencetusnya,  Lord  Shapley,  yang
+3.3)—di  mana  analis  pertandingan  menghabiskan  banyak  waktu  menganalisis  rekaman  video,  baik  menang  maupun  kalah.
+memperkenalkan  mereka  dalam  konteks  teori  permainan  kooperatif  (Roth  dan  Thomson  1988),
+Parameter  optimal  yang  digunakan  untuk  kedua  model  dapat  ditemukan  pada  Tabel  2.  Ketika
+Dengan  area  di  bawah  kurva  (AUC)  keseluruhan  tertinggi ,  optimasi  yang  disajikan  di  atas  (Tabel  3,  baris  1)  
+paling  cocok  untuk  analisis  jangka  panjang  beberapa  musim  dengan
+0,67
+0,46
+0,841
+0,55
+Tahun  2021
+0,568
+0,721
+XGBoost  dengan  penyeimbang  kelas  (Model  2)
+Pendekatan  berbasis  aturan  yang  naif
+0,37
+Skor  F1
+Tabel  3  Evaluasi  statistik  hasil  penekanan  balik
+0,51
+Model
+0,37
+0,63
+4 0,865
+AUC
+0,87
+Regresi  logistik
+0,874
+Ketepatan
+XGBoost  (Model  1)
+Pendekatan  Andrienko
+3 0,74
+5
+2
+0,80
+0,590,69
+0,37
+Hutan  acak
+Singkatan  SHAP  merupakan  kependekan  dari  SHapley  Additive  exPlanation.
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+0,31
+Mengingat
+0,8670,63
+0,602
+0,60
+6
+0,69
+3  Hasil
+123
+Machine Translated by Google
+
+PAGE 14
+123
+Gambar  2.  Pengaruh  fitur  terhadap  prediksi  penekanan  balik  berdasarkan  nilai  SHAP.
+Tahun  2022 P.  Bauer,  G.  Anzer
+Gambar  2  menampilkan  fitur-fitur  yang  paling  berpengaruh  menurut  nilai  SHAP  dalam  dua  
+representasi  berbeda.  Pada  gambar  sebelah  kiri,  setiap  titik  mewakili  kontribusi  fitur  tersebut  
+terhadap  model,  sedangkan  kode  warna  menggambarkan  nilai  fitur  tersebut.
+Metode  untuk  mengidentifikasi  kontribusi  fitur  individual  terhadap  model  pembelajaran  mesin.
+Metode  ini  telah  digunakan  secara  efektif  dalam  berbagai  aplikasi  (Antipov  et  al.  2020;  Meng  
+et  al.  2020;  Ibrahim  et  al.  2020;  Anzer  dan  Bauer  2021).
+Baik  waktu  penguasaan  bola  individu  absolut  (IndividualBallPossession  (abs))  maupun  
+kecepatan  tim  yang  merebut  kembali  bola  dua  detik  setelah  perubahan  penguasaan  bola  
+(SpeedRegainingTeamPlayer  (2s)),  memiliki  dampak  yang  sangat  kuat  dan  linier  pada  
+prediksi.  Selain  fakta  bahwa  kedua  fitur  tersebut  memiliki  pengaruh  keseluruhan  tertinggi  
+pada  prediksi  (penyebaran  titik  terluas  di  bagian  kiri  Gambar  2),  interpretasi  nilai  SHAP  dapat  
+dinyatakan  sebagai  berikut:  semakin  tinggi  jumlah  absolut  waktu  penguasaan  bola  individu  
+dalam  tiga  detik  pertama  dan  semakin  tinggi  kecepatan  tim  yang  merebut  kembali  bola  dua  
+detik  setelah  kehilangan  bola,  semakin  besar  kemungkinan  kehilangan  bola  defensif  
+diklasifikasikan  sebagai  counterpressing.  Jumlah  pemain  lawan  di  belakang  bola  setelah  satu  
+detik  (PlayersOpposingTeamBehindBall  (1s))  memengaruhi  prediksi  dengan  cara  yang  
+berbeda:  Jumlah  pemain  yang  tinggi  di  belakang  bola  meningkatkan  peluang  klasifikasi  
+counterpressing,  tetapi  hubungannya  jelas  tidak  linier.  Untuk  mendapatkan  gambaran  yang  
+lebih  baik  tentang  pengaruhnya,  kita  akan  melihat  bagian  kanan  Gambar  2.  Nilai  per  fitur  
+sekarang  ditampilkan  oleh  sumbu  x,  sedangkan  pengaruh  model  ditunjukkan  pada  sumbu  y.  
+Jika  kurang  dari  empat  pemain  berada  di  belakang  bola,  fitur  ini  rata-rata  mengurangi  peluang  
+klasifikasi  counterpressing.  Jumlah  Empat  pemain  bertahan—hampir  setengah  dari  tim—
+tampaknya  menjadi  ambang  batas  yang  menentukan.  Jika  empat  pemain  atau  lebih  berada  
+di  belakang  bola,  fitur  ini  memberikan  kontribusi  positif  pada  prediksi.  Hal  ini  tidak  hanya  
+selaras  dengan  harapan  para  praktisi,  tetapi  juga  memicu  diskusi  yang  sangat  berharga  di  
+antara  para  analis  profesional.  Hubungan  yang  lebih  kompleks  ditunjukkan  oleh  indeks  
+peregangan  lokal  dari  lima  pemain  terdekat  dengan  bola  tim  lawan  dua  detik  setelah  
+perubahan  penguasaan  bola  (OpposingTeamlocal5  stretch  (2s)).  Setelah  peningkatan  tajam  
+yang  dimulai  pada  600  cm,  pengaruh  fitur  tersebut  mencapai  maksimumnya  pada  sekitar  1.000  cm  (lihat
+Machine Translated by Google
+
+PAGE 15
+Dalam  situasi  seperti  ini,  biasanya  sebuah  tim  dapat  memilih  antara  mundur  atau  melakukan  tekanan  balik.  Namun,  
+untuk  tujuan  penelitian  ini,  perbedaan  antara  mundur  dan  lainnya  diabaikan.
+Tidak  termasuk  fitur-fitur  yang  memiliki  sedikit  atau  tidak  ada  pengaruh  menurut  nilai  SHAP,
+tekanan  balik.
+(plot  kanan  pada  Gambar  2)  tetapi  menurun  setelahnya.  Ini  menunjukkan  bahwa  indeks  peregangan  yang  lebih  tinggi
+(kekompakan  yang  lebih  rendah)  dari  tim  lawan  setelah  dua  detik  meningkatkan  peluang  untuk
+Meskipun  sukses,  sifat  permainan  yang  minim  skor  seringkali  mencegah  kita  melakukannya.  Oleh  karena  itu,  kita  menggunakan  tembakan.
+Prosedur  umum  ketika  menganalisis  strategi  transisi  tim  adalah  melihat  waktu  reaksi  defensif  yang  mudah  diperoleh  
+(Vogelbein  et  al.  2014).  Namun,  hal  ini
+tidak  meningkatkan  baik  skor  F1  maupun  AUC  dari  prediksi  kami  pada  dataset  pengujian.
+Dalam  beberapa  detik,  peluang  mencetak  gol  meningkat  pesat,  tetapi  jika  gagal,  seseorang  akan  berada  dalam  situasi  yang  sangat  sulit.
+Tidak  mengherankan  jika  peluang  untuk  menembak  atau  mencetak  gol  jauh  lebih  tinggi.
+dengan  kelemahan  bahwa  ia  tidak  mampu  membedakan  antara  situasi  dengan  perilaku  counterpressing  yang  
+disengaja  dan  noise.  Perlu  dicatat  bahwa  dalam  pergantian  pemain  bertahan  yang  tidak  sepele
+Situasi  yang  tidak  bersifat  kontrapresif  dihilangkan  demi  kesederhanaan.  Tambahan
+lebih  mungkin  kebobolan  gol.
+kebobolan  dalam  waktu  20  detik.  Jika  berhasil,  yaitu  merebut  kembali  bola  dalam  waktu  lima  detik.
+untuk  membandingkan  tim  dan  pelatih.  Namun  demikian,  menurut  para  ahli,  melihat  keduanya
+keuntungan  karena  telah  mendapatkan  penguasaan  bola.
+Keseimbangan  tembakan  dan  gol  (atau  bahkan  gol  yang  diharapkan)  adalah  indikator  kinerja  kunci  yang  sangat  
+berharga  untuk  strategi  counterpressing.
+Analisis  pelabelan  berbasis  ahli  (lihat  Lampiran  A)  menunjukkan  bahwa  sekitar  62,5%
+Pada  bagian  berikut,  kami  menggunakan  hasil  kuantitatif  kami  sebagai  dasar  untuk  analisis  kualitatif,
+3.2.1  Pelajaran  yang  dipetik  tentang  transisi  defensif  (RQ1)
+3.1.2  Efek  dari  tekanan  balik
+Tabel  4  menunjukkan  hasil  dari  strategi  counterpressing  terkait  gol  dan  tembakan  yang  dicetak  atau
+Evaluasi  dan  interpretasi  khusus  subjek  dengan  melibatkan  para  ahli.
+ketika  tekanan  balik  diterapkan  dengan  sukses,  karena  hal  itu  menyiratkan  serangan  yang  krusial.
+Meskipun  secara  teori  menggunakan  selisih  gol  yang  dicetak  dan  kebobolan  akan  ideal  untuk  mengukur  hal  tersebut.
+3.2  Evaluasi  spesifik  subjek  terhadap  data  enam  musim  Bundesliga  Jerman
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+Tabel  4  Untuk  seluruh  4118  pertandingan  Bundesliga  Jerman  dan  Bundesliga  2  yang  dipertimbangkan,  tabel  ini  menunjukkan
+0,35
+probabilitas  tembakan  dan  gol  per  tim  setelah  situasi  counterpressing
+0,25
+3.22
+1,83
+6.27
+0,78
+Strategi
+Tahun  2023
+6.7
+Persentase  gol  yang  dicetak  Persentase  gol  yang  kebobolan  Persentase  tembakan  yang  dilakukan  oleh  tim  lawan  Persentase  tembakan  yang  diterima  oleh  tim  lawan
+5.15
+1,76
+1.02
+0,75
+Tekanan  balik  (semua)
+Tekanan  balik  yang  tidak  berhasil  0,16  
+Tekanan  balik  yang  berhasil
+123
+Machine Translated by Google
+
+PAGE 16
+123
+Tahun  2024 P.  Bauer,  G.  Anzer
+Pengecualian  mereka  merupakan  langkah  penting  untuk  pemahaman  yang  lebih  baik  tentang  situasi  transisi.
+Semua  kehilangan  bola  yang  memenuhi  kriteria  inklusi  tidak  dapat  dikaitkan  dengan  strategi  pertahanan  apa  
+pun  (penekanan  balik  atau  pertahanan  mundur).  Jumlah  situasi  ini—dengan  waktu  reaksi  pertahanan  yang  
+sangat  singkat  (rata-rata  7,83  detik)  dan  tanpa  adanya  pilihan  taktik  pertahanan  yang  terdeteksi—secara  
+signifikan  memengaruhi  waktu  reaksi  pertahanan  ketika  diterapkan  pada  semua  transisi.  Analisis  lebih  lanjut  
+(lihat  Lampiran  A)  menunjukkan  bahwa  secara  khusus,  kehilangan  bola  dengan  waktu  penguasaan  bola  
+individu  yang  sangat  singkat  termasuk  dalam  kategori  ini.
+Secara  umum,  counterpressing  tidak  selalu  menguntungkan  dan  perlu  dieksekusi  dengan  baik.  Meskipun,  
+harapan  beberapa  praktisi  (yang  didorong  oleh  pernyataan  Jürgen  Klopp  "counterpressing  adalah  playmaker  
+terbaik")  mungkin  berbeda,  tetap  intuitif  bahwa  tim  yang  menguasai  bola  memiliki  peluang  lebih  tinggi  untuk  
+melakukan  aksi  ofensif  yang  sukses  (misalnya  tembakan  atau  gol;  lihat  Tabel  4,  baris  1).  Namun,  ini  adalah  
+rata-rata  dari  semua  tim  terlepas  dari  tingkat  keterampilan  mereka  dan  seperti  yang  akan  kita  lihat  nanti,  ada  
+beberapa  tim/pelatih  yang  mampu  menerapkan  counterpressing  dengan  sangat  sukses  sehingga  mereka  
+bahkan  berakhir  dengan  keseimbangan  tembakan  positif  dengan  menciptakan  lebih  banyak  tembakan  setelah  
+melakukan  counterpressing  daripada  kebobolan.  Untuk  menilai  dengan  tepat  sifat  risiko  versus  imbalan  dari  
+counterpressing,  idealnya  kita  membandingkannya  dengan  strategi  bertahan.  Tetapi  bahkan  kemudian,  kita  
+perlu  dengan  hati-hati  membahas  variabel-variabel  yang  berpotensi  membingungkan  yang  menggambarkan  
+situasi  awal,  karena,  seperti  yang  terlihat  dari  diskusi  tentang  pentingnya  fitur,  situasi  biasanya  menentukan  
+respons  strategis.  Namun,  ini  berada  di  luar  cakupan  studi  ini,  tetapi  dapat  menjadi  dasar  untuk  penelitian  
+masa  depan  yang  menarik.  Selain  itu,  karena  semua  situasi  yang  tidak  melibatkan  tindakan  penanggulangan  
+terdiri  dari  berbagai  macam  keadaan  yang  berbeda,  situasi  tersebut  tidak  dapat  dijadikan  patokan  yang  wajar  
+untuk  menilai  efektivitas  tindakan  penanggulangan.
+Berdasarkan  definisi  yang  dijelaskan  di  atas  dan  model  prediksi  yang  telah  dilatih,  beberapa  rasio  dan  hasil  
+bagi  didiskusikan  dengan  para  ahli.  Diagregasikan  pada  tingkat  musim,  kami  menganalisis  korelasi  dengan  
+peringkat  akhir  tim.  Deteksi  kami  memberikan  beberapa  metrik  berbeda  dengan  korelasi  signifikan  terhadap  
+keberhasilan.  Indikator  kinerja  ini  dapat  dihitung  per  pertandingan,  per  fase  pertandingan  (misalnya  satu  
+babak),  atau  bahkan  per  turnover,  yang  memungkinkan  praktisi  untuk  secara  objektif  membandingkan  kinerja  
+tim  mereka  dengan  tolok  ukur  yang  telah  ditentukan  sebelumnya.  Dengan  korelasi  Pearson  negatif,  rasio  
+situasi  counterpressing  yang  berhasil  terhadap  jumlah  total  transisi  memprediksi  peringkat  akhir  tim  dengan  
+paling  baik  (r  =  ÿ0,44).  Metrik  lain,  yang  berkorelasi  dengan  peringkat  akhir  dan  sangat  berharga  bagi  para  ahli  
+karena  interpretasinya  yang  langsung,  adalah  keseimbangan  tembakan  dan  gol  (r  =  ÿ0,36  tembakan,  r  =  ÿ0,42  
+gol)—menggambarkan  apakah  lebih  banyak  tembakan  atau  gol  yang  dilakukan  setelah  counterpressing  yang  
+berhasil,  daripada  yang  kebobolan  setelah  upaya  yang  gagal.  Namun,  metrik  ini  harus  digunakan  dengan  hati-
+hati  karena  didasarkan  pada  ukuran  sampel  yang  kecil  dan  dapat  mengandung  efek  yang  membingungkan  
+dengan  kualitas  ofensif  atau  defensif  keseluruhan  suatu  tim.  Kehilangan  bola  meningkatkan  kemungkinan  
+lawan  melakukan  aksi  ofensif.  Oleh  karena  itu,  kami  menyajikan  strategi  efektif  untuk  memantau  hasil  strategi  
+counterpressing,  seperti  beberapa  indikator  kinerja  yang  memungkinkan  pelatih  untuk  secara  objektif  
+mengukur  perilaku  transisi  defensif  tim.
+3.2.2  Mendefinisikan  dan  memberikan  landasan  statistik  untuk  tolok  ukur  objektif  (RQ2)
+Machine Translated by Google
+
+PAGE 17
+123
+Gambar  3.  Peta  panas  lokasi  perubahan  penguasaan  bola  sebelum  situasi  tekanan  balik  yang  tidak  berhasil  (kiri)  dan  situasi  yang  berhasil  
+(kanan).
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional Tahun  2025
+Tabel  5  juga  memberikan  indikasi  awal  tentang  aspek-aspek  lain  apa  yang  dapat  dipertimbangkan.
+Aturan  praktis  yang  tersebar  luas  adalah  bahwa  counterpressing  ideal  dilakukan  setelah  kehilangan  bola  
+di  dekat  garis  samping  atau  dekat  sudut  di  separuh  lapangan  lawan.  Gambar  3  menyajikan  dua  peta  panas  
+yang  mendukung  pernyataan  ini.  Kedua,  kami  ingin  memeriksa  apakah  keunggulan  jumlah  pemain  di  
+dekat  bola  meningkatkan  peluang  keberhasilan  counterpressing  seperti  yang  diasumsikan  oleh  banyak  
+ahli.  Untuk  itu,  kami  memeriksa  109.852  situasi  counterpressing  yang  terdeteksi  dan  memenuhi  kriteria  
+inklusi.  Setiap  kali  tim  yang  kehilangan  penguasaan  bola  memiliki  keunggulan  jumlah  pemain  dalam  radius  
+10  m  di  sekitar  bola,  pada  saat  kehilangan  bola,  mereka  mendapatkan  kembali  penguasaan  bola  dalam  
+waktu  5  detik  sebanyak  36,2%  dari  waktu,  dibandingkan  dengan  hanya  30,2%,  ketika  tim  lawan  memiliki  
+lebih  banyak  pemain  di  area  tersebut.  Ini  menunjukkan  bahwa  aturan  praktis  tersebut  memiliki  kebenaran,  
+tetapi  jauh  dari  satu-satunya  faktor  yang  memengaruhi  keberhasilan  counterpressing.
+3.2.3  Menyetujui  aturan  praktis  yang  telah  ditetapkan  (RQ3)
+3.2.4  Membandingkan  Strategi  Counterpressing  Tim  dan  Pelatih  di  Bundesliga  Jerman  (RQ4)
+Tim  yang  finis  di  5  besar  suatu  musim  menunjukkan  performa  di  atas  rata-rata  dalam  hampir  semua  metrik  
+yang  ditentukan.  Tidak  ada  kecenderungan  konsisten  yang  terdeteksi  selama  musim-musim  yang  
+dipertimbangkan:  pertandingan  tidak  menjadi  lebih  intensif  dalam  hal  total  transisi  dalam  permainan  per  
+pertandingan,  dan  tidak  ada  perubahan  signifikan  dalam  perilaku  counterpressing  rata-rata  tim.  FC  Bayern  
+München  memiliki  keseimbangan  gol  terbaik  setelah  melakukan  counterpressing,  yang  mungkin  sangat  
+dipengaruhi  oleh  efisiensi  ofensif  mereka.  Jürgen  Klopp  dan  Ralf  Ragnick  tampil  luar  biasa  dalam  hal  
+menciptakan  lebih  banyak  peluang  daripada  menerima  tembakan  setelah  mencoba  melakukan  
+counterpressing.  Mengingat  Jürgen  Klopp  hanya  finis  di  peringkat  ketujuh  dalam  salah  satu  dari  dua  musim  
+yang  dipertimbangkan,  ini  harus  dilihat  sebagai  performa  yang  luar  biasa.  Sepanjang  musim,  hanya  
+sembilan  pelatih  yang  mencapai  keseimbangan  tembakan  non-negatif  dalam  20  detik  setelah  melakukan  
+counterpressing  mereka  sendiri—peringkat  akhir  rata-rata  tim  masing-masing  adalah  empat.  Perlu  dicatat  
+bahwa  tim  yang  bermain  di  kandang  cenderung  melakukan  counterpressing  sedikit  lebih  sering  daripada  
+tim  tandang.  Dengan  mempertimbangkan  hanya  tim  tuan  rumah,  model  kami  mengklasifikasikan  27,24%
+Investigasi  lebih  lanjut  menyoroti  sejauh  mana  tim  menggunakan  strategi  transisi  defensif  yang  
+sepenuhnya  berbeda.  Kami  menyelidiki  para  pelatih  yang  diperkirakan  memiliki  perilaku  counterpressing  
+yang  menonjol  menurut  para  ahli.  Peringkat  masing-masing  di  antara  semua  pelatih  yang  menyelesaikan  
+satu  musim  penuh  dapat  ditemukan  di  Lampiran  C.
+Machine Translated by Google
+
+PAGE 18
+123
+19
+18
+16
+17
+21
+20
+Lingkaran  hijau  dengan  tulisan  96.
+menampilkan  peringkat  dalam  masing-masing  grup  dibandingkan  dengan  rata-rata  (tim  berdasarkan  peringkat;  semua  tim  berdasarkan
+P.  Bauer,  G.  Anzertahun  2026
+Tabel  5  Perbandingan  indikator  kinerja  terkait  tekanan  balik  di  Bundesliga.  Panah  berwarna
+musim;  tim  dan  pelatih).  Untuk  kolom  yang  menyajikan  keseimbangan  tembakan  dan  gol,  kami  menggunakan  titik  berwarna.
+untuk  tim  dan  pelatih,  menunjukkan  apakah  hasil  total  per  pertandingan  positif,  netral,  atau  negatif.
+Tertinggi  pada  gambar  sebelah  kiri.
+Kedua  dari  kanan  pada  gambar  sebelah  kanan.
+Logo  berbentuk  berlian  bergaris  hitam  putih  terletak  kira-kira  di  tengah  kedua  plot.
+Lingkaran  biru  mengelilingi  bunga  lili  putih.
+Peringkat  kelima  tertinggi  pada  gambar  sebelah  kiri.
+tembakan  setelah  mereka  melakukan  tekanan  balik.
+Gambar  4  menunjukkan  daftar  singkat  hasil  counterpressing  tim.  Perhatikan  bahwa,  karena  pada
+Tujuan  utama  penelitian  ini  adalah  untuk  mengotomatiskan  deteksi  penekanan  balik  (counterpressing).
+Performa  tim  lebih  buruk.  Tim  di  kanan  bawah  cenderung  menghasilkan  lebih  banyak  tembakan/gol  dan
+Sumbu-sumbu  tersebut  diskalakan  secara  berbeda.  Untuk  kedua  sub-gambar,  tim-tim  di  kiri  atas,  termasuk,  untuk
+juga  dengan  menyediakan  tolok  ukur  yang  objektif  dan  dapat  dibandingkan.  Pertama,  kami  menjelaskan  secara  umum
+Tim-tim  tersebut  menggunakan  strategi  transisi  yang  sangat  berbeda  (RQ4).  Ekspektasi  para  ahli  mengenai  pelatih  mana  
+yang  lebih  sering  dan/atau  lebih  efisien  menggunakan  counterpressing  adalah...
+didukung  oleh  hasil-hasil  tersebut.
+3.3  Bukti  konsep
+situasi.  Hal  ini  membantu  analis  pertandingan  dalam  proses  harian  mereka  dengan  menghemat  waktu,  tetapi
+Membiarkan  lebih  sedikit  saat  melakukan  counterpressing.  Tim  dengan  nilai  tinggi  di  kuadran  kanan  atas.
+Contoh,  1.  FC  Nürnberg16,  Hannover  9617  dan  SV  Darmstadt  9818  pada  gambar  sebelah  kiri,
+dari  semua  transisi  pertahanan  yang  disertakan  sebagai  counterpressing,  yang  kurang  lebih  sejalan  dengan
+data  pelatihan  berlabel,  yang  hanya  dilakukan  pada  tim  tuan  rumah  (28,77%).
+rata-rata  lebih  banyak  tembakan/gol  yang  kebobolan  daripada  yang  tercipta  saat  melakukan  counterpressing,  keempatnya
+Sebagai  rangkuman  umum  dari  analisis  Bundesliga,  kami  ingin  menyampaikan  bahwa...
+Menerapkan  strategi  transisi  defensif  yang  berisiko,  baik  dengan  menciptakan  maupun  menerima  banyak  hal.
+seperti  Borussia  Mönchengladbach19,  FC  Augsburg20  atau  TSG  Hoffenheim21  tampaknya
+Machine Translated by Google
+
+PAGE 19
+123
+Edge  Viewer25).  Alat-alat  semacam  itu  pada  dasarnya  membantu  menangani  tag  atau  label  dalam  kombinasi  dengan
+mampu  menyediakan  dua  file  kepada  analis  pertandingan  secara  otomatis  dan  hampir  secara  real-time:
+Kedua,  kami  secara  otomatis  menyediakan  laporan  pertandingan  counterpressing  kepada  pelatih  dan  analis  
+beserta  visualisasinya  setelah  pertandingan  atau  laporan  musim  keseluruhan.  Untuk  U21
+Setelah  upaya  tekanan  balik  yang  tidak  berhasil  dari  tim  Jerman  menghasilkan  dua  gol,
+dapat  diimpor  ke  alat  analisis  video  pilihan  mereka  (misalnya  Hudl  Sportscode,  24  Stats) .
+Pertama,  mereka  menerima  daftar  semua  situasi  tekanan  balik  yang  terdeteksi.  Untuk  mengintegrasikan  ini
+Pertandingan  itu  sendiri,  tetapi  juga  secara  detail  setelah  pertandingan  untuk  analisis  lawan.  Setelah  suatu  pertandingan  atau  sebagian  darinya  selesai.
+Cuplikan  dari  laporan  pertandingan  otomatis  disajikan  pada  Gambar  6.  Hanya  dua  tembakan.
+terjadi  dalam  waktu  20  detik  setelah  salah  satu  tim  melakukan  tekanan  balik.  Namun,  kedua  tembakan  ini
+Prediksi  dapat  dilihat  di  sini.
+laporan  yang  memberikan  gambaran  umum  agregat—yang  biasanya  juga  dibuat  secara  manual.
+rekaman  video.  Gambar  5  menunjukkan  bagaimana  hal  ini  menghilangkan  proses  biasa  yang  dilakukan  analis  
+pertandingan  dalam  memberi  label  video  secara  manual  pada  alat  contoh  (di  sini  Sportscode  dari  Hudl).
+Biasanya,  analis  pertandingan  menggunakan  alat-alat  ini  untuk  menandai  situasi-situasi  penting  secara  langsung  selama  pertandingan  berlangsung.
+pengaturan,  sedangkan  aplikasi  prototipe  untuk  dua  pertandingan  teladan  Jerman
+tim  nasional  dilaksanakan.22,23  Berdasarkan  hasil  yang  dijelaskan  di  atas,  kami  sekarang
+Daftar  putar  strategi  pressing  balik  yang  dibuat  secara  otomatis  untuk  pertandingan  U21  berdasarkan  data  kami.
+Agar  dapat  terintegrasi  secara  efisien  ke  dalam  ekosistem  mereka,  file-file  tersebut  diproduksi  dalam  berbagai  format  file,  yang
+yang  menjadi  penentu  hasil  akhir  pertandingan  (Jerman  vs.  Belgia,  skor  akhir)
+Setelah  diberi  tag,  alat  ini  memungkinkan  analis  untuk  menampilkan  tag  tersebut  baik  sebagai  daftar  putar  video  atau
+sebagai  file  XML,  yang  berisi  kategori  dan  rentang  waktu  setiap  tag.  Tergantung  pada
+Kebutuhan  pelatih,  hasilnya  disajikan  sebagai  daftar  putar  video  atau  dalam  bentuk  kuantitatif.
+https://www.statsperform.com/team-performance/football/stats-edge/,  Diakses  pada  20/06/2020.
+dikumpulkan  dari  semua  musim  yang  dipertimbangkan
+Gambar  4.  Untuk  tembakan  (gambar  kiri)  dan  gol  (gambar  kanan),  tim  ditampilkan  berdasarkan  persentase  tekanan  balik  mereka  yang  
+menghasilkan  tembakan  atau  gol  (sumbu  x)  atau  melawan  (sumbu  y).  Nilai  tim  adalah
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional Tahun  2027
+Jerman  melawan  Irlandia  Utara;  19  November  2019,  Commerzbankarena  Frankfurt.
+Jerman  U21  melawan  Belgia  U21;  17  November  2019,  Schwarzbaldstadion  Freiburg.
+https://www.hudl.com/products/sportscode,  Diakses  pada  20/06/2020.24
+22
+23
+25
+Machine Translated by Google
+
+PAGE 20
+123
+Gambar  6.  Laporan  pertandingan  otomatis  untuk  pertandingan  Jerman  U21  melawan  Belgia  U21  di  Freiburg.  Visualisasi  lapangan  
+menunjukkan  posisi  kehilangan  bola  yang  menyebabkan  serangan  balik  yang  berhasil  (hijau)  atau  (tidak  berhasil).  Sedangkan  
+nilai  absolut  disajikan  di  blok  tengah,  tolok  ukur  indikator  kinerja  utama  terhadap  rata-rata  Bundesliga  ditunjukkan  di  kotak  abu-
+abu  bawah.
+Gambar  5.  Integrasi  analisis  counterpressing  ke  dalam  kegiatan  sehari-hari  analis  pertandingan  dan  pelatih.
+Tahun  2028 P.  Bauer,  G.  Anzer
+Bagian  berwarna  kuning  menunjukkan  proses  tradisional,  sedangkan  bagian  abu-abu  menampilkan  bagaimana  analisis  otomatis  
+terintegrasi  dengan  mulus.
+Implementasi  praktis  dari  studi  ini  diprototipekan  dengan  contoh  dua  pertandingan  
+terbaru  tim  nasional  Jerman.  Setelah  setiap  pertandingan,  baik  file  Sportscode-xml  
+maupun  lembar  laporan  pertandingan  otomatis  dihasilkan  dan  dibagikan  kepada  para  ahli  
+untuk  proses  analisis  pasca-pertandingan  mereka.  Selain  itu,  untuk  memvalidasi  laporan  tersebut,
+2–3).  Meskipun  situasi  yang  mengarah  pada  gol  dianalisis  secara  sangat  detail  oleh  pelatih  
+dan  analis,  mereka  sampai  pada  kesimpulan  yang  sama.  Namun  demikian,  laporan  ini  
+membantu  staf  pelatih  untuk  mengevaluasi  apakah  tim  Jerman  memiliki  bias  umum  dalam  
+perilaku  transisi  defensif  mereka  atau  apakah  kedua  gol  tersebut  terjadi  sebagai  
+konsekuensi  dari  tindakan  lawan  yang  luar  biasa  atau  kesalahan  defensif  dari  tim  Jerman.  
+Dalam  kasus  ini,  perilaku  counterpressing  yang  buruk  memiliki  peran  signifikan  dalam  
+terciptanya  kedua  gol  tersebut.  Hasil  lainnya  adalah  bahwa  banyak  situasi  counterpressing  
+yang  sukses  (1,23%  di  atas  rata-rata  Bundesliga)  tidak  berakhir  dengan  satu  tembakan.
+Machine Translated by Google
+
+PAGE 21
+123
+4  Diskusi
+0
+Tabel  6  Evaluasi  ahli  statistik  terhadap  hasil  tekanan  balik.  Untuk  kolom  transisi  defensif,
+24
+25
+Cocok
+1
+GER-BEL  Jerman
+176  (87)
+GER-NIR
+Tim
+transisi
+Irlandia  Utara
+Selain  itu,
+5
+2
+Jerman
+dikecualikan
+0164  (123)
+6
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+Tekanan  balik
+Angka  dalam  kurung  menunjukkan  jumlah  adegan  yang  dikecualikan  oleh  kriteria  kami  (lihat  Gambar  1).
+25
+terdeteksi
+33
+153  (85)  
+155  (95)
+terdeteksi
+Defensif
+tahun  2029
+2
+GER-BEL  Belgia
+GER-NIR
+Secara  manual
+3
+dengan.  Hasil  keseluruhannya  ditunjukkan  pada  Tabel  6.
+Pertandingan  dianalisis  secara  manual  dan  memberikan  data  acuan  untuk  membandingkan  hasil  kami.
+sebagai  strategi  counterpressing,  di  mana  6  di  antaranya  secara  manual  dikeluarkan  dari  daftar  putar  counterpressing  akhir.  
+Untuk  164  transisi  defensif  dari  pertandingan  kedua,  terdapat  33  situasi.
+memiliki  kegunaan  praktis  dan  mencatat  bahwa  hal  itu  menghemat  sejumlah  besar  sumber  daya  di  masa  lalu  dan  sekarang.
+Tim  tersebut  diinterogasi  berdasarkan  aturan  yang  telah  ditetapkan  di  atas.  Dari  jumlah  tersebut,  25  adegan  berhasil  dideteksi.
+Analisis  pasca  pertandingan.  Laporan  pertandingan  otomatis  (lihat  Gambar  6)  memungkinkan  kami  untuk  menyediakan
+strategi  yang  dilakukan.
+Baik  file  Sportscode-xml  maupun  laporan  pertandingan  otomatis  ternyata  sangat  bermanfaat.
+Terdeteksi  secara  otomatis  berdasarkan  data  posisi  dan  kejadian  yang  tersinkronisasi.  Membandingkan
+Interpretasi  mengarah  pada  label  yang  berbeda.  Dalam  studi  kasus  ini,  sepuluh  dari  sebelas  yang  dibuat  secara  manual
+Adegan-adegan  tersebut  didiskusikan  dengan  semua  ahli  dan  ternyata  terdapat  perbedaan  definisi  dan
+Strategi  counterpressing  tim  secara  objektif  dan  dalam  jangka  waktu  yang  lebih  lama  menciptakan
+Data  spasial-temporal,  tetapi  juga  keahlian  taktik  sepak  bola,  sangat  penting  untuk  menentukan
+untuk  staf  pelatih.  Karena  adanya  perbedaan  interpretasi  ketidakakuratan,  para  ahli  mempercayainya.
+Keseimbangan  tujuan  sangat  intuitif  dan  menghadirkan  pemantauan  langsung  terhadap  efisiensi.
+yang  selanjutnya  diberi  label  oleh  analis  pertandingan  masing-masing  (total  lima)  berisi
+Strategi  tekanan  balik.
+Hasil  tersebut  menjadi  dasar  untuk  pengajuan  lebih  lanjut.  Mereka  menganggap  hasilnya  sudah  memadai.
+Oleh  karena  itu,  memberikan  cara  baru  untuk  mendekati  strategi  taktis  yang  kompleks.  Tembakan  dan
+perbandingan  objektif,  dengan  tolok  ukur  yang  fleksibel  (di  sini  rata-rata  Bundesliga)  dan
+wawasan  yang  tidak  mungkin  dicapai  dengan  metode  tradisional.
+Untuk  pertandingan  pertama,  153  situasi  transisi  pertahanan  yang  relevan  dari  tim  nasional  Jerman.
+Bertahan  secara  aktif  ke  arah  bola  sebagai  pertahanan  cadangan  (definisi  dalam  Lampiran  A).  Semua  adegan
+sebuah  sapuan  bola  yang  terjadi  segera  setelah  kehilangan  bola  awal  dan  karenanya  tidak  jelas  terkait  dengan
+Situasi  yang  dikecualikan  hanya  melibatkan  satu  pemain  yang  memberikan  tekanan.  Meskipun  ini  memenuhi  definisi  kami,  
+beberapa  ahli  akan  mengklasifikasikan  situasi  dengan  hanya  satu  pemain  sebagai  situasi  yang  tidak  termasuk  dalam  kategori  ini.
+Makalah  ini  menunjukkan  bahwa  strategi  taktis  yang  kompleks,  seperti  counterpressing,  dapat
+Kerja  sama  interdisipliner  ternyata  menjadi  faktor  yang  sangat  menguntungkan  bagi  hal  ini.
+Terdeteksi  sebagai  tekanan  balik  dan  analis  secara  manual  menyingkirkan  5  di  antaranya.  Pengecualian  manual  tersebut
+hasil.  Teknik  pembelajaran  mesin  diperlukan  untuk  mendeteksi  strategi  kompleks  dari
+studi.  Menurut  pendapat  kami,  pengaturan  kompetensi  seperti  itu  diperlukan  untuk  memperoleh  hasil  yang  relevan.
+Machine Translated by Google
+
+PAGE 22
+Mereka  menunjukkan  bahwa  tim  yang  unggul  cenderung  merebut  kembali  bola  lebih  lambat  daripada  
+tim  yang  tertinggal,  dan  bahwa  tim  yang  menyelesaikan  musim  mereka  di  sepertiga  teratas  klasemen  
+merebut  kembali  penguasaan  bola  secara  signifikan  lebih  cepat  daripada  tim  lain—terutama  dalam  
+keadaan  pertandingan  seri  dan  kalah.  Kami  menemukan  bahwa  waktu  reaksi  defensif,  yang  berfungsi  
+sebagai  dasar  untuk  definisi  keberhasilan  kami,  biasanya  mencakup  banyak  situasi  yang  tidak  jelas,  di  
+mana  tidak  ada  strategi  yang  jelas  yang  dapat  diamati.  Pelajaran  lebih  lanjut  mengenai  transisi  defensif  
+dijelaskan  di  bagian  3.2.1  dan  diperluas  di  Lampiran  A.  Pengaruh  tinggi  waktu  penguasaan  bola  individu  
+pada  prediksi  (lihat  Gambar  2)  dapat  dikaitkan  dengan  situasi  yang  tidak  terkontrol  tanpa  kemungkinan  
+strategi  defensif  (penekanan  balik,  pertahanan  mundur).
+Penerapan  metode  pendukung  pelabelan  dapat  menghasilkan  label  yang  lebih  individual  dan  sesuai,  
+sehingga  menghasilkan  prediksi  yang  lebih  baik.
+mendefinisikan,  mengekstrak  fitur,  serta  mengevaluasi  dan  menafsirkan  hasil  yang  diperoleh.  Pelajaran  
+penting  yang  kami  peroleh  melalui  studi  ini  adalah  bahwa  definisi  strategi  kompleks  dan  interpretasinya  
+bervariasi  di  antara  para  ahli  sepak  bola—hal  ini  menjadi  jelas  selama  proses  evaluasi  intensif  yang  
+didukung  oleh  para  ahli.  Salah  satu  indikator  kinerja  utama  kami  yang  paling  bermakna  adalah  
+keseimbangan  tembakan  setelah  melakukan  counterpressing.  Di  sini,  tembakan  digunakan  sebagai  
+proksi  untuk  serangan  yang  sukses.  Ini  adalah  prosedur  umum  dalam  analisis  sepak  bola,  namun,  
+pendekatan  ini  dapat  diperluas  dengan  menggunakan  expected  goals  (misalnya  Anzer  dan  Bauer  
+(2021))  atau  expected  possession  values  (misalnya  Spearman  (2018)).
+Karena  tidak  ada  pendekatan  yang  sebanding  untuk  mendeteksi  counterpressing  dalam  literatur,  
+kami  menerapkan  dua  pendekatan  dasar  sederhana  untuk  membandingkan  model  kami  (lihat  Tabel  3).  
+Meskipun  pendekatan  berdasarkan  Andrienko  (2017)  awalnya  tidak  dirancang  untuk  mengukur  
+counterpressing  tetapi  lebih  pada  tekanan  murni,  kami  membangun  pendekatan  berbasis  aturan  ini  
+berdasarkan  Fernandez  dan  Bornn  (2018),  yang  mendefinisikan  counterpressing  sebagai  tekanan  
+langsung  setelah  kehilangan  bola.  Oleh  karena  itu,  mungkin  bukan  pendekatan  yang  ideal,  tetapi  karena  
+kurangnya  alternatif  dalam  literatur,  kami  menggunakannya  sebagai  model  benchmark.  Meskipun  model  
+kami  mengungguli  berbagai  model  dasar  berbasis  aturan  (lihat  Tabel  3)  dan  akurasi  prediksinya  cukup  
+untuk  aplikasi  praktis  (lihat  bagian  3.3),  keterbatasan  mendasar  untuk  mencapai  akurasi  lebih  lanjut  
+adalah  reliabilitas  antar  pelabel  sebesar  82,01%.  Setelah  membahas  definisi,  tidak  ada  langkah  
+konsolidasi  lebih  lanjut  antara  pelabel  yang  dilakukan—tetapi  kami  sangat  merekomendasikan  langkah  
+tersebut  termasuk  pemantauan  ketat  terhadap  reliabilitas  antar  pelabel  untuk  investigasi  serupa.  Namun,  
+pelabelan  data  adalah  proses  yang  memakan  waktu  dan  tidak  dapat  dilakukan  untuk  setiap  filosofi  dan  
+definisi  yang  muncul.  Lebih  lanjut,  metodologi  yang  mengurangi  upaya  pelabelan,  seperti  supervisi  
+lemah,  harus  diimplementasikan  di  atas  deteksi  umum  seperti  yang  disajikan  di  sini  untuk  menyesuaikan  
+definisi  dengan  kebutuhan  spesifik  dan  untuk  meningkatkan  akurasi  dan  tingkat  individualisasi  (Ratner  
+et  al.  2016,  2017).  Dengan  jumlah  data  berlabel  yang  lebih  besar,  seseorang  dapat  mempertimbangkan  
+untuk  menggunakan  fitur  kontinu,  atau  bahkan  data  posisi  mentah  dari  semua  pemain  alih-alih  fitur  pada  
+titik  waktu  diskrit.
+Vogelbein  dkk.  (2014)  mengevaluasi  306  pertandingan  musim  Bundesliga  2010/2011  dan  
+menunjukkan  bahwa  waktu  yang  dibutuhkan  untuk  merebut  kembali  bola  juga  bergantung  pada  skor  pada  saat  itu.
+Dengan  model  yang  lebih  akurat  menggunakan  salah  satu  pendekatan  yang  dijelaskan  di  atas,  
+model  prediksi  keberhasilan  tim-individu  yang  lebih  baik  untuk  counterpressing  dapat  secara  signifikan  
+mendukung  refleksi  proses  pengambilan  keputusan  tim.  Selain  itu,  adaptasi  deteksi  counterpressing  itu  
+sendiri  terhadap  definisi  spesifik  tim,  memberikan  potensi  besar  untuk  penelitian  lebih  lanjut.
+P.  Bauer,  G.  AnzerTahun  2030
+123
+Machine Translated by Google
+
+PAGE 23
+5  Kesimpulan
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional Tahun  2031
+Aspek  lain  yang  masih  kurang  dan  perlu  diteliti  lebih  lanjut  adalah  pemilihan  situasi  bertahan  yang  
+akurat.  Membandingkan  struktur  risiko-imbalannya  dengan  situasi  tekanan  balik  dapat  menghasilkan  
+wawasan  penting  dengan  mengevaluasi  keputusan  tim  untuk  melakukan  tekanan  balik  versus  
+bertahan  secara  objektif.  Karena  tim  yang  berbeda  mungkin  memiliki  definisi  khusus  klub  mereka  
+sendiri,  pengaturan  eksperimen  kami  dapat  diterapkan  pada  definisi  tekanan  balik  yang  sewenang-
+wenang  atau  bahkan  pola  taktik  lainnya,  selama  mereka  mengumpulkan  data  berlabel  yang  cukup.  
+Studi  lanjutan  yang  menarik  dapat  menyelidiki  berapa  banyak  pertandingan  berlabel  yang  diperlukan  
+untuk  mencapai  akurasi  yang  cukup  tergantung  pada  definisinya.  Dalam  kasus  kami,  kami  menemukan  
+100  pertandingan  berlabel  sudah  cukup,  tetapi  juga  menekankan  bahwa  keandalan  antar  pelabel  
+yang  tinggi  sangat  diperlukan.
+Meskipun  demikian,  kecenderungan  lawan  untuk  melakukan  serangan  balik,  atau  terutama  umpan-
+umpan  berisiko,  dapat  menyebabkan  banyak  perebutan  bola  cepat  yang  independen  dari  strategi  
+transisi  defensif.  Masalah  ini  dapat  dipertimbangkan  dengan  menggabungkan  pendekatan  ini  dengan  
+deteksi  strategi  transisi  ofensif  yang  setara  seperti  yang  ditunjukkan  misalnya  dalam  Hobbs  dkk.  
+(2018)  atau  dengan  memasukkan  lebih  banyak  fitur  tim  lawan  atau  bahkan  data  mentah  dari  semua  
+22  pemain  dan  bola.  Bukan  hanya  pertanyaan  dalam  situasi  apa  counterpressing  menimbulkan  
+peluang  tinggi  untuk  merebut  kembali  penguasaan  bola,  tetapi  lebih  jauh  lagi—mengingat  situasi  di  
+mana  counterpressing  dilakukan—seberapa  besar  kemungkinan  untuk  melakukan/menerima  
+tembakan  saat  melakukan  strategi  tersebut  sangat  menarik  bagi  para  praktisi.  Merebut  kembali  bola  
+dengan  cepat  mungkin  bukan  satu-satunya  tujuan  counterpressing.  Akibatnya,  investigasi  di  masa  
+mendatang  juga  harus  mempertimbangkan  kuantifikasi  definisi  keberhasilan  alternatif,  misalnya  
+memperlambat  serangan  lawan,  memaksa  umpan  balik,  dll.
+Hal  ini  juga  menunjukkan  keterbatasan  pekerjaan  kami,  yaitu  beberapa  fitur  terpenting  model  tersebut  
+berfokus  pada  situasi  itu  sendiri  dan  lebih  sedikit  pada  strategi  yang  dilakukan  setelahnya.
+Salah  satu  kemungkinan  penjelasannya  adalah,  selain  menyaring  situasi  yang  bising,  model  tersebut  
+menemukan  bahwa  seringkali  situasi  itulah  yang  menentukan  respons  defensif.
+Berdasarkan  definisi  yang  dievaluasi  oleh  para  ahli  dan  label  yang  dibuat  secara  manual,  kami  
+mampu  mendeteksi  strategi  counterpressing  secara  otomatis  dengan  akurasi  yang  memadai  dalam  
+pengaturan  pembelajaran  mesin  terawasi.  Dengan  menghasilkan  laporan  pertandingan  yang  mudah  
+dipahami  dan  file  penandaan  yang  sesuai  untuk  perangkat  lunak  analisis  video  konvensional,  integrasi  
+proses  ini  ke  dalam  pekerjaan  harian  analis  pertandingan  menghemat  banyak  waktu.  Hasilnya  
+membantu  menganalisis  kinerja  tim  sendiri  dan  memberikan  informasi  yang  bermanfaat  tentang  
+perilaku  transisi  pertahanan  (PA)  lawan  berikutnya.
+Kita  dapat  membedakan  antara  strategi  counterpressing  yang  direncanakan  dan  banyak  situasi  
+transisi  yang  tidak  terkendali  dengan  waktu  reaksi  defensif  yang  singkat.  Hal  ini  tidak  hanya  
+memberikan  pemahaman  yang  lebih  baik  tentang  transisi  tetapi  juga  beberapa  indikator  kinerja  yang  
+lebih  rinci  yang  menggambarkan  transisi  defensif  (RQ1).  Indikator  kinerja  masing-masing,  yang  
+dikonsolidasikan  oleh  pengaruh  statistik  dan  opini  ahli,  diperoleh  dari...
+Perlu  dicatat  bahwa  counterpressing  hanyalah  satu  contoh  dari  pola  taktik  kompleks  yang  menarik  
+bagi  analis  pertandingan,  tetapi  tidak  tercakup  dalam  data  tingkat  kejadian  tipikal.  Kebutuhan  
+departemen  analisis  pertandingan  yang  dikombinasikan  dengan  ketersediaan  dan  akurasi  data  posisi  
+dan  kejadian  yang  semakin  meningkat  menghadirkan  potensi  besar  untuk  pendekatan  otomatisasi  tugas.
+123
+Machine Translated by Google
+
+PAGE 24
+123
+Lampiran  A  memberikan  informasi  tambahan  mengenai  pelabelan  yang  dilakukan  untuk  
+penelitian  ini,  termasuk  penjelasan  taktis  lebih  lanjut  tentang  transisi  pertahanan.  Lampiran  
+B,  C,  dan  D  menunjukkan  hasil  indikator  kinerja  counterpressing  yang  telah  ditentukan  per  
+tim,  per  pelatih,  dan  per  musim  pada  kumpulan  data  Bundesliga  lengkap.
+Metrik  yang  mudah  dipahami  dan  intuitif  (RQ2),  seperti  keseimbangan  gol  atau  tembakan  
+yang  menghadirkan  kuantifikasi  efisiensi  yang  efektif  untuk  strategi  counterpressing—yang  
+sebelumnya  tidak  digunakan  tetapi  tampaknya  memiliki  potensi  besar  menurut  para  ahli.  
+Dua  aturan  praktis  yang  telah  terbukti  adalah  bahwa  counterpressing  lebih  mungkin  berhasil  
+di  dekat  garis  samping  dan  keunggulan  jumlah  pemain  di  dekat  bola  meningkatkan  peluang  
+untuk  merebutnya  kembali  (RQ3).  Melalui  analisis  berbagai  aspek  selama  beberapa  musim,  
+kita  juga  dapat  mengukur  tren  dalam  jangka  waktu  yang  lama:  tim-tim  di  Bundesliga  Jerman  
+mengikuti  strategi  transisi  yang  sangat  berbeda  (RQ4).  Lebih  lanjut,  tim-tim  yang  sukses—
+diukur  berdasarkan  peringkat  akhir  mereka—cenderung  menggunakan  strategi  
+counterpressing  secara  lebih  efisien,  sehingga  memperkuat  gagasan  untuk  menyatakan  
+strategi  ini  sebagai  strategi  ofensif  (RQ2).
+Akses  Terbuka  Artikel  ini  dilisensikan  di  bawah  Lisensi  Creative  Commons  Attribution  4.0  International,  yang  mengizinkan  
+penggunaan,  berbagi,  adaptasi,  distribusi,  dan  reproduksi  dalam  media  atau  format  apa  pun,  selama  Anda  memberikan  kredit  yang  
+sesuai  kepada  penulis  asli  dan  sumbernya,  memberikan  tautan  ke  lisensi  Creative  Commons,  dan  menunjukkan  jika  ada  perubahan  
+yang  dilakukan.  Gambar  atau  materi  pihak  ketiga  lainnya  dalam  artikel  ini  termasuk  dalam  lisensi  Creative  Commons  artikel  ini,  
+kecuali  dinyatakan  lain  dalam  baris  kredit  untuk  materi  tersebut.  Jika  materi  tidak  termasuk  dalam  lisensi  Creative  Commons  artikel  
+ini  dan  penggunaan  yang  Anda  maksudkan  tidak  diizinkan  oleh  peraturan  perundang-undangan  atau  melebihi  penggunaan  yang  
+diizinkan,  Anda  perlu  mendapatkan  izin  langsung  dari  pemegang  hak  cipta.  Untuk  melihat  salinan  lisensi  ini,  kunjungi  http://
+creativecommons.org/licenses/by/4.0/.
+Ucapan  Terima  Kasih  Karya  ini  tidak  akan  mungkin  terwujud  tanpa  perspektif  dari  analis  pertandingan  profesional  dari  tim-tim  
+kelas  dunia  yang  membantu  kami  mendefinisikan  fitur-fitur  yang  relevan  dan  meluangkan  banyak  waktu  untuk  mengevaluasi  hasil  
+(sementara).  Kami  dengan  hormat  ingin  mengucapkan  terima  kasih  kepada  Dr.  Stephan  Nopp  dan  Christofer  Clemens  (kepala  
+analis  pertandingan  tim  nasional  putra  Jerman),  Jannis  Scheibe  (kepala  analis  pertandingan  tim  nasional  putra  U21  Jerman)  serta  
+Sebastian  Geißler  (mantan  analis  pertandingan  Borussia  Mönchengladbach).
+Informasi  Tambahan  Versi  daring  berisi  materi  tambahan  yang  tersedia  di  https://doi.org/10.1007/s10618-021-00763-7 .
+tahun  2032 P.  Bauer,  G.  Anzer
+Selain  itu,  para  penulis  ingin  mengucapkan  terima  kasih  kepada  Dr.  Hendrik  Weber  dan  Deutsche  Fußball  Liga  (DFL) /  Sportec  
+Solutions  AG  atas  penyediaan  data  posisi  dan  kejadian.
+Persetujuan  Etis  Dengan  menginformasikan  kepada  semua  pemain  yang  berpartisipasi,  semua  pelacakan  mematuhi  peraturan  
+perlindungan  data  umum  (GDPR)  https://gdpr-info.eu/,  Diakses  pada  20/07/2020.  Persetujuan  etika  untuk  program  penelitian  yang  
+lebih  luas  menggunakan  data  terkait  telah  disahkan  oleh  komite  etika  Fakultas  Ekonomi  dan  Ilmu  Sosial  di  Universitas  Tübingen.  
+Data  tersebut  merupakan  milik  DFL  eV /  DFB  eV  dan  tidak  dapat  dibagikan  kepada  publik.  Namun,  peneliti  yang  berminat  dapat  
+meminta  sampel  data  dengan  batasan  perjanjian  kerahasiaan  di  lembaga  masing-masing.  Dengan  deskripsi  vendor  dan  sistem  
+pelacakan  masing-masing,  rekan-rekan  yang  bekerja  di  industri  sepak  bola  dapat  mereproduksi  hasilnya  dengan  menggunakan  
+semua  jenis  data  sepak  bola  profesional.
+Pendanaan  Akses  Terbuka  dimungkinkan  dan  diatur  oleh  Projekt  DEAL.
+Lampiran
+Deklarasi
+Machine Translated by Google
+
+PAGE 25
+123
+Untuk  semua  kolom  di  Lampiran  B,  C,  dan  D,  T  berarti  turnover,  M  berarti  pertandingan,  CP  
+berarti  counterpressing,  S  berarti  tembakan,  dan  G  berarti  gol.  Sedangkan  +  menunjukkan  aksi  
+ofensif  yang  sukses  atau  positif  dan  ÿ  sebaliknya,  +/ÿ  menunjukkan  keseimbangan  ofensif/
+defensif  seperti  yang  dijelaskan  di  atas.  Tabel  pertama  di  Lampiran  B  membandingkan  semua  
+tim  yang  bermain  di  Bundesliga  antara  musim  2013/2014  dan  2019/2020  (hingga  pertandingan  
+ke-26).  Tim-tim  tersebut  diurutkan  berdasarkan  peringkat  akhir  rata-rata  mereka,  jumlah  
+pertandingan  yang  dipertimbangkan  ditunjukkan  dalam  tanda  kurung.  Pada  tabel  kedua  di  
+Lampiran  C,  semua  pelatih  yang  bermain  di  Bundesliga  antara  musim  2013/2014  dan  2018/2019  
+disajikan,  sedangkan  tabel  ketiga  menunjukkan  semua  tim  per  musim  yang  diurutkan  pertama  
+berdasarkan  peringkat  akhir  mereka  dan  kedua  berdasarkan  kolom  CP+/T.  Hanya  musim  penuh  
+dengan  34  pertandingan  dan  satu  pelatih  yang  sama  yang  dipertimbangkan.  Urutan  tersebut  
+dibuat  berdasarkan  fitur  yang  berkorelasi  tertinggi  dengan  peringkat  akhir  tim,  yaitu  jumlah  
+keberhasilan  counterpressing  per  transisi.  Lampiran  D  membandingkan  tim  pada  tingkat  musim  
+dan  diurutkan  berdasarkan  peringkat  akhir  masing-masing  yang  ditunjukkan  dalam  tanda  kurung.
+Seperti  yang  dibahas  di  Bagian  3.2,  pelabelan  sebenarnya  disederhanakan  untuk  analisis  kami.  
+Selama  proses  pelabelan  ahli  (lihat  Bagian  2.2.1),  tidak  hanya  counterpressing,  tetapi  juga  
+fallback  dilabeli  oleh  para  ahli.  Strategi  ini  dikatakan  sebagai  alternatif  untuk  counterpressing  dan  
+didefinisikan  sebagai  fase  transisi  defensif,  di  mana  semua  pemain  bermaksud  untuk  bereaksi  
+secara  pasif,  atau  bergerak  mundur  ke  barisan  pertahanan  mereka  tanpa  memberikan  tekanan  
+pada  bola.  Istilah  bertahan  maju  dan  bertahan  mundur  sering  digunakan  dalam  konteks  ini  secara  
+bergantian  dengan  counterpressing  dan  fallback.  Gambar  7  menunjukkan  dua  situasi  contoh  
+untuk  kedua  strategi  dan  mencantumkan  beberapa  pengamatan  tipikal  untuk  setiap  strategi.
+tahun  2033Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+Gambar  7.  Gambar  ini  menunjukkan  contoh  kehilangan  bola  tim  biru,  yang  melakukan  counterpressing  pada  gambar  kanan  dan  fallback  pada  
+gambar  kiri.  Umpan  yang  menyebabkan  kehilangan  bola  ditampilkan  sebagai  panah  solid  dan  panah  putus-putus  menunjukkan  pergerakan  
+pemain  yang  diharapkan  dalam  beberapa  detik  setelah  kehilangan  bola.  Metrik  stretch-index  dan  team-center  didefinisikan  dalam  Tabel  1.
+Lampiran  A
+Machine Translated by Google
+
+PAGE 26
+123
+31.40
+513  (1005)
+427  (808)  
+400  (904)
+Tabel  7  Hasil  pelabelan  manual  oleh  ahli.  Angka  pertama  per  entri  menunjukkan  jumlah  adegan.
+43  (47)
+Tim  (Pertandingan)
+433  (868)  
+335  (711)
+656  (1.092)
+23.0234  (45)  
+60  (66)
+25,52
+Fortuna  Düsseldorf  (6)
+689  (1.253)
+29.30
+130  (188)  
+133  (165)
+VfL  Wolfsburg  (6)
+404  (828)  
+264  (466)
+394  (832)  
+383  (806)224  (304)
+3.196  (4.523)  970  (1.268)  6.942  (15.137)  28,77
+26,72
+40.07
+32.48
+Bayer  04  Leverkusen  (5)
+Borussia  Möchengladbach  (5)  534  (963)
+556  (1.044)  
+667  (1.176)
+64  (77)
+Turnover  Defensif  Counterpressing  Fallback  Tidak  Terdefinisi  %  CP
+210  (340)
+31.06
+94  (111)  394  (828)
+33.38
+175  (262)
+Semua  (97)
+FC  Bayern  Munich  (4)
+1.  FC  Nürnberg  (6)
+yang  memenuhi  kriteria  yang  didefinisikan  dalam  Bagian  2.1.2  dan  digunakan  untuk  pembuatan  model.  Jumlah  total  yang  diberi  tag
+133  (156)  
+178  (258)
+FC  Schalke  04  (5) 623  (1.054)  
+660  (1.233)
+28.14
+22.30
+196  (246)
+622  (1.092)  
+656  (1.227)
+Hertha  BSC  (5)
+46  (50)  
+61  (75)
+FC  Augsburg  (5)
+RB  Leipzig  (6)
+P.  Bauer,  G.  Anzer
+33.59
+214  (276)
+752  (1.298)
+28.18
+76  (88)
+23,91
+677  (1.187)  
+488  (946)
+173  (215)
+49  (59)  
+46  (53)
+1.  FSV  Mainz  05  (6) 399  (889)
+26.06
+390  (767)
+Klub  Olahraga  Freiburg  (5)
+11.108  (20.928)  
+666  (1.167)
+149  (190)  
+186  (233)
+52  (59)  
+50  (63)
+30.02
+226  (313)  
+143  (192)
+678  (1.181)
+32.01
+Eintracht  Frankfurt  (5)
+583  (1.075)  
+443  (684)
+tahun  2034
+VfB  Stuttgart  (5)
+Hannover  96  (5) 44  (55)  
+35  (41)
+178  (228)
+47  (56)  
+74  (96)
+441  (889)
+Borussia  Dortmund  (6)
+SV  Werder  Bremen  (6)
+408  (834)
+adegan  ditampilkan  dalam  tanda  kurung
+610  (1.079)  
+548  (1.010)
+TSG  Hoffenheim  (6)
+21.80
+214  (289)  
+206  (273)
+274  (624)  
+389  (744)
+399  (815)  
+295  (691)
+57  (63)  
+38  (53)
+128  (167)
+Pertanyaan  diajukan  semata-mata  berdasarkan  aturan  yang  didasarkan  pada  data  peristiwa.  Karena  fakta  ini  dan  karena  itu  adalah  kebijakan  kami,
+situasi  sudut).  Situasi-situasi  ini  biasanya  menunjukkan  bola  individu  yang  sangat  rendah  (relatif).
+sebagai  tidak  terkontrol.  Tabel  7  menunjukkan  hasil  pelabelan  lengkap.
+Waktu  penguasaan  bola  dalam  tiga  detik  setelah  terjadinya  turnover.  Oleh  karena  itu,  hal  ini  memiliki  dampak  yang  besar.
+pada  model  XGBoost  yang  dihasilkan  (lihat  Gambar  2).  Secara  total,  20.928  transisi  defensif
+Dengan  fokus  untuk  menyelidiki  situasi  penekanan  balik,  kami  memutuskan  untuk  mengecualikan  perbedaan  tersebut.
+Situasi  fallback  yang  terdeteksi  dimulai  dengan  seorang  penjaga  gawang  menangkap  bola,  yang  juga  bisa  berupa
+Evaluasi  lebih  lanjut  terhadap  hasil  pelabelan  menunjukkan  bahwa  lebih  dari  95%  dari  semuanya  sebagai
+diberi  label  sebagai  tekanan  balik,  970  sebagai  cadangan,  dan  6.942  secara  eksplisit  dihilangkan.
+diberi  label  berdasarkan  definisi  yang  dirumuskan  di  atas  (dan  di  Bagian  2.1.2).  Tugasnya  adalah
+terjadi  karena  fase  penguasaan  bola  yang  singkat  atau  sangat  tidak  terkontrol  (misalnya  sundulan  setelah
+Pergantian  kepemilikan  saham  di  mana  tidak  satu  pun  dari  kedua  strategi  tersebut  dapat  diidentifikasi  diberi  label  sebagai
+situasi  transisi  yang  tidak  terdefinisi  atau  tidak  terkendali.  Seperti  yang  ditunjukkan  dalam  penelitian  ini,  hal  ini  biasanya
+Situasi  dari  sebelas  pertandingan  pertama  musim  Bundesliga  2018/2019  adalah...
+dan  tidak  memberi  label  pada  transisi  pertahanan  apa  pun  di  mana  tidak  ada  strategi  yang  terlihat.  Melalui
+Dalam  prosedur  ini,  rata-rata  siswa  dengan  latar  belakang  taktik  sepak  bola  dikecualikan.
+dari  11.108  turnover  defensif  yang  relevan  (setelah  kriteria  inklusi),  3.196  situasi
+untuk  memberi  label  pada  situasi  dengan  strategi  yang  dapat  dideteksi  dengan  penekanan  balik  atau  strategi  cadangan.
+62,50%  dari  semua  situasi  pergantian  karyawan  secara  implisit  diberi  label  sebagai  tidak  terdefinisi.  Secara  total,
+Machine Translated by Google
+
+PAGE 27
+antara  opsi  cadangan  dan  perubahan  penguasaan  bola  yang  tidak  terdefinisi  untuk  semua  penyelidikan  lebih  lanjut.
+Perlu  dicatat  bahwa  situasi  fallback  rata-rata  berlangsung  selama  18,30  detik,  sedangkan  situasi  yang  tidak  
+terdefinisi  adalah  yang  terpendek  dengan  rata-rata  7,83  detik,  yang  sekali  lagi  menyoroti  pengaruh  luar  biasa  pada  
+waktu  reaksi  pertahanan  (counterpressing:  9,89  detik;  semua  turnover  rata-rata:  9,34  detik).
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional tahun  2035
+123
+Machine Translated by Google
+
+PAGE 28
+7.10  6.29  6.00  6.96  8.32  7.64  8.02  6.76  7.51%  6.46  7.02%  8.14%  7.61  7.84  7.46  9.07  8.32  7.41  7.64  5.80  9.40  7.40  9.64  9.51  7.06  5.56
+CP+/T  (%)  %CP  S+/  ÿTim  (Permainan)
+TSG  1899  Hoffenheim  (228)
+SC  Paderborn  07  (59)
+1.  FC  Köln  (161)
+FC  Bayer  04  Leverkusen  (229)
+18,65  ÿ  0,48  ÿ  0,24  18,90  ÿ  0,88  ÿ  0,04  24,63  ÿ  0,24  24,87  ÿ  0,16  ÿ  0,04  22,13  ÿ  0,02  ÿ  0,06  22,91  ÿ  0,24  ÿ  0,04  24,60  ÿ  0,69  ÿ  0,12  23,27  ÿ  0,59  ÿ  0,11  23,27  ÿ  0,43  ÿ  0,04  23,88  ÿ  0,49  ÿ  0,15  23,08  
+ÿ  0,51  ÿ  0,11  23,67  ÿ  0,50  ÿ  0,10  22,45  ÿ  0,54  ÿ  0,16  22,53  ÿ  0,62  ÿ  0,14  23,50  ÿ  0,68  ÿ  0,10  23,06  ÿ  0,58  ÿ  0,19  22,95  ÿ  0,45  ÿ  0,13  20,87  ÿ  0,83  ÿ  0,11  24,56  ÿ  0,78  ÿ  0,37  23,41  ÿ  0,50  ÿ  0,14  21,10  ÿ  0,35  ÿ  0,06  22,05  ÿ  1,02  ÿ  0,25  22,05  ÿ  0,42  ÿ  0,21  24,37  ÿ  1,06  ÿ  0,19  22,20  ÿ  0,42  ÿ  0,09  23,15  ÿ  0,12  ÿ  0,12
+SV  Werder  Bremen  (228)
+VfL  Wolfsburg  (229)
+1,13  1,23  1,07  1,07  1,02%  1,18%  1,19%  1,07%  1,32%  1,15%  1,06%  1,59%  1,23%  0,80  0,87  0,92  0,94  1,13%  2,50%
+1,61%  1,66%  1,36%  0,78%  0,76%  0,93%Hannover  96  (170)
+67.44  65.80  64.59  64.52  70.4  69.67  67.84  70.86  68.58%  68.91  71.21  70.05  68.34  70.21  67.42  70.60  72.18  70.52  68.20  64.23  70.86  67.79  67.17  73.89  68.50  68.44FC  Bayern  Munich  (229)
+Borussia  Dortmund  (229)
+0,03
+RB  Leipzig  (127)
+1.  FC  Augsburg  (229)
+Eintracht  Braunschweig  (33)
+0,88
+3.90  3.61  3.79  3.66  3.18  3.11  3.82  2.93  3.22%  2.58  2.91  3.25  2.77  3.31  3.40  2.85  2.94  2.99  3.33  2.59  2.61  3.42  2.55  2.78  3.01  3.36
+Borussia  Monchengladbach  (229)
+0,66  0,44  0,51  0,46  0,41  0,31  0,47  0,20  0,35%  0,31  0,24  0,28%  0,37  0,20  0,32  0,26  0,33  0,00  0,33  0,38  0,14  0,35  0,33  0,24  0,13  0,19
+RATA-
+G+/  ÿ  %  CP+  %CP  ÿ  %  S+  %  G+  %  Sÿ  %Gÿ
+Klub  Olahraga  Freiburg  (195)
+1.  FSV  Mainz  05  (229)
+T/M
+112.21  119.57  126.69  125.59  104.44  113.48  115.36  111.14  113.14  115.12  111.49  119.78  115.01  120.28  111.33  103.44  114.96  113.80  147.91  114.62  120.76  118.96  102.16  104.42  115.51  115.60 32.56  34.20  35.41  35.48  29.54  30.33  32.16  29.14  31.42%  31.09  28.79  29.95  31.66  29.79  32.58  29.40  27.82  29.48  31.80  35.77  29.14  32.21  32.83  26.11  31.50  31.56
+Fortuna  Düsseldorf  (59)Lampiran  B
+Schalke  04  (229)
+Eintracht  Frankfurt  (228)
+VfB  Stuttgart  (170)
+SV  Darmstadt  98  (68)
+1.  FC  Union  Berlin  (25)
+Hertha  BSC  (229)
+Hamburger  SV  (170)
+ING  (68)Tabel  8  per  tim  untuk  Bundesliga  musim  2013/2014  hingga  2019/2020
+8.02  8.51  7.84  8.13  7.27  7.06  7.48  6.96  7.25  7.36  6.46  6.75  7.44  6.87  7.48  6.14  6.83  5.50  7.44  7.55  6.43  7.10  6.21  6.36  6.99  7.31
+1.  FC  Nürnberg  (68)
+P.  Bauer,  G.  Anzertahun  2036
+123
+Machine Translated by Google
+
+PAGE 29
+Lampiran  C
+4,86  0,67
+T/M  CP+/T
+(102)
+6.81  0.46
+Martin
+110.10  7.36
+128,94  8,05
+(68)
+4.00  0.91
+Hitam
+(102)
+23,64  ÿ  0,44  ÿ  0,03  32,47  67,53  3,76  0,54
+1.28
+23,92  ÿ  0,28  ÿ  0,03  31,18  68,82  3,09  0,55
+RATA-RATA
+8.55  0.76
+Thomas
+Schaaf  (34)
+1.05
+22,62  ÿ  0,24  ÿ  0,12  32,24  67,76  2,96  0,31 1.05
+Pelatih
+156,29  8,49
+Adi  Hütter
+Niko  Kovac
+Tuchel  (102)
+23,27  ÿ  0,59  ÿ  0,09  34,61  65,3
+24,61  ÿ  0,27  ÿ  0,06  34,93  65,07  3,49  0,53
+24,05  ÿ  0,26  ÿ  0,18  32,96  67,0 6,87
+Muntah
+%CP  S+/ÿ  G+/ÿ  %  CP+  %CPÿ  %  S+  %  G+  %  Sÿ  %Gÿ
+22,34  0,24  0,12  35,95  64,05  4,30  0,56
+24,99  ÿ  0,12  ÿ  0,09  33,07  66,93  2,80  0,11
+Hasenhttül
+Ancelotti
+128,29  7,62
+31.03  68.97  4.43  0.64
+(68)
+(2176)
+5,54  0,79
+25,24  ÿ  0,21  0,02  34,10  65,90  3,87  0,50
+116.22  7.40
+109.47  8.61
+120.03  7.69
+Tabel  9.  Strategi  Counterpressing  per  pelatih  untuk  musim  Bundesliga  2013/2014  hingga  2019/2020.  Hanya  musim  penuh.
+(34)
+(Pertandingan)
+Pep  Guardiola
+8.55
+136.35  8.00
+Dominikus
+7.00  0.65
+23,06  -  0,39  -  0,08  32,07  67,93  3,28%  0,38%  6,99%  1,01%
+Julian
+Nagelsmann
+Sandro
+5,95  0,96
+23,51  0,26
+tahun  2037
+1.14
+115.71  7.68
+5.26  0.69
+23,88  ÿ  0,12  ÿ  0,09  31,68  68,32  3,35  0,22
+Schmidt  (68)
+(%)
+Roger
+(102)
+104,97  8,27
+5.57
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+113.00  8.60
+3.70  0.25
+129,00  8,54
+7,96  0,96
+Thomas
+Jika  Luhukay
+23,52  ÿ  0,56  0,15  32,71  67,29  2,60  0,83
+18,84  0,91  0,09  45,05  54,95  5,29  0,80
+7.06  0.88
+113,94  7,56
+(102)
+Markus  Gisdol
+(34)
+118.18  7.46
+21,99  ÿ  0,27  ÿ  0,03  36,38  63,62  2,91 0,56
+141.03  8.03
+(34)
+Schmidt  (34)
+6.01
+23,70  ÿ  0,38  0,03
+Carlo
+127.44  7.29
+Jurgen  Klopp
+dengan  total  34  pertandingan  per  pelatih  yang  dipertimbangkan.
+6,88
+Jerman  (34)
+120.76  7.93
+1.03
+21,92  ÿ  0,46  ÿ  0,06  34,78  65,22  2,98  0,37
+Heiko  Herrlich
+-  0,04  36,32  63,68  4,22  0,29
+(34)
+5,54  0,29
+(34)
+3,63  0,39
+123
+Machine Translated by Google
+
+PAGE 30
+117,86  6,82
+(34)
+(34)
+Armin  Veh
+Skripnik
+Sialan
+Peter  Stöger
+21,72  0,56  ÿ  0,03  32,23  67,77  4,63  0,41  3,95  0,76
+125,82  5,82
+24,77  ÿ  0,59  ÿ  0,47  26,71  73,29  3,43  0,35  7,90  3,06
+23,36  ÿ  0,69  ÿ  0,08  30,62  69,38  2,50  0,33  7,37  0,92
+23,93  ÿ  0,56  ÿ  0,24  29,43  70,57  3,45  0,23  7,98  1,63
+Weinzierl
+Lucien  Favre
+(68)
+114.29  6.26
+Andrew
+(102)
+16,88  ÿ  0,65  ÿ  0,03  34,49  65,51  2,35  0,28  8,25  0,63
+100.44  6.62
+131.47  7.00
+T/M  CP+/T
+Viktor
+25,38  ÿ  0,87  ÿ  0,03  27,40  72,60  2,65  0,43  8,65  0,76
+121.62  6.41
+106.00  7.27
+Friedhelm
+(136)
+114.91  7.06
+Dirk  Schuster
+(34)
+P.  Bauer,  G.  Anzer
+21,81  ÿ  0,35  ÿ0,12  30,25  69,75  2,48  0,19  5,55  0,94
+93,38  6,93
+109.07  7.21
+25,98  ÿ  0,79  ÿ  0,24  26,67  73,33  2,91  0,00  8,43  1,32
+Breitenreiter
+23,53  ÿ  0,46  ÿ  0,10  30,66  69,34  3,30  0,32  7,31  0,99
+24.13  ÿ  0.41  ÿ  0.14  30.13  69.87  3.40  0.39  7.18  1.32
+(%)
+(34)
+Pal  Dardai
+24,75  ÿ  0,63  ÿ  0,19  28,54  71,46  2,95  0,21  7,24  1,23
+%CP  S+/ÿ  G+/ÿ  %  CP+  %CPÿ  %  S+  %  G+  %  Sÿ  %GÿPelatih
+22,20  ÿ  0,67  ÿ  0,18  30,72  69,28  3,07  0,26  8,11
+Dieter
+Markus
+111.24  7.22
+106,94  7,04
+23,43  ÿ  0,71  ÿ  0,26  30,81  69,19  3,61  0,11  9,14  1,63
+113.18  7.15
+(34)
+(68)
+tahun  2038
+Labbadia
+94.10  6.95
+Ralf  Rangnick
+Florian
+(136)
+20,34  ÿ  0,68  ÿ  0,07  30,77  69,23  2,66  0,25  8,04  0,78
+21,73  ÿ  0,32  ÿ  0,18  30,78  69,22  3,02  0,32  6,08  1,40
+Kilauan  (34)
+(34)
+Bruno
+(34)
+(102)
+21,45  ÿ  0,65  0,00  29,88  70,12  2,71  0,34  7,40  0,48
+Kohfeldt
+Manuel  Baum
+Kristen
+Robin  Dutt
+125,35  6,69
+Tabel  9  berlanjut
+(Pertandingan)
+116.09  6.60
+(170)
+1.35
+Prank  (136)
+123
+Machine Translated by Google
+
+PAGE 31
+1,53%
+FCB  -  
+0,98%
+24,75%
+CP+/T
+26,57%BVB  -  
+8,98%  8,50%  8,40%  8,40%  8,71%  8,59%  8,35%  8,19%  8,79%  8,29%  7,69%  7,33%  7,03%  9,40%  7,56%  7,18%
+Lampiran  D
+WOB  -  
+27,65%
+0,67%
+ÿ  0,32
+0,15
+FCB  -  
+BVB  -  
+BVB  -  
+ÿ  0,09  ÿ  0,12
+1,17%
+34,30%  34,28%  33,75%  32,28%  32,71%  30,27%  30,07%  38,03%  35,41%  32,32%  39,44%  29,62%  31,68%  32,62%  39,38%  33,50%
+ÿ  0,56
+0,82%
+ÿ  0,24  ÿ  0,24
+%  S+
+BVB  -  
+0,93%
+T/M
+ÿ  0,71
+%  CP+
+9,67%  5,88%  5,76%  8,75%  6,81%  5,64%  7,82%  5,56%  6,22%  5,26%  5,78%  7,51%  5,54%  6,03%  5,59%  6,72%
+22,00%  22,33%
+0,93%
+0,79%
+FCB  -  
+ÿ  0,32
+24,79%  24,90%  26,02%
+FCB  -  ÿ  0,32
+1,20%  0,46%  0,51%  0,52%  0,66%  0,83%  0,46%  0,59%  0,21%  0,21%  0,72%  0,70%  0,22%  0,45%  0,55%  0,58%
+24,71%
+21,16%
+24,21%  23,39%
+0,79%
+3,58%  3,87%  4,13%  4,87%  2,60%  5,14%  3,30%  3,15%  3,59%  2,41%  2,68%  4,17%  3,35%  4,63%  2,66%  3,69%
+%CP  ÿ
+23,88%
+%CP
+1,10%
+0,53%
+1,02%
+23,52%
+FCB  -  
+S+/  ÿ
+S04  -  
+65,70%  65,72%  66,25%  67,72%  67,29%  69,73%  69,93%  61,97%  64,59%  67,68%  60,56%  70,38%  68,32%  67,38%  60,62%  66,50%
+0,46%FCB  -  
+ÿ  0,12
+0,03  0,06  ÿ  0,03  ÿ  0,04  0,15  0,12  ÿ  0,06  0,03  ÿ  0,09  ÿ  0,12  ÿ  0,06  ÿ  0,08  ÿ  0,09  0,00  0,15  ÿ  0,03
+%  G+  %  S  ÿ  %G  ÿ
+RBL  -  
+ÿ  0,56
+0,00  0,09
+Tim  (Peringkat)
+BVB  -  
+24,60%
+FCB  -  
+0,32
+0,15%
+26,18%
+ÿ  0,24
+1,38%
+97.29  116.65  114.47  116.68  120.03  111.15  110.41  120.79  113.12  105.82  134.97  104.00  113.94  118.44  143.85  122.38
+0,46%
+Tabel  
+LEV  -  
+G+/  ÿ
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional tahun  2039
+123
+Machine Translated by Google
+
+PAGE 32
+ÿ  0,03  ÿ  0,62  ÿ  0,64  ÿ  0,71  ÿ  0,47  ÿ  0,35  ÿ  0,38  ÿ  0,29  ÿ  0,44  ÿ  0,85  ÿ  0,41  ÿ  0,85  ÿ  0,26  ÿ  0,76  0,91
+%Gÿ
+BMG  -  Tabel  
+5,29%  3,10%  3,51%  3,30%  3,64%  3,01%  3,76%  2,75%  2,24%  3,98%  2,34%  3,30%  4,07%  4,74%  4,63%  4,02%  2,85%  4,65%
+0,56
+LEV  -  
+Tim  (Peringkat)
+S04  -  
+BVB  -  
+ANDA  -  
+0,51%  0,76%  0,73%  0,66%  0,91%  0,68%  0,71%  0,83%  0,96%  0,89%  2,06%  0,68%
+LEV  -  
+RBL  -  
+S+/ÿ %CPÿT/M
+103.12  156.29  114.76  121.85  117.32  107.94  101.26  114.68  115.71  121.35
+64,50%  67,86%  67,77%  70,69%  71,50%  54,95%  65,44%  68,16%  68,80%  68,64%  71,49%  69,98%  67,53%  67,16%  70,07%  71,79%  68,62%  69,62%35,50%  32,14%  32,23%  29,31%  28,50%  45,05%  34,56%  31,84%  31,20%  31,36%  28,51%  30,02%  32,47%  32,84%  29,93%  28,21%  31,38%  30,38%
+94,82  99,29
+%  S+  %  G+  %  Sÿ
+HOF  -  
+ÿ  0,20  ÿ  0,18
+BMG  -  
+LEV  -  
+S04  -  
+7,88%  7,49%  7,00%  6,87%  6,85%  8,49%  8,16%  7,89%  7,60%  7,52%  7,44%  7,28%  7,68%  7,54%  7,44%  7,35%  6,95%  6,80% 7,58%  8,01%  3,95%  5,87%  7,48%  4,00%  8,35%  8,57%  7,19%  7,28%  6,23%  8,16%  7,96%  8,65%  5,69%
+4,95%  8,99%
+CP+/T  %CP
+18,84%  22,21%  23,31%  21,72%  23,44%  24,02%  23,60%  24,79%  24,34%  23,98%  26,08%  24,26%  23,64%  22,95%  24,88%  26,04%  22,15%  22,39%
+%  CP+
+WOB  -  
+LEV  -  
+BMG  -  
+G+/ÿ
+113.41  115.44
+10,14%
+110.60  109.15  131.47 1,26%  1,35%  1,09%  1,06%  1,42%  1,14%RBL  -  ÿ  0,12  0,12  ÿ  0,03  0,03  ÿ  0,03  0,09  ÿ  0,12  0,00  ÿ  0,15  ÿ  0,06  ÿ  0,06  ÿ  0,15  ÿ  0,03  ÿ  0,21  ÿ  0,12  ÿ  0,29  ÿ  0,12  ÿ  0,12 0,33%  0,81%  0,41%  0,65%  0,36%  0,80%  0,00%  0,49%  0,41%  0,34%  0,56%  0,21%  0,54%  0,21%  0,12%  0,34%  0,00%  0,34%
+HOF  -  
+AGUSTUS  -  
+96,74
+LEV  -  
+P.  Bauer,  G.  AnzerTahun  2040
+123
+Machine Translated by Google
+
+PAGE 33
+1,63%
+14,38%
+M05  -  
+1,77%
+1,69%
+BRE  -  
+HBER  -  
+8,38%  5,54%  9,14%
+24,53%
+0,68%
+0,03
+ÿ  0,40
+%  CP+
+ÿ  1,03  0,65  ÿ  0,59
+%  S  ÿ
+HBER  -  
+1,05%
+22,65%
+ÿ  0,56
+%  G+
+1,01%
+6,59%  8,14%  7,75%  7,73%  7,49%  7,09%  6,74%  6,19%  8,40%  8,05%  7,98%  7,54%  7,30%  5,79%  5,48%  8,03%  7,22%  7,14%
+S04  -  
+%CP  ÿ  %  S+
+ÿ  0,26
+ÿ  1.12
+ÿ  1,8422,46%
+23,09%
+M05  -  
+BMG  -  
+20,97%
+1,36%
+RBL  -  
+0,12
+22,66%  23,27%
+SCF  -  2,65%
+ÿ  0,09  ÿ  0,18  ÿ  0,06  ÿ  0,09  ÿ  0,03  ÿ  0,44
+Tabel  
+0,00  0,00
+ÿ  0,50
+27,03%
+S04  -  
+23,56%
+0,32%  0,50%  0,31%  0,34%  0,29%  0,51%  0,14%  0,34%  0,36%  0,39%  0,38%  0,31%  0,34%  0,25%  0,17%  0,56%  0,11%  0,14%
+1,40%
+0,76%
+S+/  ÿ
+BMG  -  ÿ  0,24  ÿ  0,06
+ÿ  0,50  ÿ  0,47
+24,31%
+T/M
+ÿ  0,71
+0,31%
+19,10%SCF  -  
+ÿ  0,56
+24,77%
+1,06%
+0,57%
+CP+/T  %CP G+/  ÿ
+ÿ  0,76
+ÿ  0,88
+27,15%
+22,97%
+BVB  -  
+110.48  125.44  123.71  115.29  110.38  85.09  123.36  123.56  144.88  128.94  95.82  114.26  111.53  122.44  106.48  141.03  111.24  113.68 22,95%
+ÿ  0,26  ÿ  0,24
+2,84%  3,88%  3,01%  2,48%  2,85%  2,43%  3,23%  2,50%  4,75%  3,63%  3,66%  2,31%  2,18%  2,26%  3,18%  4,30%  3,61%  2,84%
+%G  ÿ
+0,29%
+Tim  (Peringkat)
+28,71%  34,53%  33,82%  34,12%  27,58%  26,21%  29,21%  29,51%  37,10%  34,61%  32,83%  30,75%  31,80%  30,31%  24,41%  35,95%  30,81%  28,84%
+0,87%
+HOF  -  
+71,29%  65,47%  66,18%  65,88%  72,42%  73,79%  70,79%  70,49%  62,90%  65,39%  67,17%  69,25%  68,20%  69,69%  75,59%  64,05%  69,19%  71,16%
+WOB  -  
+STU  -  
+0,24  ÿ  0,71
+0,54%
+ÿ  0,03  ÿ  0,21  ÿ  0,03  ÿ  0,12
+ÿ  0,79
+22,34%  23,43%
+22,92%
+WOB  -  
+DARI  -  
+0,79%
+0,48%
+8,55%  8,65%  7,08%  7,29%  7,21%  6,50%  7,59%  9,88%  6,55%  9,18%  4,42%  6,97%  6,40%  7,94%
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional Tahun  2041
+123
+Machine Translated by Google
+
+PAGE 34
+123
+tahun  2042 P.  Bauer,  G.  Anzer
+S04  -  
+0,93%  0,81%  0,63%  3,06%
+120.18  110.15  109.85  107.59  108.24  127.44  109.79  115.60  113.21  115.47  102.44  114.38  127.21  119.44  100.44
+%Gÿ
+HOF  -  
+25,01%  25,01%  23,68%  23,51%  24,69%  23,91%  22,62%  23,36%  23,08%  23,82%  21,88%  22,73%  23,68%  21,39%  22,53%  24,77%  23,24% 0,63%  0,39%  0,34%  0,34%  0,66%  0,23%  0,31%  0,23%  0,35%  0,76%  0,12%  0,69%  0,43%  0,00%  0,11%  0,35%  0,26%
+Tim  (Peringkat) RATA-
+68,00%  68,15%  67,76%  68,92%  68,58%  71,45%  71,53%  70,80%  72,21%
+BRE  -  
+28,55%  28,47%  29,20%  27,79%  32,00%  31,85%  32,24%  31,08%  31,42%  29,66%  27,94%  24,91%  30,29%  31,24%  29,62%  26,71%  28,44%
+T/M
+BMG  -  
+10,98%
+HSV  -  
+%  S+
+ÿ  0,12  ÿ  0,97  ÿ  0,76  ÿ  0,35  ÿ  0,59  ÿ  0,33  ÿ  0,24  ÿ  0,59  ÿ  0,51  ÿ  0,62  ÿ  0,59  ÿ  1,28  ÿ  0,47  ÿ  0,44  ÿ  0,47  ÿ  0,59  ÿ  0,38
+H96  -  
+0,00  ÿ  0,12  ÿ  0,24  ÿ  0,26  0,00  ÿ  0,18  ÿ  0,12  ÿ  0,12  ÿ  0,11  0,03  ÿ  0,12  ÿ  0,12  ÿ  0,09  ÿ  0,12  ÿ  0,18  ÿ  0,47  ÿ  0,15
+%  G+  %  Sÿ
+1,60%  1,09%  1,09%  1,26%
+93,50
+1,09%  1,75%  1,89%  1,37%  1,05%  1,00%  1,13%  0,88%  0,98%
+5,81%  7,66%  8,60%  5,52%  8,31%  6,70%  5,57%  7,99%  7,51%
+69,71%  68,76%  70,34%  72,06%  75,09%  70,38%  73,29%  71,56%
+10,23%
+AGUSTUS  -  
+DARI  -  
+CP+/T  %CP %CPÿ
+7,14%  7,12%  6,92%  6,53%  7,90%  7,61%  7,29%  7,26%  7,25%  7,07%  6,11%  5,66%  7,17%  6,68%  6,67%  6,62%  6,61%
+6,85%  7,55%  6,83%  7,90%  8,09%
+6,14%
+BMG  -  
+%  CP+G+/ÿ
+98,32
+HOF  -  
+ANDA  -  
+DARI  -  Tabel  
+BRE  -  
+HOF  -  
+JATUH  TEMPO  -  
+3,65%  2,25%  3,16%  2,62%  3,43%  3,28%  2,96%  3,21%  3,22%  4,91%  2,10%  2,75%  3,04%  3,57%  3,06%  3,43%  4,12%
+S+/ÿ
+WOB  -  
+Machine Translated by Google
+
+PAGE 35
+CP+/T  %CP
+0,91%
+24,99% ÿ  0,12
+DARI  -  Tabel  
+0,57%
+HBER  -  
+G+/  ÿ
+ÿ  0,68
+ANDA  -  
+Tim  (Peringkat)
+BRE  -  
+ÿ  1.12
+ÿ  0,62
+1,53%
+ING  -  
+0,67%
+0,65%
+ÿ  0,96 9,63%  7,13%  4,86%  4,23%  5,00%  6,75%  9,28%  7,22%  7,79%
+HBER  -  
+HBER  -  
+ÿ  0,28  ÿ  0,09  ÿ  0,09  ÿ  0,09  ÿ  0,24  ÿ  0,12  ÿ  0,12  ÿ  0,09  0,03
+HBER  -  
+24,00%
+0,00%  0,33%  0,11%  0,11%  0,46%  0,31%  0,32%  0,11%  0,21%
+1,74%
+21,43%
+1,07%
+3,16%  2,89%  2,80%  2,01%  2,22%  2,76%  2,45%  2,75%  3,47%
+ÿ  0,32  ÿ  0,52
+106,52  112,94  104,97  123,21  148,65  104,04  112,94  116,06  129,59
+0,74%
+22,58%
+6,57%  6,25%  8,27%  7,90%  7,58%  7,38%  7,32%  6,79%  6,13%
+%CP  ÿ%  CP+
+ÿ  0,21
+0,74%
+S+/  ÿ
+27,69%  26,70%  33,07%  34,99%  35,36%  29,49%  29,96%  28,30%  28,42%
+T/M
+M05  -  ÿ  0,59
+24,43%
+23,73%
+%  S+  %  G+  %  S  ÿ  %  G  ÿ
+72,31%  73,30%  66,93%  65,01%  64,64%  70,51%  70,04%  71,70%  71,58%
+23,41%
+25,03%
+21,56%
+tahun  2043Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+123
+Machine Translated by Google
+
+PAGE 36
+123
+P.  Bauer,  G.  AnzerTahun  2044
+139,88
+26,67%
+28,57%
+96,24
+30,30%
+114,96
+9,35%
+69,70%
+M05  -  
+123,00
+30,78%
+0,23%
+33,81%
+107.03
+ÿ  0,71
+24,33%
+ÿ  0,09
+8,43%
+HSV  -  
+2,71%
+7,71%
+0,68%
+66,19%
+0,80%
+103.03
+35,82%
+ÿ  0,62
+0,14%
+ÿ  1.12
+25,98%
+21,71%
+ÿ  0,18
+5,73%
+AGUSTUS  -  7,84%
+ÿ  0,26
+1,63%
+AGUSTUS  -  
+3,37%
+5,54%
+7,04%
+6,45%
+STU  -  
+2,33%
+0,63%
+0,00%
+0,34%
+1,82%ÿ  0,88
+22,21%
+ÿ  0,79
+23,70%
+M05  -  
+1,51%
+3,87%
+-0,09
+1,34%
+64,18%
+7,41%
+8,43%
+ÿ  0,26
+3,20%
+69,22%
+7,35%
+6,10%
+SCF  -  
+70,12%
+SCF  -  
+8,50%
+Tabel  
+0,42%
+23,93%
+119,74
+ÿ  0,65
+93,38
+1,65%
+LEV  -  
+29,88%
+0,39%27,63%
+CP+/T
+119,38
+7,85%
+-0,09
+106,94
+3,02%
+71,43%
+%  S+  %  G+
+0,00
+8,04%
+6,93%
+ÿ  0,06
+5,50%
+2,88%
+ÿ  0,32
+ANDA  -  
+3,99%
+ÿ  0,71
+BRE  -  
+70,55%29,45%
+4,27%
+ÿ  0,38
+0,48%
+118,97
+19,88%
+22,01%
+6,82%
+1,59%
+0,22%
+21,41% -0,12
+AGUSTUS  -  
+8,54%
+129,71
+3,42%
+2,80%
+0,97%
+69,41%
+72,37%
+ÿ  0,12
+0,10%
+6,41%
+ÿ  0,21
+125,35 0,32%
+0,24
+0,10%
+30,59%
+ÿ  0,68
+24,70%
+21,73% 1,40%
+T/M
+31,71%
+0,90%
+22,06%
+0,03
+6,95%
+3,28%
+63,54%
+8,65%
+1,84%
+8,21%
+DARI  -  
+3,55%
+ÿ  0,24
+ÿ  0,657,46%
+H96  -  
+68,29%
+18,65% 29,48%
+22,31%
+0,46%
+0,00%
+1,15%
+ÿ  1,06
+104,40
+1,81%
+ÿ  0,12
+1,40%
+ÿ  0,32
+6,18%
+%CP-
+7,49%
+8,78%
+7,40%
+63,68%
+ÿ  0,18
+3,45%
+7,59%
+6,57%
+BRE  -  
+2,99%
+130,62
+33,85%
+-0,35
+70,52%
+H96  -  
+ÿ  0,56
+120.24
+0,62%
+23,38%
+36,46%
+36,32%
+0,23%
+20,90%
+29,06%
+0,09
+29,43%
+1,32%
+70,94%
+S04  -  
+3,52%
+8,32%
+70,57%
+6,08%
+-0,21
+UBER  -  
+6,73%
+-0,36
+11,32%
+2,52%
+%  CP+
+6,08%
+%CP
+22,73%
+DARI  -  
+ÿ  1,06
+21,45%
+0,52%
+0,38%
+0,11%
+1,14%
+2,10%
+69,93%
+ÿ  0,24
+S+/ÿ
+2,91%
+69,31%
+121,79
+3,06%
+66,15%
+8,38%
+%  G-
+ÿ  0,48
+0,50%
+22,68%
+0,00%
+3,14%
+30,69%
+ÿ  0,52
+8,64%
+115,74
+ÿ  0,24
+AGUSTUS  -  
+7,98%
+2,99%
+6,69%
+68,58%
+G+/-
+ÿ  0,79
+21,63%
+121,62
+0,00%
+116,68
+31,42%
+%  S-
+73,33%
+Tim  (Peringkat)
+30,07%
+Machine Translated by Google
+
+PAGE 37
+123
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional Tahun  2045
+30,66%
+ÿ  0,18
+0,76%6,38%
+AGUSTUS  -  6,29%
+1,52%
+5,82%
+8,33%
+ÿ  0,15
+2,30%
+32,09%
+129,35
+ÿ  1,04
+132,88 6,90%
+69,18%
+67,61%
+0,81%
+ÿ  0,1222,87%
+7,27%
+1,82%
+24,29%
+M05  -  
+22,71%
+8,63%
+1,48%
+4,17%
+125,50
+0,29%
+2,46%
+ÿ  0,18
+0,50%
+3,30%
+35,75%
+ÿ  0,41
+30,82%
+Tabel  
+ÿ  1,00
+71,17%
+ÿ  0,59
+92,38
+STU  -  
+107,52
+2,95%
+29,25%
+0,06
+ÿ  0,79
+6,93%
+JATUH  TEMPO  -  
+ÿ  0,03
+21,46%
+1,28%0,12%
+30,29%
+ÿ  0,29
+6,58%
+68,27%
+10,68%
+2,98%
+ÿ  0,15
+4,30%
+30,86%
+64,24%
+8,66%
+ÿ  0,68
+70,75%
+116,62
+117,72
+0,40%
+0,46%
+0,88%
+20,76%
+0,63%
+20,63%
+1,73%
+8,21%
+3,20%
+7,24%
+34,49%
+2,87%
+28,83%
+106,88
+TAPI  -  
+69,71%
+ÿ  1,06
+ÿ  0,88
+0,92%
+ÿ  0,24
+%CP
+125,82
+0,00%
+HSV  -  
+4,22%
+22,96%
+65,51%
+%  G-
+69,34%
+95,32
+ÿ  0,65
+7,50%
+7,95%WOB  -  
+0,30%
+36,19%
+ÿ  0,18
+M05  -  
+22,95%
+7,25%
+6,04%
+63,81%
+26,19%
+31,73%
+STU  -  
+ING  -  
+ÿ  0,03
+30,98%
+69,14%
+10,14%ÿ  0,44
+23,48%
+6,86%
+HOF  -  
+HSV  -  
+G+/-
+0,00%
+3,79%
+147.18
+31,55%
+ÿ  0,59
+22,38%
+2,52%
+6,51%
+1,19%
+8,38%
+WOB  -  0,97%
+ÿ  0,16
+ÿ  0,59
+0,40%
+8,37%
+%CP-
+7,51%
+121,85
+123.26
+ÿ  0,74
+6,64%
+68,45%
+0,28%
+ÿ  0,21
+1,46%
+23,50%
+7,44%
+22,65%
+CP+/T
+0,31%
+%  S-
+1,21%
+0,00%
+3,61%
+8,35% 1,31%
+ÿ  0,74117,50
+68,04%
+2,54%
+0,00%
+ÿ  0,12
+35,76%
+T/M
+8,87%
+73,81%
+25,66%
+SCF  -  
+1,61%
+%  S+  %  G+
+8,28%
+HSV  -  
+ÿ  0,1520,98%
+7,21%
+HBER  -  
+31,96% 0,52%
+67,91%
+111,68
+ÿ  0,68
+67,74%
+ÿ  0,38
+127,85
+ÿ  0,15
+3,33%
+8,80%
+7,43%
+STU  -  
+S+/  ÿ
+22,73%
+2,48%
+119,79
+%  CP+
+32,39%
+2,73%
+1,12%
+ÿ  0,24
+7,34%
+7,11%
+3,58%
+0,03
+DARI  -  
+0,42%
+64,25%
+8,25%
+69,02%
+32,26%
+ÿ  0,24
+ÿ  0,50
+114.32
+Tim  (Peringkat)
+7,62%
+3,26%
+24,38%
+21,83%
+2,35%
+1,69%
+0,43%
+0,11%
+16,88%
+Machine Translated by Google
+
+PAGE 38
+3,01%
+105,25
+72,32%
+0,81%122,41
+68,50%
+6,64%
+3,32%
+118,53
+67,36%
+1,61%
+25,55%
+31,50%
+24,56%
+0,37%
+PAD  -  
+ÿ  0,62
+23,02%
+22,20%
+21,18%
+ANDA  -  
+ÿ  0,20
+0,12%
+HANYA  -  
+6,00%
+124.18
+0,90%
+6,86%
+6,00%
+22,01%
+T/M
+0,53%
+28,37%
+0,36%
+0,06
+ÿ  1,59
+1,16%
+ÿ  0,47
+0,00%
+6,81%
+1,54%6,35%
+0,76%
+1,99%
+3,91%
+7,06%
+71,66%
+106.12
+S+/ÿ
+1,08%
+8,06%
+ÿ  0,32
+ÿ  1,03
+0,48%
+3,38%PAD  -  
+31,35%
+24,95%
+28,34%
+CP+/T  %CP
+29,09%
+4,97%
+109.35
+104,42
+1,98%
+%CP-
+ÿ  1,09
+ÿ  0,06
+0,33%
+104,85
+3,11%SCF  -  
+0,22%
+30,06%
+22,38%
+G+/-
+24,78%
+H96  -  
+ÿ  0,42
+70,91%
+5,89%
+10,83%
+99,47
+%  CP+
+68,65%
+%  S+  %  G+  %  S-
+23,98%
+%  G-
+7,18%
+ÿ  0,21
+Tim  (Peringkat)
+0,13%
+ÿ  1,03
+0,33%
+ÿ  0,18
+ÿ  0,04
+BAIK  -  
+7,36%
+2,73%
+69,94%
+74,45%
+11,06%
+12,03%
+1,55%
+8,94%
+9,08%
+ÿ  0,24
+32,64%
+3,58%
+ÿ  0,18
+HANYA  -  
+ÿ  0,79
+6,99%
+24,03%
+75,44%
+6,70%
+1,56%
+6,25% 68,38%
+2,54%
+ÿ  0,06
+ÿ  0,26
+ÿ  0,09
+ÿ  1.12
+2,22%
+TAPI  -  
+31,62%
+0,12%
+23,50%
+3,79%
+ÿ  0,12
+0,35%
+Tabel  
+BRE  -  
+27,68%
+H96  -  
+19,78%
+71,63%
+8,74%
+119.06
+7,50%
+112.09
+tahun  2046 P.  Bauer,  G.  Anzer
+123
+Machine Translated by Google
+
+PAGE 39
+Referensi
+Goes  F  et  al  (2020)  Pembelajaran  mesin  yang  dapat  diinterpretasikan  untuk  pemodelan  permintaan  dengan  data  berdimensi  
+tinggi  menggunakan  Gradient  Boosting  Machines  dan  nilai  Shapley.  Euro  J  Sport  Sci.  https://doi.org/10.1080/17461391.
+Antipov  EA,  Pokryshevskaya  EB  (2020)  Pembelajaran  mesin  yang  dapat  diinterpretasikan  untuk  pemodelan  permintaan  
+dengan  data  berdimensi  tinggi  menggunakan  Gradient  Boosting  Machines  dan  nilai  Shapley.  J  Revenue  Pricing  Manag  
+19(5):355–364.  https://doi.org/10.1057/s41272-020-00236-4  Anzer  G,  
+Bauer  P  (2021)  “Model  Probabilitas  Pencetak  Gol  Berdasarkan  Data  Posisi  dan  Peristiwa  yang  Disinkronkan”.  Frontiers  in  
+Sports  and  Active  Learning  (dalam  proses  penerbitan)  Menggunakan  Kecerdasan  Buatan  untuk  Meningkatkan  Kinerja  
+Olahraga,  hlm.  1-18.  https://doi.org/10.3389/fspor.2021.624475.
+Andrienko  G  et  al  (2017)  Analisis  visual  tekanan  dalam  sepak  bola.  Data  Mining  Knowl  Discov  31(6):1793–
+Buku  Panduan  Praktis”.  arXiv:1612.04858
+tahun  2047
+Andrienko  G  et  al  (2019)  Membangun  Ruang  dan  Waktu  untuk  Analisis  Taktis  dalam  Sepak  Bola.  IEEE  Trans  Vis
+Comput  Graph.  https://doi.org/10.1109/tvcg.2019.2952129
+Grant  AG  et  al  (1999)  Analisis  gol  yang  dicetak  di  Piala  Dunia  1998.  J  Sports  Sci  17(10):826–827
+Dalam:  Prosiding  -  Konferensi  Internasional  IEEE  tentang  Penambangan  Data,  ICDM  2015-Januari,  hlm.  725–730.  
+ISSN:  15504786.  https://doi.org/10.1109/ICDM.2014.133
+Fairchild  A,  Pelechrinis  K,  Kokkodis  M  (2018)  “Analisis  spasial  tembakan  di  MLS:  Sebuah  model  untuk  gol  yang  diharapkan  
+dan  dimensi  fraktal”.  Dalam:  Journal  of  Sports  Analytics  4.3,  hlm.  165–174.  ISSN:  2215020X.  https://doi.org/10.3233/
+jsa-170207.
+Bialkowski  A  et  al  (2015)  “Mengidentifikasi  gaya  tim  dalam  sepak  bola  menggunakan  formasi  yang  dipelajari  dari  data  
+pelacakan  spasial-temporal”.  Dalam:  IEEE  International  Conference  on  Data  Mining  Workshops,  ICDMW  2015.  Januari-
+Januari,  hlm.  9-14.  ISSN:  23759259.  https://doi.org/10.1109/ICDMW.2014.167.29  https://gdpr-info.eu/,  Diakses  pada  
+20/07/2020.  Deteksi  Counterpressing  Berbasis  Data  dalam  Sepak  Bola  Profesional  15  Bojinov  I,  Bornn  L  
+(2016)  “Permainan  Pressing:  Gangguan  Pertahanan  Optimal  dalam  Sepak  Bola”.  Dalam:  MIT  Sloan
+Dewnacker  Ian,  Michael  McCourt,  Scott  Clark  (2016)  “Optimasi  Bayesian  untuk  Pembelajaran  Mesin.  Sebuah
+Chen  T,  Guestrin  C  (2016)  “XGBoost:  Sistem  peningkatan  pohon  yang  terukur”.  Dalam:  Prosiding  Konferensi  Internasional  
+ACM  SIGKDD  tentang  Penemuan  Pengetahuan  dan  Penambangan  Data  13-17  Agustus,  hlm.  785–794.  https://doi.org/
+10.1145/2939672.2939785.
+Decroos  T,  Van  Haaren  J,  Davis  J  (2018)  “Penemuan  taktik  otomatis  dalam  data  pertandingan  sepak  bola  spasial-temporal”.  
+Dalam:  Prosiding  Konferensi  Internasional  ACM  SIGKDD  tentang  Penemuan  Pengetahuan  dan  Penambangan  Data.  
+ISBN:  9781450355520.  https://doi.org/10.1145/3219819.3219832.  URL :  https://people.cs.kuleuven.be/~jesse.davis/
+decroos-kdd18.pdf  Decroos  T  et  al  (2020)  “VAEP:  
+Pendekatan  Objektif  untuk  Menilai  Aksi  Penguasaan  Bola  dalam  Sepak  Bola  (Abstrak  Diperluas)”.  Dalam:  Prosiding  Konferensi  
+Gabungan  Internasional  ke-29  tentang  Kecerdasan  Buatan  (IJCAI-20),  hlm.  4696–4700.  ISSN:  10450823.  https://
+doi.org/10.24963/ijcai.2020/648.
+2020.1747552
+Bergstra  J  et  al  (2011)  “Algoritma  untuk  optimasi  hiperparameter”.  Dalam:  Advances  in  Neural  Information  Processing  Systems  
+24:  Konferensi  Tahunan  ke-25  tentang  Sistem  Pemrosesan  Informasi  Neural  2011,  NIPS  2011,  hlm.  1–9.  Bialkowski  A  
+et  al  (2014)  “Analisis  
+Skala  Besar  Pertandingan  Sepak  Bola  Menggunakan  Data  Pelacakan  Spatiotemporal”.
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+Fernandez  J,  Bornn  L  (2018)  “Ruang  Terbuka  Luas:  Teknik  statistik  untuk  mengukur  penciptaan  ruang  dalam  sepak  bola  
+profesional”.  Dalam:  Konferensi  Analisis  Olahraga  MIT  Sloan,  hlm.  1–19
+1839.  https://doi.org/10.1007/s10618-017-0513-2
+Navarro  Férnandez,  J  (2018)  Analisis  Gaya  Bermain  dalam  Sepak  Bola  dan  Efektivitasnya.  isbn:
+Konferensi  Analisis  Olahraga,  hlm.  1–8
+Bourbousson  Jérôme,  Carole  Sève  Tim  McGarry  (2010)  “Dinamika  koordinasi  ruang-waktu  dalam  bola  basket:  Bagian  2.  
+Interaksi  antara  kedua  tim”.  Dalam:  Journal  of  Sports  Sciences  28.3,  hlm.  349–358.  ISSN:  02640414.  https://doi.org/
+10.1080/02640410903503640
+Brefeld  U,  Lasek  J,  Mair  S  (2019)  Model  pergerakan  probabilistik  dan  zona  kendali.  Mach  Learn  108(1):127–147.  https://
+doi.org/10.1007/s10994-018-5725-1
+9788413060576
+Goes  F,  Kempe  M,  Koen  L  (2019).  “Memprediksi  hasil  pertandingan  dalam  sepak  bola  profesional  Belanda  menggunakan  
+metrik  kinerja  taktis  yang  dihitung  dari  data  pelacakan  posisi”.  Dalam:  Konferensi  Internasional  MathSport  Juni,  hlm.  4-5
+123
+Machine Translated by Google
+
+PAGE 40
+123
+Sistem  Pemrosesan  Informasi  Nips,  hlm.  3574–3582.  ISSN:  10495258
+Data  6(1):236.  https://doi.org/10.1038/s41597-019-0247-7
+1-12
+Ratner  Alexander  J  et  al  (2017)  “Belajar  menyusun  transformasi  spesifik  domain  untuk  augmentasi  data”.  Dalam:  Advances  in  
+Neural  Information  Processing  Systems  Nips,  hlm.  3237–3247.  ISSN:  10495258  Ratner  A  et  al  (2016)  “Pemrograman  data:  
+Membuat  set  pelatihan  besar  dengan  cepat”.  Dalam:  Advances  in  Neural
+https://doi.org/10.2307/2343726
+Pengelompokan”.  Dalam:  Konferensi  Analisis  Olahraga  MIT  Sloan,  hlm.  1–11
+Paul  P  et  al  (2018)  “Membongkar  Mitos  Bola  Mati  dalam  Sepak  Bola”.  Dalam:  Konferensi  Analisis  Olahraga  MIT  Sloan,  hlm.
+Santos  A.  Benito  dkk  (2018)  “Analisis  kinerja  visual  berbasis  data  dalam  sepak  bola:  Sebuah  prototipe  eksploratif”.
+doi.org/10.15388/na.2004.9.3.15154
+Lundberg  SM,  SI  Lee  (2017)  “Atribusi  fitur  yang  konsisten  untuk  ensemble  pohon”.  Dalam:  Prosiding
+Rathke  A  (2017)  “An  examination  of  expected  goals  and  shot  efficiency  in  soccer”.  Dalam:  Journal  of  Human  Sport  and  Exercise  
+12.Proc2.  issn:  1988-5202.  https://doi.org/10.14198/jhse.2017.12.proc2.05.  URL:  http://www.redalyc.org/articulo.oa?
+id=301052437005
+Li  TR  dkk  (2019).  Prediksi  fluktuasi  harga  mata  uang  kripto  alternatif  berdasarkan  sentimen  menggunakan  model  pohon  penguat  
+gradien.  https://doi.org/10.3389/fphy.2019.00098  Link  D,  Lang  S,  
+Seidenschwarz  P  (2016)  Kuantifikasi  bahaya  dalam  sepak  bola  secara  waktu  nyata  menggunakan  data  pelacakan  spasial-temporal.  
+PLoS  ONE.  https://doi.org/10.1371/journal.pone.0168768  Link  D,  Hoernig  M  (2017)  Penguasaan  bola  
+individu  dalam  sepak  bola.  PLoS  ONE  12(7):1–15.  https://doi.org/10.  1371/journal.pone.0179953  Liu  K,  Chen  W,  Lin  H  (2020)  XG-
+PseU:  sebuah  metode  berbasis  
+eXtreme  Gradient  Boosting  untuk  mengidentifikasi  situs  pseudouridin.  Mole  Genet  Genom  295(1):13–21.  https://doi.org/10.1007/
+s00438-019-01600-9  Patrick  L  et  al  (2014)  “Kualitas  vs  Kuantitas”:  Peningkatan  Prediksi  Tembakan  dalam  Sepak  Bola  
+menggunakan  Fitur  Strategis  dari  Data  Spatiotemporal ”.  Dalam:  Konferensi  Analisis  Olahraga  MIT  Sloan,  hlm.  1–9.  url:  http://
+www.sloansportsconference.com/?p=15790
+Dalam:  Frontiers  in  Psychology  9.  ISSN:  16641078.  https://doi.org/10.3389/fpsyg.2018.02416.
+Robert  R,  Memmert  D  (2016)  “Big  data  dan  analisis  taktik  dalam  sepak  bola  elit:  tantangan  dan  peluang  masa  depan  untuk  ilmu  
+olahraga”.  Dalam:  SpringerPlus  5.1.  ISSN:  21931801.  https://doi.org/10.1186/s40064-016-3108-2 .
+Hobbs  J  dkk.  (2018).  “Mengkuantifikasi  Nilai  Transisi  dalam  Sepak  Bola  melalui  Trajektori  Spatiotemporal”
+Herold  M  et  al  (2019)  Pembelajaran  mesin  dalam  sepak  bola  profesional  pria:  aplikasi  saat  ini  dan  arah  masa  depan  untuk  
+meningkatkan  permainan  menyerang.  Int  J  Sports  Sci  Coaching.  https://doi.org/10.1177/  1747954119879350
+Tahun  2048 P.  Bauer,  G.  Anzer
+Robberechts  P  (2019)  “Menghargai  Seni  Menekan”.  Dalam:  StatsBomb  Innovation  in  Football  Conference  2019,  hlm.  11.  url:  http://
+statsbomb.com/wp-content/uploads/2019/10/Pieter-Robberechts-Valuing-the-  Art-of-Pressing.pdf  Roth  Alvin  E,  Thomson  W  
+(1988)  Nilai  Shapley:  
+Esai  untuk  Menghormati  Lloyd  S.  Shapley.  ISBN:  052136177X.  https://doi.org/10.2307/2554979.
+Hughes  M,  Ian  M  Franks  (2015)  Esensi  analisis  kinerja  dalam  olahraga.  Vol.  53.  04,  hlm.  53-1831.  https://  doi.org/10.5860/
+choice.193440.  url:https://books.google.de/books?hl=de&lr=&id=KorCDwAAQB  
+AJ&oi=fnd&pg=PT14&dq=the+essentials+of+performance+analysis&ots=ZhJd6413Fq&sig=F  
+MnUcL21bpzACnWTzNhxESEgUY4\#v=onepage&q=theessentialsofperformanceanalysis&f=false  Ibrahim  L  et  al  (2020)  
+Prediksi  yang  dapat  dijelaskan  tentang  infark  miokard  akut  menggunakan  pembelajaran  mesin  dan  nilai  Shapley.  IEEE  Access.  
+https://doi.org/10.1109/access.2020.3040166  Kempe  M  et  al  (2014)  Penguasaan  bola  vs.  
+permainan  langsung:  mengevaluasi  perilaku  taktis  dalam  sepak  bola  elit.  Int  J  Sports
+Sains  4(6A):35–41.  https://doi.org/10.5923/s.sports.201401.05
+Reep  C,  Benjamin  B  (1968)  Keterampilan  dan  Peluang  dalam  Sepak  Bola.  J  Royal  Stat  Soc  Seri  A  (Umum).
+Konferensi  Internasional  ke-34  tentang  Pembelajaran  Mesin,  hlm.  1–9
+Yuan  M  et  al  (2020)  Apa  yang  Membuat  Ulasan  Online  Lebih  Bermanfaat:  Kerangka  Interpretasi  Menggunakan  Nilai  XGBoost  dan  
+SHAP.  J  Theor  Appl  Electron  Commerce  Res  16(3):466–490.  https://doi.org/  10.3390/jtaer16030029
+Pappalardo  L  et  al  (2019)  Kumpulan  data  publik  tentang  peristiwa  pertandingan  spasial-temporal  dalam  kompetisi  sepak  bola.  Ilmiah
+Kim  S  (2004)  Analisis  Voronoi  pada  Permainan  Sepak  Bola.  Kontrol  Model  Anal  Nonlinier  9(3):233–240.  https://
+Machine Translated by Google
+
+PAGE 41
+879671.url:  http://dx.doi.org/10.1080/02640414.2013.879671
+Di  dalam:
+Shaw  L,  Glickman  M  (2019)  “Analisis  dinamis  strategi  tim  dalam  sepak  bola  profesional”.  summit.
+Deteksi  counterpressing  berbasis  data  dalam  sepak  bola  profesional
+Zhang  W  et  al  (2020)“Prediksi  kekuatan  geser  tak  terdrainase  menggunakan  peningkatan  gradien  ekstrem  dan  acak
+Catatan  Penerbit:  Springer  Nature  tetap  bersikap  netral  terkait  klaim  yurisdiksi  dalam  peta  yang  diterbitkan.
+56ce723e-barca-conferencepaper-laurie-shaw.pdf
+Diperoleh  dari
+hutan  berdasarkan  optimasi  Bayesian”.  Geoscience  Frontiers  12(1):  469–477.  https://doi.org/10.
+1016/j.gsf.2020.03.007
+J  Latihan  Olahraga  Res.  https://doi.org/10.1007/s12662-019-00579-0
+tion”.  arXiv:1901.08433
+pendekatan.  Int  J  Perform  Anal  Sport  13(1):83–95.  https://doi.org/10.1080/24748668.2013.11868633
+Barça
+Ukuran  keberhasilan?  Analisis  kuantitatif  Liga  Sepak  Bola  Bundesliga  Jerman  2010/2011”.  Dalam:  Jurnal
+dan  afiliasi  kelembagaan.
+tahun  2049
+olahraga  https://static.capabiliaserver.com/frontend/clients/barca/wp_prod/wp-content/uploads/2020/01/
+Vogelbein  M,  Nopp  S,  Hökelmann  A  (2014)  “Transisi  defensif  dalam  sepak  bola  -  apakah  penguasaan  bola  kembali  terjadi  dengan  cepat”
+Jurnal  Ilmu  Olahraga  32.11,  hlm.  1076-1083.  ISSN:  1466447X.  https://doi.org/10.1080/02640414.2013.
+analitik
+Steiner  S  et  al  (2019)  Mengungguli  lawan  -  perspektif  diferensial  pada  umpan  menggunakan  data  posisi.  Jerman
+Wang  Y  (2019)  “Model  Risiko  Xgboost  Melalui  Pemilihan  Fitur  dan  Optimasi  Hiper-Parameter  Bayesian-
+Travassos  B  et  al  (2013)  Analisis  kinerja  dalam  olahraga  tim:  kemajuan  dari  dinamika  ekologis
+Spearman  W  (2018)  “Beyond  Expected  Goals”.  Dalam:  MIT  Sloan  Sports  Analytics  Conference,  hlm.  1–17
+123
+Machine Translated by Google

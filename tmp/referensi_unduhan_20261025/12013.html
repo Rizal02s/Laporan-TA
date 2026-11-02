@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en-US" xml:lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>
+		Penerapan Graph Neural Network dalam Pengenalan Alfabet BISINDO dengan Fokus pada Gerakan Dinamis
+							| Jurnal Buana Informatika
+			</title>
+
+	
+<link rel="icon" href="https://ojs.uajy.ac.id/public/journals/1/favicon_en_US.png" />
+<meta name="generator" content="Open Journal Systems 3.3.0.22" />
+<meta name="gs_meta_revision" content="1.1"/>
+<meta name="citation_journal_title" content="Jurnal Buana Informatika"/>
+<meta name="citation_journal_abbrev" content="JBI"/>
+<meta name="citation_issn" content="2089-7642"/> 
+<meta name="citation_author" content="Febri Damatraseta"/>
+<meta name="citation_author_institution" content="Program Studi Teknologi Informatika, Fakultas Informatika dan Pariwisata, Institut Bisnis dan Informatika Kesatuan"/>
+<meta name="citation_author" content="Muhammad Alfan"/>
+<meta name="citation_author_institution" content="Program Studi Teknologi Informatika, Fakultas Informatika dan Pariwisata, Institut Bisnis dan Informatika Kesatuan"/>
+<meta name="citation_author" content="Yuliandi"/>
+<meta name="citation_author_institution" content="Program Studi Manajemen, Fakultas Bisnis, Institut Bisnis dan Informatika Kesatuan"/>
+<meta name="citation_title" content="Penerapan Graph Neural Network dalam Pengenalan Alfabet BISINDO dengan Fokus pada Gerakan Dinamis"/>
+<meta name="citation_language" content="en"/>
+<meta name="citation_date" content="2025/10/01"/>
+<meta name="citation_volume" content="16"/>
+<meta name="citation_issue" content="2"/>
+<meta name="citation_firstpage" content="176"/>
+<meta name="citation_lastpage" content="187"/>
+<meta name="citation_doi" content="10.24002/jbi.v16i2.12013"/>
+<meta name="citation_abstract_html_url" content="https://ojs.uajy.ac.id/index.php/jbi/article/view/12013"/>
+<meta name="citation_keywords" xml:lang="en" content="BISINDO"/>
+<meta name="citation_keywords" xml:lang="en" content="hand gesture recognition"/>
+<meta name="citation_keywords" xml:lang="en" content="Graph Neural Networks"/>
+<meta name="citation_keywords" xml:lang="en" content="MediaPipe"/>
+<meta name="citation_keywords" xml:lang="en" content="Dynamic Sign Language Recognition"/>
+<meta name="citation_keywords" xml:lang="en" content="pengenalan gerakan tangan"/>
+<meta name="citation_keywords" xml:lang="en" content="GNN"/>
+<meta name="citation_keywords" xml:lang="en" content="pengenalan bahasa isyarat dinamis"/>
+<meta name="citation_pdf_url" content="https://ojs.uajy.ac.id/index.php/jbi/article/download/12013/4269"/>
+<meta name="citation_reference" content="A. Rahman, and S. Informatika, “Aplikasi Penerjemah Bahasa Isyarat Menggunakan Metode K-NN (K-Nearest Neighbour),” Jurnal Teknologi Pintar, vol. 2, no. 4, pp. 1–12, 2022. [Online]. Available: https://ejurnal.stmik-budidarma.ac.id/mib/article/view/7714"/>
+<meta name="citation_reference" content="A. S. Nugraheni, A. P. Husain, and H. Unayah, “Optimalisasi Penggunaan Bahasa Isyarat dengan SIBI dan BISINDO pada Mahasiswa Difabel Tunarungu di Prodi PGMI UIN Sunan Kalijaga,” Jurnal Holistika, vol. 5, no. 1, pp. 28–33, 2023, doi: 10.24853/holistika.5.1.28-33. [Online]. Available: https://jurnal.umj.ac.id/index.php/holistika/article/view/9355"/>
+<meta name="citation_reference" content="T. Tao and Y. Zhao, “Sign language recognition: A comprehensive review of traditional and deep learning approaches, datasets, and challenges,” IEEE Access, vol. 12, pp. 111216–111234, 2024, doi: 10.1109/ACCESS.2024.3387279"/>
+<meta name="citation_reference" content="Y. E. Mulyanto, “Sign Language Recognition Based on Geometric Features Using Deep Learning,” Jurnal Nasional Pendidikan Teknik Informatika: JANAPATI, vol. 13, no. 2, pp. 338-348, Jul. 2024, doi: 10.23887/janapati.v13i2.82103."/>
+<meta name="citation_reference" content="F. Damatraseta, R. Novariany, and M. A. Ridhani, “Real-time BISINDO Hand Gesture Detection and Recognition with Deep Learning CNN,” Jurnal Informatika Kesatuan, vol. 1, no. 1, pp. 71–80, Jul. 2021, doi: 10.37641/jikes.v1i1.774."/>
+<meta name="citation_reference" content="Y. V. Via, W. S. J. Saputra, M. I. Fachrurrozi, E. Y. Puspaningrum, F. T. Anggraeny, and S. R. Nudin, “Object Localization and Detecting Alphabet in Sign Language BISINDO Using Convolution Neural Network,” Technium: Romanian Journal of Applied Sciences and Technology, vol. 5, no. 12, pp. 143–149, 2023. [Online]. Available: https://ideas.repec.org/s/tec/techni.html"/>
+<meta name="citation_reference" content="H. Kolivand, S. Joudaki, M. S. Sunar, and D. Tully, “A new framework for sign language alphabet hand posture recognition using geometrical features through artificial neural network (part 1),” Neural Computing and Applications, vol. 33, no. 10, pp. 4945–4963, May 2021, doi: 10.1007/s00521-020-05279-7."/>
+<meta name="citation_reference" content="B. Khemani, S. Qamar, and S. Anwar, “A review of graph neural networks: Concepts, architectures, and applications,” Journal of Big Data, vol. 11, no. 1, pp. 1–38, 2024, doi: 10.1186/s40537-024-00815-4"/>
+<meta name="citation_reference" content="A. Sharma, A. Sharma, A. Tselykh, A. Bozhenyuk, and B. G. Kim, “Image and video analysis using graph neural network for Internet of Medical Things and computer vision applications,” CAAI Transactions on Intelligent Technology, 2024, doi: 10.1049/cit2.12306."/>
+<meta name="citation_reference" content="S. Dey, S. Samanta, and S. Banerjee, “Sign language recognition using convolutional neural networks: A review and open research challenges,” International Journal of Advanced Computer Science and Applications (IJACSA), vol. 14, no. 5, pp. 123–131, 2023, doi: 10.14569/IJACSA.2023.0140515"/>
+<meta name="citation_reference" content="W. Chen, J. Liu, and Z. Luo, “A survey on hand pose estimation with wearable sensors and computer-vision-based methods,” Sensors, vol. 20, no. 3, pp. 1–25, Feb. 2020, doi: 10.3390/s20030856"/>
+<meta name="citation_reference" content="H. Ansar, M. Ali, and S. Ahmed, “Hand gesture recognition based on auto-landmark localization,” Sustainability, vol. 13, no. 17, pp. 1–18, 2021, doi: 10.3390/su13179902"/>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Creator.PersonalName" content="Febri Damatraseta"/>
+<meta name="DC.Creator.PersonalName" content="Muhammad Alfan"/>
+<meta name="DC.Creator.PersonalName" content="Yuliandi"/>
+<meta name="DC.Date.created" scheme="ISO8601" content="2025-10-01"/>
+<meta name="DC.Date.dateSubmitted" scheme="ISO8601" content="2025-06-24"/>
+<meta name="DC.Date.issued" scheme="ISO8601" content="2025-10-01"/>
+<meta name="DC.Date.modified" scheme="ISO8601" content="2026-05-21"/>
+<meta name="DC.Description" xml:lang="en" content="Sebagian besar studi pengenalan alfabet Bahasa Isyarat Indonesia (BISINDO) masih terbatas pada gesture statik, meskipun beberapa huruf seperti R dan J memiliki karakteristik gerakan dinamis yang tidak dapat direpresentasikan secara statis. Penelitian ini menggunakan MediaPipe untuk mendeteksi 21 keypoints tangan sebagai input fitur. Titik-titik ini dimodelkan dalam bentuk graf dan diproses menggunakan Graph Neural Networks (GNNs) guna mengenali alfabet secara simultan, termasuk huruf-huruf dinamis. Proses pelatihan menggunakan K-Fold Cross Validation untuk menguji konsistensi performa model. Model GNN menghasilkan akurasi sebesar 96% pada pengujian data alfabet BISINDO. Prototipe sistem dalam bentuk aplikasi web berhasil mengenali 26 huruf BISINDO secara dinamis dengan tingkat akurasi prediksi mencapai 91%, menunjukkan potensi implementasi nyata dari pendekatan GNN dalam mendukung aksesibilitas komunikasi inklusif."/>
+<meta name="DC.Format" scheme="IMT" content="application/pdf"/>
+<meta name="DC.Identifier" content="12013"/>
+<meta name="DC.Identifier.pageNumber" content="176-187"/>
+<meta name="DC.Identifier.DOI" content="10.24002/jbi.v16i2.12013"/>
+<meta name="DC.Identifier.URI" content="https://ojs.uajy.ac.id/index.php/jbi/article/view/12013"/>
+<meta name="DC.Language" scheme="ISO639-1" content="en"/>
+<meta name="DC.Rights" content="Copyright (c) 2025 "/>
+<meta name="DC.Rights" content="https://creativecommons.org/licenses/by-sa/4.0"/>
+<meta name="DC.Source" content="Jurnal Buana Informatika"/>
+<meta name="DC.Source.ISSN" content="2089-7642"/>
+<meta name="DC.Source.Issue" content="2"/>
+<meta name="DC.Source.Volume" content="16"/>
+<meta name="DC.Source.URI" content="https://ojs.uajy.ac.id/index.php/jbi"/>
+<meta name="DC.Subject" xml:lang="en" content="BISINDO"/>
+<meta name="DC.Subject" xml:lang="en" content="hand gesture recognition"/>
+<meta name="DC.Subject" xml:lang="en" content="Graph Neural Networks"/>
+<meta name="DC.Subject" xml:lang="en" content="MediaPipe"/>
+<meta name="DC.Subject" xml:lang="en" content="Dynamic Sign Language Recognition"/>
+<meta name="DC.Subject" xml:lang="en" content="pengenalan gerakan tangan"/>
+<meta name="DC.Subject" xml:lang="en" content="GNN"/>
+<meta name="DC.Subject" xml:lang="en" content="pengenalan bahasa isyarat dinamis"/>
+<meta name="DC.Title" content="Penerapan Graph Neural Network dalam Pengenalan Alfabet BISINDO dengan Fokus pada Gerakan Dinamis"/>
+<meta name="DC.Type" content="Text.Serial.Journal"/>
+<meta name="DC.Type.articleType" content="Articles"/>
+<link rel="alternate" type="application/atom+xml" href="https://ojs.uajy.ac.id/index.php/jbi/gateway/plugin/WebFeedGatewayPlugin/atom">
+<link rel="alternate" type="application/rdf+xml" href="https://ojs.uajy.ac.id/index.php/jbi/gateway/plugin/WebFeedGatewayPlugin/rss">
+<link rel="alternate" type="application/rss+xml" href="https://ojs.uajy.ac.id/index.php/jbi/gateway/plugin/WebFeedGatewayPlugin/rss2">
+	<link rel="stylesheet" href="https://ojs.uajy.ac.id/index.php/jbi/$$$call$$$/page/page/css?name=stylesheet" type="text/css" /><link rel="stylesheet" href="https://ojs.uajy.ac.id/lib/pkp/styles/fontawesome/fontawesome.css?v=3.3.0.22" type="text/css" /><link rel="stylesheet" href="https://ojs.uajy.ac.id/plugins/generic/articleMetrics/styles/article_metrics.css?v=3.3.0.22" type="text/css" /><link rel="stylesheet" href="https://ojs.uajy.ac.id/plugins/generic/citations/css/citations.css?v=3.3.0.22" type="text/css" /><link rel="stylesheet" href="https://ojs.uajy.ac.id/public/journals/1/styleSheet.css?d=2024-07-08+14%3A19%3A01" type="text/css" />
+</head>
+<body class="pkp_page_article pkp_op_view has_site_logo" dir="ltr">
+
+	<div class="pkp_structure_page">
+
+				<header class="pkp_structure_head" id="headerNavigationContainer" role="banner">
+						
+ <nav class="cmp_skip_to_content" aria-label="Jump to content links">
+	<a href="#pkp_content_main">Skip to main content</a>
+	<a href="#siteNav">Skip to main navigation menu</a>
+		<a href="#pkp_content_footer">Skip to site footer</a>
+</nav>
+
+			<div class="pkp_head_wrapper">
+
+				<div class="pkp_site_name_wrapper">
+					<button class="pkp_site_nav_toggle">
+						<span>Open Menu</span>
+					</button>
+										<div class="pkp_site_name">
+																<a href="						https://ojs.uajy.ac.id/index.php/jbi/index
+					" class="is_img">
+							<img src="https://ojs.uajy.ac.id/public/journals/1/pageHeaderLogoImage_en_US.png" width="1520" height="180"  />
+						</a>
+										</div>
+				</div>
+
+				
+				<nav class="pkp_site_nav_menu" aria-label="Site Navigation">
+					<a id="siteNav"></a>
+					<div class="pkp_navigation_primary_row">
+						<div class="pkp_navigation_primary_wrapper">
+																				<ul id="navigationPrimary" class="pkp_navigation_primary pkp_nav_list">
+								<li class="">
+				<a href="https://ojs.uajy.ac.id/index.php/jbi/index">
+					Home
+				</a>
+							</li>
+								<li class="">
+				<a href="https://ojs.uajy.ac.id/index.php/jbi/issue/current">
+					Current
+				</a>
+							</li>
+								<li class="">
+				<a href="https://ojs.uajy.ac.id/index.php/jbi/issue/archive">
+					Archives
+				</a>
+							</li>
+								<li class="">
+				<a href="https://ojs.uajy.ac.id/index.php/jbi/announcement">
+					Announcements
+				</a>
+							</li>
+								<li class="">
+				<a href="https://ojs.uajy.ac.id/index.php/jbi/about">
+					About
+				</a>
+									<ul>
+																					<li class="">
+									<a href="https://ojs.uajy.ac.id/index.php/jbi/about">
+										About the Journal
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ojs.uajy.ac.id/index.php/jbi/about/submissions">
+										Submissions
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ojs.uajy.ac.id/index.php/jbi/about/editorialTeam">
+										Editorial Team
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ojs.uajy.ac.id/index.php/jbi/about/privacy">
+										Privacy Statement
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ojs.uajy.ac.id/index.php/jbi/about/contact">
+										Contact
+									</a>
+								</li>
+																		</ul>
+							</li>
+			</ul>
+
+				
+
+																						<div class="pkp_navigation_search_wrapper">
+									<a href="https://ojs.uajy.ac.id/index.php/jbi/search" class="pkp_search pkp_search_desktop">
+										<span class="fa fa-search" aria-hidden="true"></span>
+										Search
+									</a>
+								</div>
+													</div>
+					</div>
+					<div class="pkp_navigation_user_wrapper" id="navigationUserWrapper">
+							<ul id="navigationUser" class="pkp_navigation_user pkp_nav_list">
+								<li class="profile">
+				<a href="https://ojs.uajy.ac.id/index.php/jbi/index">
+					Home
+				</a>
+							</li>
+								<li class="profile">
+				<a href="https://ojs.uajy.ac.id/index.php/jbi/user/register">
+					Register
+				</a>
+							</li>
+								<li class="profile">
+				<a href="https://ojs.uajy.ac.id/index.php/jbi/login">
+					Login
+				</a>
+							</li>
+										</ul>
+
+					</div>
+				</nav>
+			</div><!-- .pkp_head_wrapper -->
+		</header><!-- .pkp_structure_head -->
+
+						<div class="pkp_structure_content has_sidebar">
+			<div class="pkp_structure_main" role="main">
+				<a id="pkp_content_main"></a>
+
+<div class="page page_article">
+			<nav class="cmp_breadcrumbs" role="navigation" aria-label="You are here:">
+	<ol>
+		<li>
+			<a href="https://ojs.uajy.ac.id/index.php/jbi/index">
+				Home
+			</a>
+			<span class="separator">/</span>
+		</li>
+		<li>
+			<a href="https://ojs.uajy.ac.id/index.php/jbi/issue/archive">
+				Archives
+			</a>
+			<span class="separator">/</span>
+		</li>
+					<li>
+				<a href="https://ojs.uajy.ac.id/index.php/jbi/issue/view/550">
+					Vol. 16 No. 2 (2025): Jurnal Buana Informatika, Volume 16, Nomor 02, Oktober 2025
+				</a>
+				<span class="separator">/</span>
+			</li>
+				<li class="current" aria-current="page">
+			<span aria-current="page">
+									Articles
+							</span>
+		</li>
+	</ol>
+</nav>
+	
+		  	 <article class="obj_article_details">
+
+		
+	<h1 class="page_title">
+		Penerapan Graph Neural Network dalam Pengenalan Alfabet BISINDO dengan Fokus pada Gerakan Dinamis
+	</h1>
+
+	
+	<div class="row">
+		<div class="main_entry">
+
+							<section class="item authors">
+					<h2 class="pkp_screen_reader">Authors</h2>
+					<ul class="authors">
+											<li>
+							<span class="name">
+								Febri Damatraseta
+							</span>
+															<span class="affiliation">
+									Program Studi Teknologi Informatika, Fakultas Informatika dan Pariwisata, Institut Bisnis dan Informatika Kesatuan
+																	</span>
+																				</li>
+											<li>
+							<span class="name">
+								Muhammad Alfan
+							</span>
+															<span class="affiliation">
+									Program Studi Teknologi Informatika, Fakultas Informatika dan Pariwisata, Institut Bisnis dan Informatika Kesatuan
+																	</span>
+																				</li>
+											<li>
+							<span class="name">
+								Yuliandi
+							</span>
+															<span class="affiliation">
+									Program Studi Manajemen, Fakultas Bisnis, Institut Bisnis dan Informatika Kesatuan
+																	</span>
+																				</li>
+										</ul>
+				</section>
+			
+																												<section class="item doi">
+						<h2 class="label">
+														DOI:
+						</h2>
+						<span class="value">
+							<a href="https://doi.org/10.24002/jbi.v16i2.12013">
+								https://doi.org/10.24002/jbi.v16i2.12013
+							</a>
+						</span>
+					</section>
+							
+									<section class="item keywords">
+				<h2 class="label">
+										Keywords:
+				</h2>
+				<span class="value">
+											BISINDO, 											hand gesture recognition, 											Graph Neural Networks, 											MediaPipe, 											Dynamic Sign Language Recognition, 											pengenalan gerakan tangan, 											GNN, 											pengenalan bahasa isyarat dinamis									</span>
+			</section>
+			
+										<section class="item abstract">
+					<h2 class="label">Abstract</h2>
+					<p><em>Sebagian besar studi pengenalan alfabet Bahasa Isyarat Indonesia (BISINDO) masih terbatas pada gesture statik, meskipun beberapa huruf seperti R dan J memiliki karakteristik gerakan dinamis yang tidak dapat direpresentasikan secara statis. Penelitian ini menggunakan MediaPipe untuk mendeteksi 21 keypoints tangan sebagai input fitur. Titik-titik ini dimodelkan dalam bentuk graf dan diproses menggunakan Graph Neural Networks (GNNs) guna mengenali alfabet secara simultan, termasuk huruf-huruf dinamis. Proses pelatihan menggunakan K-Fold Cross Validation untuk menguji konsistensi performa model. Model GNN menghasilkan akurasi sebesar 96% pada pengujian data alfabet BISINDO. Prototipe sistem dalam bentuk aplikasi web berhasil mengenali 26 huruf BISINDO secara dinamis dengan tingkat akurasi prediksi mencapai 91%, menunjukkan potensi implementasi nyata dari pendekatan GNN dalam mendukung aksesibilitas komunikasi inklusif.</em></p>
+				</section>
+			
+			
+
+																																	
+										<section class="item references">
+					<h2 class="label">
+						References
+					</h2>
+					<div class="value">
+																					<p>A. Rahman, and S. Informatika, “Aplikasi Penerjemah Bahasa Isyarat Menggunakan Metode K-NN (K-Nearest Neighbour),” Jurnal Teknologi Pintar, vol. 2, no. 4, pp. 1–12, 2022. [Online]. Available: <a href="https://ejurnal.stmik-budidarma.ac.id/mib/article/view/7714">https://ejurnal.stmik-budidarma.ac.id/mib/article/view/7714</a> </p>
+															<p>A. S. Nugraheni, A. P. Husain, and H. Unayah, “Optimalisasi Penggunaan Bahasa Isyarat dengan SIBI dan BISINDO pada Mahasiswa Difabel Tunarungu di Prodi PGMI UIN Sunan Kalijaga,” Jurnal Holistika, vol. 5, no. 1, pp. 28–33, 2023, doi: 10.24853/holistika.5.1.28-33. [Online]. Available: <a href="https://jurnal.umj.ac.id/index.php/holistika/article/view/9355">https://jurnal.umj.ac.id/index.php/holistika/article/view/9355</a> </p>
+															<p>T. Tao and Y. Zhao, “Sign language recognition: A comprehensive review of traditional and deep learning approaches, datasets, and challenges,” IEEE Access, vol. 12, pp. 111216–111234, 2024, doi: 10.1109/ACCESS.2024.3387279 </p>
+															<p>Y. E. Mulyanto, “Sign Language Recognition Based on Geometric Features Using Deep Learning,” Jurnal Nasional Pendidikan Teknik Informatika: JANAPATI, vol. 13, no. 2, pp. 338-348, Jul. 2024, doi: 10.23887/janapati.v13i2.82103. </p>
+															<p>F. Damatraseta, R. Novariany, and M. A. Ridhani, “Real-time BISINDO Hand Gesture Detection and Recognition with Deep Learning CNN,” Jurnal Informatika Kesatuan, vol. 1, no. 1, pp. 71–80, Jul. 2021, doi: 10.37641/jikes.v1i1.774. </p>
+															<p>Y. V. Via, W. S. J. Saputra, M. I. Fachrurrozi, E. Y. Puspaningrum, F. T. Anggraeny, and S. R. Nudin, “Object Localization and Detecting Alphabet in Sign Language BISINDO Using Convolution Neural Network,” Technium: Romanian Journal of Applied Sciences and Technology, vol. 5, no. 12, pp. 143–149, 2023. [Online]. Available: <a href="https://ideas.repec.org/s/tec/techni.html">https://ideas.repec.org/s/tec/techni.html</a> </p>
+															<p>H. Kolivand, S. Joudaki, M. S. Sunar, and D. Tully, “A new framework for sign language alphabet hand posture recognition using geometrical features through artificial neural network (part 1),” Neural Computing and Applications, vol. 33, no. 10, pp. 4945–4963, May 2021, doi: 10.1007/s00521-020-05279-7. </p>
+															<p>B. Khemani, S. Qamar, and S. Anwar, “A review of graph neural networks: Concepts, architectures, and applications,” Journal of Big Data, vol. 11, no. 1, pp. 1–38, 2024, doi: 10.1186/s40537-024-00815-4 </p>
+															<p>A. Sharma, A. Sharma, A. Tselykh, A. Bozhenyuk, and B. G. Kim, “Image and video analysis using graph neural network for Internet of Medical Things and computer vision applications,” CAAI Transactions on Intelligent Technology, 2024, doi: 10.1049/cit2.12306. </p>
+															<p>S. Dey, S. Samanta, and S. Banerjee, “Sign language recognition using convolutional neural networks: A review and open research challenges,” International Journal of Advanced Computer Science and Applications (IJACSA), vol. 14, no. 5, pp. 123–131, 2023, doi: 10.14569/IJACSA.2023.0140515 </p>
+															<p>W. Chen, J. Liu, and Z. Luo, “A survey on hand pose estimation with wearable sensors and computer-vision-based methods,” Sensors, vol. 20, no. 3, pp. 1–25, Feb. 2020, doi: 10.3390/s20030856 </p>
+															<p>H. Ansar, M. Ali, and S. Ahmed, “Hand gesture recognition based on auto-landmark localization,” Sustainability, vol. 13, no. 17, pp. 1–18, 2021, doi: 10.3390/su13179902 </p>
+																		</div>
+				</section>
+			
+		</div><!-- .main_entry -->
+
+		<div class="entry_details">
+
+										<div class="item cover_image">
+					<div class="sub_item">
+													<a href="https://ojs.uajy.ac.id/index.php/jbi/issue/view/550">
+								<img src="https://ojs.uajy.ac.id/public/journals/1/cover_issue_550_en_US.png" alt="">
+							</a>
+											</div>
+				</div>
+			
+										<div class="item galleys">
+					<h2 class="pkp_screen_reader">
+						Downloads
+					</h2>
+					<ul class="value galleys_links">
+													<li>
+								
+	
+							
+
+<a class="obj_galley_link pdf" href="https://ojs.uajy.ac.id/index.php/jbi/article/view/12013/4269">
+
+		
+	PDF
+
+	</a>
+							</li>
+											</ul>
+				</div>
+						
+						<div class="item published">
+				<section class="sub_item">
+					<h2 class="label">
+						Published
+					</h2>
+					<div class="value">
+																			<span>2025-10-01</span>
+																	</div>
+				</section>
+							</div>
+			
+						
+										<div class="item issue">
+
+											<section class="sub_item">
+							<h2 class="label">
+								Issue
+							</h2>
+							<div class="value">
+								<a class="title" href="https://ojs.uajy.ac.id/index.php/jbi/issue/view/550">
+									Vol. 16 No. 2 (2025): Jurnal Buana Informatika, Volume 16, Nomor 02, Oktober 2025
+								</a>
+							</div>
+						</section>
+					
+											<section class="sub_item">
+							<h2 class="label">
+								Section
+							</h2>
+							<div class="value">
+								Articles
+							</div>
+						</section>
+					
+									</div>
+			
+															
+										<div class="item copyright">
+					<h2 class="label">
+						License
+					</h2>
+																									<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" src="//i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><p>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+																<p>Copyright of this journal is assigned to Jurnal Buana Informatika as the journal publisher by the knowledge of author, whilst the moral right of the publication belongs to author. Every printed and electronic publications are open access for educational purposes, research, and library. The editorial board is not responsible for copyright violation to the other than them aims mentioned before. The reproduction of any part of this journal (printed or online) will be allowed only with a written permission from Jurnal Buana Informatika.</p><p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p><p><img src="data:image/png;base64,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" alt="" /></p>
+				</div>
+			
+			
+
+		</div><!-- .entry_details -->
+	</div><!-- .row -->
+
+</article>
+
+	
+
+</div><!-- .page -->
+
+	</div><!-- pkp_structure_main -->
+
+									<div class="pkp_structure_sidebar left" role="complementary" aria-label="Sidebar">
+				<div class="pkp_block block_custom" id="customblock-editorial-policies">
+	<h2 class="title">editorial-policies</h2>
+	<div class="content">
+		<div class="sidebar">
+<h2 class="sidebar-title">Editorial Policies</h2>
+<div class="sidebar-body">
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/Focus-Scope">Focus and Scope</a></div>
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/Peer-Review-Process"> Peer Review Process </a></div>
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/about/editorialTeam"> Editorial Team</a></div>
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/Reviewers"> Reviewers </a></div>
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/Publication-Ethics"> Publication Ethics </a></div>
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/Privacy-Statement"> Privacy Statement </a></div>
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/OpenAccessPolicy-CopyrightNotice"> Open Access Policy &amp; Copyright Notice </a></div>
+</div>
+</div>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-instruction-for-authors">
+	<h2 class="title pkp_screen_reader">instruction-for-authors</h2>
+	<div class="content">
+		<div class="sidebar">
+<h2 class="sidebar-title">Instruction for Authors</h2>
+<div class="sidebar-body">
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/Online-Submission"> Online Submission </a></div>
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/Author-Guidelines"> Author Guidelines </a></div>
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/Author-Submission-Checklist"> Author Submission Checklist</a></div>
+<div class="each-menu"><a href="https://ojs.uajy.ac.id/index.php/jbi/Author-Fees"> Author Fees </a></div>
+</div>
+</div>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-article-template-and-instructions">
+	<h2 class="title pkp_screen_reader">article-template-and-instructions</h2>
+	<div class="content">
+		<div class="sidebar template">
+<h2 class="sidebar-title">Article Templates and Instructions</h2>
+<div class="sidebar-body-template-parent">
+<div class="sidebar-body-template"><a class="articleToolIcon" title="template naskah JBI 2026" href="https://docs.google.com/document/d/1_KHUQeqQVSlKHdovUhuymxitrssd1RSC/edit?usp=sharing&amp;ouid=103651250636869410403&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener"><img src="https://ojs.uajy.ac.id/public/site/images/andreash/file_do
+wnload_8844.png" alt="manuskripTemplate" height="60"></a></div>
+<p>This file contains article templates, as well as instructions on how to prepare your papers for publication in Jurnal Buana Informatika.</p>
+</div>
+</div>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-accreditation-certificate">
+	<h2 class="title pkp_screen_reader">accreditation-certificate</h2>
+	<div class="content">
+		<div class="sidebar tools">
+<h2 class="sidebar-title">Accreditation Certificate</h2>
+<div class="sidebar-body"><a href="https://ojs.uajy.ac.id/public/site/images/andreash/sertifikat-jbi-sinta-4-2025.png" target="_blank" rel="noopener"> <img src="https://ojs.uajy.ac.id/public/site/images/andreash/sertifikat-jbi-sinta-4-2025.png" alt="" width="1024" height="684"></a></div>
+</div>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-cited-by">
+	<h2 class="title pkp_screen_reader">Cited-by</h2>
+	<div class="content">
+		<div class="sidebar license">
+<h2 class="sidebar-title">Dimensions Citations</h2>
+<a href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;and_facet_source_title=jour.1290951" target="_blank" rel="noopener"><img src="https://ojs.uajy.ac.id/public/site/images/andreash/chart-indexindimension2-b9b0fecbca7f46cb9db2a37d108771f8.png" alt="" width="481" height="302"></a></div>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-visitors">
+	<h2 class="title pkp_screen_reader">Visitors</h2>
+	<div class="content">
+		<div class="sidebar license">
+<h2 class="sidebar-title">Visitors</h2>
+<div class="sidebar-body"><a href="https://info.flagcounter.com/Eel6"><img src="https://s11.flagcounter.com/count2/Eel6/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a> <!-- Default Statcounter code for JBI Stat page
+https://ojs.uajy.ac.id/index.php/jbi -->
+<div class="statcounter"><a title="website statistics" href="http://statcounter.com/p13016417/summary/?guest=1" target="_blank" rel="noopener"><img class="statcounter" src="https://c.statcounter.com/13016417/0/b6675e58/0/" alt="website statistics"></a></div>
+<!-- End of Statcounter Code --></div>
+</div>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-index-in">
+	<h2 class="title pkp_screen_reader">Index-in</h2>
+	<div class="content">
+		<div class="sidebar tools">
+<h2 class="sidebar-title">Indexed In</h2>
+<div class="sidebar-body-template-parent">
+<div class="sidebar-body-indexed"><a href="https://sinta.kemdiktisaintek.go.id/journals/profile/3786" target="_blank" rel="noopener"> <img src="https://ojs.uajy.ac.id/public/site/images/andreash/index1.png" alt="" width="150" height="52"></a> <a href="https://garuda.kemdikbud.go.id/journal/view/5411" target="_blank" rel="noopener"> <img src="https://ojs.uajy.ac.id/public/site/images/andreash/index2.png" alt="" width="150" height="59"></a> <a href="https://scholar.google.com/citations?hl=us&amp;user=HYVqVNwAAAAJ" target="_blank" rel="noopener"> <img src="https://ojs.uajy.ac.id/public/site/images/andreash/index3.png" alt="" width="150" height="52"></a> <a href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;search_text=Journal%20of%20Buana%20Informatika&amp;search_type=kws&amp;search_field=full_search&amp;or_facet_source_title=jour.1290951" target="_blank" rel="noopener"> <img src="https://ojs.uajy.ac.id/public/site/images/andreash/index4.png" alt="" width="150" height="52"></a></div>
+</div>
+</div>
+	</div>
+</div>
+
+			</div><!-- pkp_sidebar.left -->
+			</div><!-- pkp_structure_content -->
+
+<div class="pkp_structure_footer_wrapper" role="contentinfo">
+	<a id="pkp_content_footer"></a>
+
+	<div class="pkp_structure_footer">
+
+					<div class="pkp_footer_content">
+				<div class="container">
+<div class="row">
+<div class="footer-col">
+<h4>Address</h4>
+<p><strong>Program Studi Informatika</strong><br />Fakultas Teknologi Industri <br />Universitas Atma Jaya Yogyakarta <br />Jln. Babarsari No. 43, Caturtunggal, Kec. Depok, Kabupaten Sleman,<br />Daerah Istimewa Yogyakarta 55281</p>
+</div>
+<div class="footer-col">
+<h4>Contact Information</h4>
+<div style="display: flex; gap: 0.2rem;">
+<div class="social-links">Telp: (0274) 487711<br />Email: jbi@uajy.ac.id</div>
+</div>
+</div>
+<div class="footer-col footer-col-1">
+<div class="footer-parent"><img class="footer-logo" src="https://ojs.uajy.ac.id/public/site/images/andreash/logo-jbi.png" alt="" /><br />
+<div>
+<p>Jurnal Buana <br /><span class="footerinformatika">Informatika</span></p>
+</div>
+</div>
+</div>
+</div>
+<p class="issn-text" style="text-align: center;">Print ISSN : <a style="font-weight: bold; display: inline-block;" href="https://issn.brin.go.id/terbit/detail/1271083534">2087-2534</a> • Online ISSN : <a style="font-weight: bold; display: inline-block;" href="https://issn.brin.go.id/terbit/detail/1326768860">2089-7642</a> <br />© 2024. JURNAL BUANA INFORMATIKA</p>
+</div>
+			</div>
+		
+		<div class="pkp_brand_footer" role="complementary">
+			<a href="https://ojs.uajy.ac.id/index.php/jbi/about/aboutThisPublishingSystem">
+				<img alt="More information about the publishing system, Platform and Workflow by OJS/PKP." src="https://ojs.uajy.ac.id/templates/images/ojs_brand.png">
+			</a>
+		</div>
+	</div>
+</div><!-- pkp_structure_footer_wrapper -->
+
+</div><!-- pkp_structure_page -->
+
+<script src="https://ojs.uajy.ac.id/lib/pkp/lib/vendor/components/jquery/jquery.min.js?v=3.3.0.22" type="text/javascript"></script><script src="https://ojs.uajy.ac.id/lib/pkp/lib/vendor/components/jqueryui/jquery-ui.min.js?v=3.3.0.22" type="text/javascript"></script><script src="https://ojs.uajy.ac.id/plugins/themes/default/js/lib/popper/popper.js?v=3.3.0.22" type="text/javascript"></script><script src="https://ojs.uajy.ac.id/plugins/themes/default/js/lib/bootstrap/util.js?v=3.3.0.22" type="text/javascript"></script><script src="https://ojs.uajy.ac.id/plugins/themes/default/js/lib/bootstrap/dropdown.js?v=3.3.0.22" type="text/javascript"></script><script src="https://ojs.uajy.ac.id/plugins/themes/default/js/main.js?v=3.3.0.22" type="text/javascript"></script><script type="text/javascript">
+(function (w, d, s, l, i) { w[l] = w[l] || []; var f = d.getElementsByTagName(s)[0],
+j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; 
+j.src = 'https://www.googletagmanager.com/gtag/js?id=' + i + dl; f.parentNode.insertBefore(j, f); 
+function gtag(){dataLayer.push(arguments)}; gtag('js', new Date()); gtag('config', i); })
+(window, document, 'script', 'dataLayer', 'UA-11131874-40');
+</script>
+
+
+</body>
+</html>

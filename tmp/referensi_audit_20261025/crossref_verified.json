@@ -1,0 +1,330 @@
+[
+  {
+    "DOI": "10.1007/s10618-021-00763-7",
+    "title": [
+      "Data-driven detection of counterpressing in professional football"
+    ],
+    "type": "journal-article",
+    "container-title": [
+      "Data Mining and Knowledge Discovery"
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2021,
+          7,
+          8
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          2021,
+          7,
+          8
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2021,
+          9
+        ]
+      ]
+    },
+    "volume": "35",
+    "issue": "5",
+    "page": "2009-2049",
+    "publisher": "Springer Science and Business Media LLC",
+    "relation": {},
+    "author": [
+      {
+        "given": "Pascal",
+        "family": "Bauer"
+      },
+      {
+        "given": "Gabriel",
+        "family": "Anzer"
+      }
+    ]
+  },
+  {
+    "DOI": "10.1038/s41597-025-04505-y",
+    "title": [
+      "An integrated dataset of spatiotemporal and event data in elite soccer"
+    ],
+    "type": "journal-article",
+    "container-title": [
+      "Scientific Data"
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2025,
+          2,
+          1
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          2025,
+          2,
+          1
+        ]
+      ]
+    },
+    "volume": "12",
+    "issue": "1",
+    "article-number": "195",
+    "publisher": "Springer Science and Business Media LLC",
+    "relation": {},
+    "author": [
+      {
+        "given": "Manuel",
+        "family": "Bassek"
+      },
+      {
+        "given": "Robert",
+        "family": "Rein"
+      },
+      {
+        "given": "Hendrik",
+        "family": "Weber"
+      },
+      {
+        "given": "Daniel",
+        "family": "Memmert"
+      }
+    ]
+  },
+  {
+    "DOI": "10.1038/s41467-024-45965-x",
+    "title": [
+      "TacticAI: an AI assistant for football tactics"
+    ],
+    "type": "journal-article",
+    "container-title": [
+      "Nature Communications"
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2024,
+          3,
+          19
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          2024,
+          3,
+          19
+        ]
+      ]
+    },
+    "volume": "15",
+    "issue": "1",
+    "article-number": "1906",
+    "publisher": "Springer Science and Business Media LLC",
+    "relation": {},
+    "author": [
+      {
+        "given": "Zhe",
+        "family": "Wang"
+      },
+      {
+        "given": "Petar",
+        "family": "Veličković"
+      },
+      {
+        "given": "Daniel",
+        "family": "Hennes"
+      },
+      {
+        "given": "Nenad",
+        "family": "Tomašev"
+      },
+      {
+        "given": "Laurel",
+        "family": "Prince"
+      },
+      {
+        "given": "Michael",
+        "family": "Kaisers"
+      },
+      {
+        "given": "Yoram",
+        "family": "Bachrach"
+      },
+      {
+        "given": "Romuald",
+        "family": "Elie"
+      },
+      {
+        "given": "Li Kevin",
+        "family": "Wenliang"
+      },
+      {
+        "given": "Federico",
+        "family": "Piccinini"
+      },
+      {
+        "given": "William",
+        "family": "Spearman"
+      },
+      {
+        "given": "Ian",
+        "family": "Graham"
+      },
+      {
+        "given": "Jerome",
+        "family": "Connor"
+      },
+      {
+        "given": "Yi",
+        "family": "Yang"
+      },
+      {
+        "given": "Adrià",
+        "family": "Recasens"
+      },
+      {
+        "given": "Mina",
+        "family": "Khan"
+      },
+      {
+        "given": "Nathalie",
+        "family": "Beauguerlange"
+      },
+      {
+        "given": "Pablo",
+        "family": "Sprechmann"
+      },
+      {
+        "given": "Pol",
+        "family": "Moreno"
+      },
+      {
+        "given": "Nicolas",
+        "family": "Heess"
+      },
+      {
+        "given": "Michael",
+        "family": "Bowling"
+      },
+      {
+        "given": "Demis",
+        "family": "Hassabis"
+      },
+      {
+        "given": "Karl",
+        "family": "Tuyls"
+      }
+    ]
+  },
+  {
+    "DOI": "10.1145/3292500.3330758",
+    "title": [
+      "Actions Speak Louder than Goals"
+    ],
+    "type": "proceedings-article",
+    "container-title": [
+      "Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining"
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2019,
+          7,
+          25
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          2019,
+          7,
+          25
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2019,
+          7,
+          25
+        ]
+      ]
+    },
+    "page": "1851-1861",
+    "publisher": "ACM",
+    "relation": {},
+    "author": [
+      {
+        "given": "Tom",
+        "family": "Decroos"
+      },
+      {
+        "given": "Lotte",
+        "family": "Bransen"
+      },
+      {
+        "given": "Jan",
+        "family": "Van Haaren"
+      },
+      {
+        "given": "Jesse",
+        "family": "Davis"
+      }
+    ]
+  },
+  {
+    "DOI": "10.1109/bigdata52589.2021.9671833",
+    "title": [
+      "Graph Neural Networks to Predict Sports Outcomes"
+    ],
+    "type": "proceedings-article",
+    "container-title": [
+      "2021 IEEE International Conference on Big Data (Big Data)"
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2021,
+          12,
+          15
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2021,
+          12,
+          15
+        ]
+      ]
+    },
+    "page": "1757-1763",
+    "publisher": "IEEE",
+    "relation": {},
+    "author": [
+      {
+        "given": "Peter",
+        "family": "Xenopoulos"
+      },
+      {
+        "given": "Claudio",
+        "family": "Silva"
+      }
+    ]
+  }
+]

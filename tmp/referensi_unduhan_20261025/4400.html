@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>
+		Klasifikasi Citra Gerakan Olahraga Dalam Gym Menggunakan Graph Convolutional Network
+							| KALBISCIENTIA Jurnal Sains dan Teknologi
+			</title>
+
+	
+<meta name="generator" content="Open Journal Systems 3.5.0.1" />
+<link rel='alternate' hreflang='id' href='https://ojs.kalbis.ac.id/index.php/kalbiscientia/id/article/view/4400' />
+<link rel='alternate' hreflang='en' href='https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/article/view/4400' />
+<link rel='alternate' hreflang='x-default' href='https://ojs.kalbis.ac.id/index.php/kalbiscientia/article/view/4400' />
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Creator.PersonalName" content="Affan Rifqy Kurniadi"/>
+<meta name="DC.Creator.PersonalName" content="Akmal"/>
+<meta name="DC.Creator.PersonalName" content="Deni Setiana"/>
+<meta name="DC.Date.created" scheme="ISO8601" content="2025-03-27"/>
+<meta name="DC.Date.dateSubmitted" scheme="ISO8601" content="2025-02-06"/>
+<meta name="DC.Date.issued" scheme="ISO8601" content="2025-03-29"/>
+<meta name="DC.Date.modified" scheme="ISO8601" content="2025-03-29"/>
+<meta name="DC.Description" xml:lang="en" content="The participation rate in sports activities among Indonesians remains low, with the Sport Development Index (SDI) in 2022 recording only 30.93%, a decline from 32.80% in the previous year. Simple kind of sport can be followed is gym. This study aims to introduce and promote basic gym movements such as bench press, squat, and deadlift to encourage greater engagement in sports activities. This research utilizes Deep Learning technology based on Graph Convolutional Network (GCN) to classify gym movement images into three classes: benchpress, squat, and deadlift. The study focuses on comparing various hyperparameters, including model type, batch size, and dropout, to determine the optimal configuration with the best performance.The results indicate that the GCN model achieved an F1 Score of 0.8667, demonstrating strong performance in classifying gym movement images. A simple web-based application was developed as an implementation to facilitate automatic gym movement classification."/>
+<meta name="DC.Description" xml:lang="id" content="Tingkat partisipasi olahraga masyarakat Indonesia masih rendah, dengan Sport Development Index (SDI) tahun 2022 mencatat hanya 30,93%, turun dari 32,80% pada tahun sebelumnya. Olahraga sederhana yang dapat diikuti salah satunya adalah olahraga gym. Penelitian ini bertujuan untuk mengenalkan dan mempromosikan gerakan dasar gym seperti benchpress, squat, dan deadlift guna mendorong peningkatan partisipasi olahraga. Penelitian menggunakan teknologi Deep Learning berbasis Graph Convolutional Network (GCN) untuk mengklasifikasikan citra gerakan gym ke dalam tiga kelas tersebut. Fokus penelitian adalah membandingkan berbagai hyperparameter, termasuk model, ukuran batch, dan dropout, untuk menemukan konfigurasi optimal dengan performa terbaik. Hasil penelitian menunjukkan bahwa model GCN mencapai nilai F1 Score sebesar 0,8667, menunjukkan performa yang baik dalam klasifikasi citra gerakan gym. Sebagai implementasi, aplikasi berbasis web sederhana dikembangkan untuk memfasilitasi klasifikasi gerakan gym secara otomatis."/>
+<meta name="DC.Format" scheme="IMT" content="application/pdf"/>
+<meta name="DC.Identifier" content="4400"/>
+<meta name="DC.Identifier.pageNumber" content="12-20"/>
+<meta name="DC.Identifier.DOI" content="10.53008/kalbiscientia.v12i01.4400"/>
+<meta name="DC.Identifier.URI" content="https://ojs.kalbis.ac.id/index.php/kalbiscientia/article/view/4400"/>
+<meta name="DC.Language" scheme="rfc5646" content="id"/>
+<meta name="DC.Source" content="KALBISCIENTIA Jurnal Sains dan Teknologi"/>
+<meta name="DC.Source.ISSN" content="2775-5576"/>
+<meta name="DC.Source.Issue" content="01"/>
+<meta name="DC.Source.Volume" content="12"/>
+<meta name="DC.Source.URI" content="https://ojs.kalbis.ac.id/index.php/kalbiscientia/kalbiscientia"/>
+<meta name="DC.Subject" xml:lang="en" content="gym"/>
+<meta name="DC.Subject" xml:lang="en" content="deep learning"/>
+<meta name="DC.Subject" xml:lang="en" content="graph convoultional network"/>
+<meta name="DC.Subject" xml:lang="en" content="F1-Score"/>
+<meta name="DC.Subject" xml:lang="en" content="web"/>
+<meta name="DC.Subject" xml:lang="id" content="gym"/>
+<meta name="DC.Subject" xml:lang="id" content="deep learning"/>
+<meta name="DC.Subject" xml:lang="id" content="graph convolutional network"/>
+<meta name="DC.Subject" xml:lang="id" content="F1-Score"/>
+<meta name="DC.Subject" xml:lang="id" content="web"/>
+<meta name="DC.Title" content="Klasifikasi Citra Gerakan Olahraga Dalam Gym Menggunakan Graph Convolutional Network"/>
+<meta name="DC.Title.Alternative" xml:lang="en" content="Klasifikasi Citra Gerakan Olahraga Dalam Gym Menggunakan Graph Convolutional Network"/>
+<meta name="DC.Type" content="Text.Serial.Journal"/>
+<meta name="DC.Type.articleType" content="Articles"/>
+<meta name="gs_meta_revision" content="1.1"/>
+<meta name="citation_journal_title" content="KALBISCIENTIA Jurnal Sains dan Teknologi"/>
+<meta name="citation_journal_abbrev" content="KalbiScientiaa"/>
+<meta name="citation_issn" content="2775-5576"/> 
+<meta name="citation_author" content="Affan Rifqy Kurniadi"/>
+<meta name="citation_author_institution" content="Universitas Padjadjaran"/>
+<meta name="citation_author" content="Akmal"/>
+<meta name="citation_author_institution" content="Universitas Padjadjaran"/>
+<meta name="citation_author" content="Deni Setiana"/>
+<meta name="citation_author_institution" content="Universitas Padjadjaran"/>
+<meta name="citation_title" content="Klasifikasi Citra Gerakan Olahraga Dalam Gym Menggunakan Graph Convolutional Network"/>
+<meta name="citation_language" content="id"/>
+<meta name="citation_date" content="2025/03/27"/>
+<meta name="citation_volume" content="12"/>
+<meta name="citation_issue" content="01"/>
+<meta name="citation_firstpage" content="12"/>
+<meta name="citation_lastpage" content="20"/>
+<meta name="citation_doi" content="10.53008/kalbiscientia.v12i01.4400"/>
+<meta name="citation_abstract_html_url" content="https://ojs.kalbis.ac.id/index.php/kalbiscientia/article/view/4400"/>
+<meta name="citation_abstract" xml:lang="id" content="Tingkat partisipasi olahraga masyarakat Indonesia masih rendah, dengan Sport Development Index (SDI) tahun 2022 mencatat hanya 30,93%, turun dari 32,80% pada tahun sebelumnya. Olahraga sederhana yang dapat diikuti salah satunya adalah olahraga gym. Penelitian ini bertujuan untuk mengenalkan dan mempromosikan gerakan dasar gym seperti benchpress, squat, dan deadlift guna mendorong peningkatan partisipasi olahraga. Penelitian menggunakan teknologi Deep Learning berbasis Graph Convolutional Network (GCN) untuk mengklasifikasikan citra gerakan gym ke dalam tiga kelas tersebut. Fokus penelitian adalah membandingkan berbagai hyperparameter, termasuk model, ukuran batch, dan dropout, untuk menemukan konfigurasi optimal dengan performa terbaik. Hasil penelitian menunjukkan bahwa model GCN mencapai nilai F1 Score sebesar 0,8667, menunjukkan performa yang baik dalam klasifikasi citra gerakan gym. Sebagai implementasi, aplikasi berbasis web sederhana dikembangkan untuk memfasilitasi klasifikasi gerakan gym secara otomatis."/>
+<meta name="citation_keywords" xml:lang="id" content="gym"/>
+<meta name="citation_keywords" xml:lang="id" content="deep learning"/>
+<meta name="citation_keywords" xml:lang="id" content="graph convolutional network"/>
+<meta name="citation_keywords" xml:lang="id" content="F1-Score"/>
+<meta name="citation_keywords" xml:lang="id" content="web"/>
+<meta name="citation_pdf_url" content="https://ojs.kalbis.ac.id/index.php/kalbiscientia/article/download/4400/1106"/>
+	<link rel="stylesheet" href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/$$$call$$$/page/page/css?name=stylesheet" type="text/css" /><link rel="stylesheet" href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/$$$call$$$/page/page/css?name=font" type="text/css" /><link rel="stylesheet" href="https://ojs.kalbis.ac.id/lib/pkp/styles/fontawesome/fontawesome.css?v=3.5.0.1" type="text/css" /><link rel="stylesheet" href="https://ojs.kalbis.ac.id/plugins/themes/default/js/lib/swiper/swiper-bundle.min.css?v=3.5.0.1" type="text/css" /><link rel="stylesheet" href="https://ojs.kalbis.ac.id/public/journals/5/styleSheet.css?d=" type="text/css" />
+</head>
+<body class="pkp_page_article pkp_op_view has_site_logo" dir="ltr">
+
+	<div class="pkp_structure_page">
+
+				<header class="pkp_structure_head" id="headerNavigationContainer" role="banner">
+						 <nav class="cmp_skip_to_content" aria-label="Jump to content links">
+	<a href="#pkp_content_main">Skip to main content</a>
+	<a href="#siteNav">Skip to main navigation menu</a>
+		<a href="#pkp_content_footer">Skip to site footer</a>
+</nav>
+
+			<div class="pkp_head_wrapper">
+
+				<div class="pkp_site_name_wrapper">
+					<button class="pkp_site_nav_toggle">
+						<span>Open Menu</span>
+					</button>
+										<div class="pkp_site_name">
+																<a href="						https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/index
+					" class="is_img">
+							<img src="https://ojs.kalbis.ac.id/public/journals/5/pageHeaderLogoImage_en_US.png" width="6000" height="910"  />
+						</a>
+										</div>
+				</div>
+
+				
+				<nav class="pkp_site_nav_menu" aria-label="Site Navigation">
+					<a id="siteNav"></a>
+					<div class="pkp_navigation_primary_row">
+						<div class="pkp_navigation_primary_wrapper">
+																				<ul id="navigationPrimary" class="pkp_navigation_primary pkp_nav_list">
+								<li class="">
+				<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/issue/current">
+					Current
+				</a>
+							</li>
+								<li class="">
+				<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/issue/archive">
+					Archives
+				</a>
+							</li>
+								<li class="">
+				<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/Reviewer-Team">
+					Reviewer Team
+				</a>
+							</li>
+								<li class="">
+				<a href="http://ojs.kalbis.ac.id/index.php/kalbiscientia/Publication-Ethics">
+					Publication Ethics
+				</a>
+							</li>
+															<li class="">
+				<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/about">
+					About
+				</a>
+									<ul>
+																					<li class="">
+									<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/about">
+										About the Journal
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/about/submissions">
+										Submissions
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/about/editorialMasthead">
+										Editorial Masthead
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/about/privacy">
+										Privacy Statement
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/about/contact">
+										Contact
+									</a>
+								</li>
+																		</ul>
+							</li>
+			</ul>
+
+				
+
+																						<div class="pkp_navigation_search_wrapper">
+									<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/search" class="pkp_search pkp_search_desktop">
+										<span class="fa fa-search" aria-hidden="true"></span>
+										Search
+									</a>
+								</div>
+													</div>
+					</div>
+					<div class="pkp_navigation_user_wrapper" id="navigationUserWrapper">
+							<ul id="navigationUser" class="pkp_navigation_user pkp_nav_list">
+															<li class="profile">
+				<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/login">
+					Login
+				</a>
+							</li>
+										</ul>
+
+					</div>
+				</nav>
+			</div><!-- .pkp_head_wrapper -->
+		</header><!-- .pkp_structure_head -->
+
+						<div class="pkp_structure_content has_sidebar">
+			<div class="pkp_structure_main" role="main">
+				<a id="pkp_content_main"></a>
+
+<div class="page page_article">
+			<nav class="cmp_breadcrumbs" role="navigation" aria-label="You are here:">
+	<ol>
+		<li>
+			<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/index">
+				Home
+			</a>
+			<span class="separator">/</span>
+		</li>
+		<li>
+			<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/issue/archive">
+				Archives
+			</a>
+			<span class="separator">/</span>
+		</li>
+					<li>
+				<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/issue/view/80">
+					Vol. 12 No. 01 (2025): Jurnal Sains dan Teknologi
+				</a>
+				<span class="separator">/</span>
+			</li>
+				<li class="current" aria-current="page">
+			<span aria-current="page">
+									Articles
+							</span>
+		</li>
+	</ol>
+</nav>
+	
+		  	 <article class="obj_article_details">
+
+		
+	<h1 class="page_title">
+		Klasifikasi Citra Gerakan Olahraga Dalam Gym Menggunakan Graph Convolutional Network
+	</h1>
+
+	
+	<div class="row">
+		<div class="main_entry">
+
+							<section class="item authors">
+					<h2 class="pkp_screen_reader">Authors</h2>
+					<ul class="authors">
+											<li>
+							<span class="name">
+								Affan Rifqy Kurniadi
+							</span>
+															<span class="affiliation">
+																			<span>Padjadjaran University</span>
+										<a href="https://ror.org/00xqf8t64"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:i="&amp;ns_ai;"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 23.4225 16.696501"
+   xml:space="preserve"
+   sodipodi:docname="rorId.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   width="23.422501"
+   height="16.696501"><metadata
+   id="metadata93"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs91" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1880"
+   inkscape:window-height="1016"
+   id="namedview89"
+   showgrid="true"
+   showguides="false"
+   inkscape:zoom="1"
+   inkscape:cx="-177.76975"
+   inkscape:cy="13.962506"
+   inkscape:window-x="40"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<switch
+   id="switch86"
+   transform="matrix(0.15,0,0,0.15,-0.7305,-0.624)">
+	<foreignObject
+   requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/"
+   x="0"
+   y="0"
+   width="1"
+   height="1">
+
+	</foreignObject>
+	<g
+   i:extraneous="self"
+   id="g84">
+		<polygon
+   class="strorId0"
+   points="68.65,4.16 56.52,22.74 44.38,4.16 "
+   id="polygon72"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="119.41,4.16 107.28,22.74 95.14,4.16 "
+   id="polygon74"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="44.38,115.47 56.52,96.88 68.65,115.47 "
+   id="polygon76"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="95.14,115.47 107.28,96.88 119.41,115.47 "
+   id="polygon78"
+   style="fill:#53baa1" />
+		<g
+   id="g82">
+			<path
+   class="st1"
+   d="m 145.53,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 2.24,-3.01 3.35,-6.67 3.35,-10.96 0,-3.56 -0.62,-6.52 -1.85,-8.9 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 h -23.56 v 18.83 c -0.19,-0.55 -0.39,-1.09 -0.61,-1.63 -1.63,-3.95 -3.91,-7.32 -6.84,-10.1 -2.93,-2.78 -6.39,-4.92 -10.41,-6.41 -4.01,-1.49 -8.4,-2.24 -13.16,-2.24 -4.76,0 -9.14,0.75 -13.16,2.24 -4.01,1.49 -7.48,3.63 -10.41,6.41 -2.62,2.49 -4.72,5.46 -6.3,8.9 -0.23,-2.47 -0.81,-4.61 -1.74,-6.41 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 H 4.87 V 89.42 H 18.28 V 65.08 H 24.9 L 37.63,89.42 H 53.71 L 38.24,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 0.1,-0.14 0.19,-0.29 0.29,-0.43 -0.02,0.47 -0.03,0.94 -0.03,1.42 0,4.87 0.82,9.29 2.45,13.24 1.63,3.95 3.91,7.32 6.84,10.1 2.92,2.78 6.39,4.92 10.41,6.41 4.01,1.49 8.4,2.24 13.16,2.24 4.76,0 9.14,-0.75 13.16,-2.24 4.01,-1.49 7.48,-3.63 10.41,-6.41 2.92,-2.78 5.2,-6.15 6.84,-10.1 0.22,-0.53 0.42,-1.08 0.61,-1.63 v 18.83 h 13.41 V 65.08 h 6.62 l 12.73,24.34 h 16.08 z M 36.39,50.81 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 H 18.29 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z m 62.35,16.04 c -0.89,2.38 -2.16,4.44 -3.83,6.19 -1.66,1.75 -3.65,3.11 -5.98,4.09 -2.32,0.98 -4.92,1.46 -7.78,1.46 -2.87,0 -5.46,-0.49 -7.78,-1.46 -2.32,-0.97 -4.31,-2.34 -5.98,-4.09 -1.66,-1.75 -2.94,-3.81 -3.83,-6.19 -0.89,-2.38 -1.33,-5 -1.33,-7.87 0,-2.81 0.44,-5.42 1.33,-7.83 0.89,-2.41 2.16,-4.48 3.83,-6.23 1.66,-1.75 3.65,-3.11 5.98,-4.09 2.32,-0.97 4.91,-1.46 7.78,-1.46 2.87,0 5.46,0.49 7.78,1.46 2.32,0.97 4.31,2.34 5.98,4.09 1.66,1.75 2.94,3.83 3.83,6.23 0.89,2.41 1.33,5.02 1.33,7.83 0,2.87 -0.44,5.49 -1.33,7.87 z m 44.94,-16.04 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 h -7.91 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z"
+   id="path80"
+   inkscape:connector-curvature="0"
+   style="fill:#202826" />
+		</g>
+	</g>
+</switch>
+</svg>
+</a>																											</span>
+																																		</li>
+											<li>
+							<span class="name">
+								Akmal
+							</span>
+															<span class="affiliation">
+																			<span>Padjadjaran University</span>
+										<a href="https://ror.org/00xqf8t64"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:i="&amp;ns_ai;"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 23.4225 16.696501"
+   xml:space="preserve"
+   sodipodi:docname="rorId.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   width="23.422501"
+   height="16.696501"><metadata
+   id="metadata93"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs91" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1880"
+   inkscape:window-height="1016"
+   id="namedview89"
+   showgrid="true"
+   showguides="false"
+   inkscape:zoom="1"
+   inkscape:cx="-177.76975"
+   inkscape:cy="13.962506"
+   inkscape:window-x="40"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<switch
+   id="switch86"
+   transform="matrix(0.15,0,0,0.15,-0.7305,-0.624)">
+	<foreignObject
+   requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/"
+   x="0"
+   y="0"
+   width="1"
+   height="1">
+
+	</foreignObject>
+	<g
+   i:extraneous="self"
+   id="g84">
+		<polygon
+   class="strorId0"
+   points="68.65,4.16 56.52,22.74 44.38,4.16 "
+   id="polygon72"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="119.41,4.16 107.28,22.74 95.14,4.16 "
+   id="polygon74"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="44.38,115.47 56.52,96.88 68.65,115.47 "
+   id="polygon76"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="95.14,115.47 107.28,96.88 119.41,115.47 "
+   id="polygon78"
+   style="fill:#53baa1" />
+		<g
+   id="g82">
+			<path
+   class="st1"
+   d="m 145.53,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 2.24,-3.01 3.35,-6.67 3.35,-10.96 0,-3.56 -0.62,-6.52 -1.85,-8.9 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 h -23.56 v 18.83 c -0.19,-0.55 -0.39,-1.09 -0.61,-1.63 -1.63,-3.95 -3.91,-7.32 -6.84,-10.1 -2.93,-2.78 -6.39,-4.92 -10.41,-6.41 -4.01,-1.49 -8.4,-2.24 -13.16,-2.24 -4.76,0 -9.14,0.75 -13.16,2.24 -4.01,1.49 -7.48,3.63 -10.41,6.41 -2.62,2.49 -4.72,5.46 -6.3,8.9 -0.23,-2.47 -0.81,-4.61 -1.74,-6.41 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 H 4.87 V 89.42 H 18.28 V 65.08 H 24.9 L 37.63,89.42 H 53.71 L 38.24,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 0.1,-0.14 0.19,-0.29 0.29,-0.43 -0.02,0.47 -0.03,0.94 -0.03,1.42 0,4.87 0.82,9.29 2.45,13.24 1.63,3.95 3.91,7.32 6.84,10.1 2.92,2.78 6.39,4.92 10.41,6.41 4.01,1.49 8.4,2.24 13.16,2.24 4.76,0 9.14,-0.75 13.16,-2.24 4.01,-1.49 7.48,-3.63 10.41,-6.41 2.92,-2.78 5.2,-6.15 6.84,-10.1 0.22,-0.53 0.42,-1.08 0.61,-1.63 v 18.83 h 13.41 V 65.08 h 6.62 l 12.73,24.34 h 16.08 z M 36.39,50.81 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 H 18.29 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z m 62.35,16.04 c -0.89,2.38 -2.16,4.44 -3.83,6.19 -1.66,1.75 -3.65,3.11 -5.98,4.09 -2.32,0.98 -4.92,1.46 -7.78,1.46 -2.87,0 -5.46,-0.49 -7.78,-1.46 -2.32,-0.97 -4.31,-2.34 -5.98,-4.09 -1.66,-1.75 -2.94,-3.81 -3.83,-6.19 -0.89,-2.38 -1.33,-5 -1.33,-7.87 0,-2.81 0.44,-5.42 1.33,-7.83 0.89,-2.41 2.16,-4.48 3.83,-6.23 1.66,-1.75 3.65,-3.11 5.98,-4.09 2.32,-0.97 4.91,-1.46 7.78,-1.46 2.87,0 5.46,0.49 7.78,1.46 2.32,0.97 4.31,2.34 5.98,4.09 1.66,1.75 2.94,3.83 3.83,6.23 0.89,2.41 1.33,5.02 1.33,7.83 0,2.87 -0.44,5.49 -1.33,7.87 z m 44.94,-16.04 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 h -7.91 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z"
+   id="path80"
+   inkscape:connector-curvature="0"
+   style="fill:#202826" />
+		</g>
+	</g>
+</switch>
+</svg>
+</a>																											</span>
+																																		</li>
+											<li>
+							<span class="name">
+								Deni Setiana
+							</span>
+															<span class="affiliation">
+																			<span>Padjadjaran University</span>
+										<a href="https://ror.org/00xqf8t64"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:i="&amp;ns_ai;"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 23.4225 16.696501"
+   xml:space="preserve"
+   sodipodi:docname="rorId.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   width="23.422501"
+   height="16.696501"><metadata
+   id="metadata93"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs91" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1880"
+   inkscape:window-height="1016"
+   id="namedview89"
+   showgrid="true"
+   showguides="false"
+   inkscape:zoom="1"
+   inkscape:cx="-177.76975"
+   inkscape:cy="13.962506"
+   inkscape:window-x="40"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<switch
+   id="switch86"
+   transform="matrix(0.15,0,0,0.15,-0.7305,-0.624)">
+	<foreignObject
+   requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/"
+   x="0"
+   y="0"
+   width="1"
+   height="1">
+
+	</foreignObject>
+	<g
+   i:extraneous="self"
+   id="g84">
+		<polygon
+   class="strorId0"
+   points="68.65,4.16 56.52,22.74 44.38,4.16 "
+   id="polygon72"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="119.41,4.16 107.28,22.74 95.14,4.16 "
+   id="polygon74"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="44.38,115.47 56.52,96.88 68.65,115.47 "
+   id="polygon76"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="95.14,115.47 107.28,96.88 119.41,115.47 "
+   id="polygon78"
+   style="fill:#53baa1" />
+		<g
+   id="g82">
+			<path
+   class="st1"
+   d="m 145.53,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 2.24,-3.01 3.35,-6.67 3.35,-10.96 0,-3.56 -0.62,-6.52 -1.85,-8.9 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 h -23.56 v 18.83 c -0.19,-0.55 -0.39,-1.09 -0.61,-1.63 -1.63,-3.95 -3.91,-7.32 -6.84,-10.1 -2.93,-2.78 -6.39,-4.92 -10.41,-6.41 -4.01,-1.49 -8.4,-2.24 -13.16,-2.24 -4.76,0 -9.14,0.75 -13.16,2.24 -4.01,1.49 -7.48,3.63 -10.41,6.41 -2.62,2.49 -4.72,5.46 -6.3,8.9 -0.23,-2.47 -0.81,-4.61 -1.74,-6.41 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 H 4.87 V 89.42 H 18.28 V 65.08 H 24.9 L 37.63,89.42 H 53.71 L 38.24,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 0.1,-0.14 0.19,-0.29 0.29,-0.43 -0.02,0.47 -0.03,0.94 -0.03,1.42 0,4.87 0.82,9.29 2.45,13.24 1.63,3.95 3.91,7.32 6.84,10.1 2.92,2.78 6.39,4.92 10.41,6.41 4.01,1.49 8.4,2.24 13.16,2.24 4.76,0 9.14,-0.75 13.16,-2.24 4.01,-1.49 7.48,-3.63 10.41,-6.41 2.92,-2.78 5.2,-6.15 6.84,-10.1 0.22,-0.53 0.42,-1.08 0.61,-1.63 v 18.83 h 13.41 V 65.08 h 6.62 l 12.73,24.34 h 16.08 z M 36.39,50.81 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 H 18.29 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z m 62.35,16.04 c -0.89,2.38 -2.16,4.44 -3.83,6.19 -1.66,1.75 -3.65,3.11 -5.98,4.09 -2.32,0.98 -4.92,1.46 -7.78,1.46 -2.87,0 -5.46,-0.49 -7.78,-1.46 -2.32,-0.97 -4.31,-2.34 -5.98,-4.09 -1.66,-1.75 -2.94,-3.81 -3.83,-6.19 -0.89,-2.38 -1.33,-5 -1.33,-7.87 0,-2.81 0.44,-5.42 1.33,-7.83 0.89,-2.41 2.16,-4.48 3.83,-6.23 1.66,-1.75 3.65,-3.11 5.98,-4.09 2.32,-0.97 4.91,-1.46 7.78,-1.46 2.87,0 5.46,0.49 7.78,1.46 2.32,0.97 4.31,2.34 5.98,4.09 1.66,1.75 2.94,3.83 3.83,6.23 0.89,2.41 1.33,5.02 1.33,7.83 0,2.87 -0.44,5.49 -1.33,7.87 z m 44.94,-16.04 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 h -7.91 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z"
+   id="path80"
+   inkscape:connector-curvature="0"
+   style="fill:#202826" />
+		</g>
+	</g>
+</switch>
+</svg>
+</a>																											</span>
+																																		</li>
+										</ul>
+				</section>
+			
+																	<section class="item doi">
+					<h2 class="label">
+												DOI: 
+					</h2>
+					<span class="value">
+						<a href="https://doi.org/10.53008/kalbiscientia.v12i01.4400">
+							https://doi.org/10.53008/kalbiscientia.v12i01.4400
+						</a>
+					</span>
+				</section>
+			
+
+									<section class="item keywords">
+				<h2 class="label">
+										Keywords: 
+				</h2>
+				<span class="value">
+											gym, 											deep learning, 											graph convoultional network, 											F1-Score, 											web									</span>
+			</section>
+			
+										<section class="item abstract">
+					<h2 class="label">Abstract</h2>
+					<p><em>The participation rate in sports activities among Indonesians remains low, with the Sport Development Index (SDI) in 2022 recording only 30.93%, a decline from 32.80% in the previous year. Simple kind of sport can be followed is gym. This study aims to introduce and promote basic gym movements such as bench press, squat, and deadlift to encourage greater engagement in sports activities. This research utilizes Deep Learning technology based on Graph Convolutional Network (GCN) to classify gym movement images into three classes: benchpress, squat, and deadlift. The study focuses on comparing various hyperparameters, including model type, batch size, and dropout, to determine the optimal configuration with the best performance.The results indicate that the GCN model achieved an F1 Score of 0.8667, demonstrating strong performance in classifying gym movement images. A simple web-based application was developed as an implementation to facilitate automatic gym movement classification.</em></p>
+				</section>
+			
+			
+
+										
+				<section class="item downloads_chart">
+					<h2 class="label">
+						Downloads
+					</h2>
+					<div class="value">
+						<canvas class="usageStatsGraph" data-object-type="Submission" data-object-id="4400"></canvas>
+						<div class="usageStatsUnavailable" data-object-type="Submission" data-object-id="4400">
+							Download data is not yet available.
+						</div>
+					</div>
+				</section>
+			
+																																	
+						
+		</div><!-- .main_entry -->
+
+		<div class="entry_details">
+
+										<div class="item cover_image">
+					<div class="sub_item">
+													<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/issue/view/80">
+								<img src="https://ojs.kalbis.ac.id/public/journals/5/cover_issue_80_en.jpg" alt="">
+							</a>
+											</div>
+				</div>
+			
+										<div class="item galleys">
+					<h2 class="pkp_screen_reader">
+						Downloads
+					</h2>
+					<ul class="value galleys_links">
+													<li>
+								
+	
+													
+
+<a class="obj_galley_link pdf" href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/article/view/4400/1106">
+		
+	PDF (Indonesian)
+
+	</a>
+							</li>
+											</ul>
+				</div>
+						
+						<div class="item published">
+				<section class="sub_item">
+					<h2 class="label">
+						Published
+					</h2>
+					<div class="value">
+																			<span>2025-03-27</span>
+																	</div>
+				</section>
+							</div>
+			
+						
+										<div class="item issue">
+
+											<section class="sub_item">
+							<h2 class="label">
+								Issue
+							</h2>
+							<div class="value">
+								<a class="title" href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/issue/view/80">
+									Vol. 12 No. 01 (2025): Jurnal Sains dan Teknologi
+								</a>
+							</div>
+						</section>
+					
+											<section class="sub_item">
+							<h2 class="label">
+								Section
+							</h2>
+							<div class="value">
+								Articles
+							</div>
+						</section>
+					
+									</div>
+			
+						
+										<div class="item copyright">
+					<h2 class="label">
+						License
+					</h2>
+										<p>Hak cipta jurnal ini ditugaskan untuk KALBISCIENTIA sebagai penerbit jurnal berdasarkan pengetahuan penulis, sedangkan hak moral publikasi merupakan milik penulis. Setiap publikasi cetak dan elektronik dapat diakses secara terbuka untuk tujuan pendidikan, penelitian, dan perpustakaan. Dewan editorial tidak bertanggung jawab atas pelanggaran hak cipta kepada pihak lain selain dari yang telah disebutkan sebelumnya. Reproduksi bagian mana pun dari jurnal ini (dicetak atau online) hanya akan diizinkan dengan izin tertulis dari KALBISCIENTIA: Jurnal Sains dan Teknologi.</p>
+				</div>
+			
+			
+
+		</div><!-- .entry_details -->
+	</div><!-- .row -->
+
+</article>
+
+	
+
+</div><!-- .page -->
+
+	</div><!-- pkp_structure_main -->
+
+									<div class="pkp_structure_sidebar left" role="complementary">
+				<div class="pkp_block block_custom" id="customblock-menubar">
+	<h2 class="title pkp_screen_reader">menubar</h2>
+	<div class="content">
+		<table style="width: 100.475%;" cellspacing="0" cellpadding="0" align="left">
+<tbody>
+<tr>
+<td style="height: 40px; vertical-align: middle; border-bottom: 1px solid #ffffff; text-align: center; background-color: #1e6292; width: 100%;"><span style="color: #ffffff;"><strong> ..::: QUICK MENU :::.. <br></strong> </span></td>
+</tr>
+<tr>
+<td style="height: 35px; vertical-align: middle; border-bottom: 1px solid #ffffff; text-align: center; background-color: #468af9; width: 100%;"><span style="color: #ffffff;"><a style="color: #ffffff;" href="http://ojs.kalbis.ac.id/index.php/kalbiscientia/Focus-and-Scope" target="_blank" rel="noopener"><strong>Focus and Scope</strong></a></span></td>
+</tr>
+<tr>
+<td style="height: 35px; vertical-align: middle; border-bottom: 1px solid #ffffff; text-align: center; background-color: #468af9; width: 100%;"><span style="color: #ffffff;"><a style="color: #ffffff;" href="http://ojs.kalbis.ac.id/index.php/kalbiscientia/Peer-Review-Policy" target="_blank" rel="noopener"><strong>Peer Review Policy</strong></a></span></td>
+</tr>
+<tr>
+<td style="height: 35px; vertical-align: middle; border-bottom: 1px solid #ffffff; text-align: center; background-color: #468af9; width: 100%;"><span style="color: #ffffff;"><a style="color: #ffffff;" href="http://ojs.kalbis.ac.id/index.php/kalbiscientia/Open-Access-Statement" target="_blank" rel="noopener"><strong>Open Access Statement</strong></a></span></td>
+</tr>
+<tr>
+<td style="height: 35px; vertical-align: middle; border-bottom: 1px solid #ffffff; text-align: center; background-color: #468af9; width: 100%;"><span style="color: #ffffff;"><a style="color: #ffffff;" href="http://ojs.kalbis.ac.id/index.php/kalbiscientia/Plagiarism-Screening" target="_blank" rel="noopener"><strong>Plagiarism Screening</strong></a></span></td>
+</tr>
+<tr>
+<td style="height: 35px; vertical-align: middle; border-bottom: 1px solid #ffffff; text-align: center; background-color: #468af9; width: 100%;"><span style="color: #ffffff;"><a style="color: #ffffff;" href="http://ojs.kalbis.ac.id/index.php/kalbiscientia/SOP-of-Managemen-in-Manuscript" target="_blank" rel="noopener"><strong>SOP of management in Manuscript</strong></a></span></td>
+</tr>
+<tr>
+<td style="height: 35px; vertical-align: middle; border-bottom: 1px solid #ffffff; text-align: center; background-color: #468af9; width: 100%;"><span style="color: #ffffff;"><a style="color: #ffffff;" href="http://ojs.kalbis.ac.id/index.php/kalbiscientia/Article-Processing-Charge" target="_blank" rel="noopener"><strong>Article Processing Charge (APC)</strong></a></span></td>
+</tr>
+</tbody>
+</table>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-sinta">
+	<h2 class="title pkp_screen_reader">sinta</h2>
+	<div class="content">
+		<p>&nbsp;</p>
+<p><a href="https://sinta.kemdiktisaintek.go.id/journals/profile/10361" target="_blank" rel="noopener"><img src="/public/site/images/ojs-kalbis/sinta-5.jpg" alt="" width="437" height="109"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-sertifikat">
+	<h2 class="title pkp_screen_reader">sertifikat</h2>
+	<div class="content">
+		<p><a href="https://ojs.kalbis.ac.id/public/site/images/ojs-kalbis/Sertifikat_Akreditasi_Sinta_5_Kalbiscientia_BMP.bmp"><img src="/public/site/images/ojs-kalbis/Sertifikat_Akreditasi_Sinta_5_Kalbiscientia_BMP.bmp" alt="" width="48" height="48"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-crossref">
+	<h2 class="title pkp_screen_reader">crossref</h2>
+	<div class="content">
+		<p><a href="https://search.crossref.org/search/works?q=Kalbiscientia&amp;from_ui=yes" target="_blank" rel="noopener"><img src="https://ojs.kalbis.ac.id/public/site/images/ojs-kalbis/crossref.jpg" alt="" width="200" height="68"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-logorji">
+	<h2 class="title pkp_screen_reader">logorji</h2>
+	<div class="content">
+		<p><a href="https://relawanjurnal.id" target="_blank" rel="noopener"><img src="/public/site/images/ojs-kalbis/logo-rji.png" width="755" height="247"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-scholar">
+	<h2 class="title pkp_screen_reader">scholar</h2>
+	<div class="content">
+		<p><a href="https://www.journal-publishing.com/" target="_blank" rel="noopener"> <img src="/public/site/images/ojs-kalbis/GS3.png"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-garuda">
+	<h2 class="title pkp_screen_reader">garuda</h2>
+	<div class="content">
+		<p><a href="https://garuda.kemdiktisaintek.go.id/journal/view/21358"><img src="https://garuda.kemdiktisaintek.go.id/assets/img/garuda1.png" alt="Garuda" width="429" height="100"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-dimensions">
+	<h2 class="title pkp_screen_reader">dimensions</h2>
+	<div class="content">
+		<p><a href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;and_facet_source_title=jour.1424316" target="_blank" rel="noopener"><img src="/public/site/images/ojs-kalbis/LogoDimensions2.png"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-scilit">
+	<h2 class="title pkp_screen_reader">scilit</h2>
+	<div class="content">
+		<p><a href="https://www.scilit.net/publisher/18464" target="_blank" rel="noopener"><img src="/public/site/images/ojs-kalbis/LogoScilit2.png"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_language">
+	<h2 class="title">
+		Language
+	</h2>
+
+	<div class="content">
+		<ul>
+							<li class="locale_en current" lang="en">
+					<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/user/setLocale/en?source=ojs.kalbis.ac.id%2Findex.php%2Fkalbiscientia%2Fen%2Farticle%2Fview%2F4400">
+						English
+					</a>
+				</li>
+							<li class="locale_id" lang="id">
+					<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/user/setLocale/id?source=ojs.kalbis.ac.id%2Findex.php%2Fkalbiscientia%2Fen%2Farticle%2Fview%2F4400">
+						Indonesia
+					</a>
+				</li>
+					</ul>
+	</div>
+</div><!-- .block_language -->
+<div class="pkp_block block_information">
+	<h2 class="title">Information</h2>
+	<div class="content">
+		<ul>
+							<li>
+					<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/information/readers">
+						For Readers
+					</a>
+				</li>
+										<li>
+					<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/information/authors">
+						For Authors
+					</a>
+				</li>
+										<li>
+					<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/information/librarians">
+						For Librarians
+					</a>
+				</li>
+					</ul>
+	</div>
+</div>
+
+			</div><!-- pkp_sidebar.left -->
+			</div><!-- pkp_structure_content -->
+
+<div class="pkp_structure_footer_wrapper" role="contentinfo">
+	<a id="pkp_content_footer"></a>
+
+	<div class="pkp_structure_footer">
+
+					<div class="pkp_footer_content">
+				<p><a title="Web Analytics" href="https://statcounter.com/" target="_blank" rel="noopener"><img src="https://c.statcounter.com/12761625/0/7c1b3d9d/0/" alt="Web Analytics"></a> <a href="https://statcounter.com/p12761625/?guest=1">View My Stats 2</a></p>
+			</div>
+		
+		<div class="pkp_brand_footer">
+			<a href="https://ojs.kalbis.ac.id/index.php/kalbiscientia/en/about/aboutThisPublishingSystem">
+				<img alt="More information about the publishing system, Platform and Workflow by OJS/PKP." src="https://ojs.kalbis.ac.id/templates/images/ojs_brand.png">
+			</a>
+		</div>
+	</div>
+</div><!-- pkp_structure_footer_wrapper -->
+
+</div><!-- pkp_structure_page -->
+
+<script src="https://ojs.kalbis.ac.id/js/build/jquery/jquery.min.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ojs.kalbis.ac.id/js/build/jquery-ui/jquery-ui.min.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ojs.kalbis.ac.id/plugins/themes/default/js/lib/popper/popper.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ojs.kalbis.ac.id/plugins/themes/default/js/lib/bootstrap/util.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ojs.kalbis.ac.id/plugins/themes/default/js/lib/bootstrap/dropdown.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ojs.kalbis.ac.id/plugins/themes/default/js/lib/swiper/swiper-bundle.min.js?v=3.5.0.1" type="text/javascript"></script><script type="text/javascript">var pkpDefaultThemeI18N = {"nextSlide":"Next slide","prevSlide":"Previous slide"}</script><script src="https://ojs.kalbis.ac.id/plugins/themes/default/js/main.js?v=3.5.0.1" type="text/javascript"></script><script type="text/javascript">var pkpUsageStats = pkpUsageStats || {};pkpUsageStats.data = pkpUsageStats.data || {};pkpUsageStats.data.Submission = pkpUsageStats.data.Submission || {};pkpUsageStats.data.Submission[4400] = {"data":{"2025":{"3":"2","4":"21","5":"14","6":"10","7":"12","8":"11","9":"35","10":"23","11":"35","12":"43"},"2026":{"1":"16","2":"29","3":"20","4":"18","5":"36","6":"27","7":"28","8":"35","9":"32","10":"41"}},"label":"All Downloads","color":"79,181,217","total":488};</script><script src="https://ojs.kalbis.ac.id/js/build/chart.js/chart.umd.js?v=3.5.0.1" type="text/javascript"></script><script type="text/javascript">var pkpUsageStats = pkpUsageStats || {};pkpUsageStats.locale = pkpUsageStats.locale || {};pkpUsageStats.locale.months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];pkpUsageStats.config = pkpUsageStats.config || {};pkpUsageStats.config.chartType = "line";</script><script src="https://ojs.kalbis.ac.id/lib/pkp/js/usage-stats-chart.js?v=3.5.0.1" type="text/javascript"></script>
+
+
+</body>
+</html>

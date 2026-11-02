@@ -1,0 +1,70 @@
+{
+  "hash": "805c8db341ffd5f8ffbd4c00bd8853b71f124253a252211d0404ae7847e5206a",
+  "role": "penilai_utama",
+  "person": "B",
+  "answers": {
+    "J03WMX_P1_F73826": {
+      "person": "B",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:14:33.274Z"
+    },
+    "J03WMX_P1_F11238": {
+      "person": "B",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:14:59.348Z"
+    },
+    "J03WOY_P1_F48730": {
+      "person": "B",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:15:06.481Z"
+    },
+    "J03WMX_P1_F72996": {
+      "person": "B",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:15:23.468Z"
+    },
+    "J03WMX_P1_F73879": {
+      "person": "B",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah melakukan defense normal",
+      "utc": "2026-11-02T17:15:42.157Z"
+    },
+    "J03WOH_P2_F103255": {
+      "person": "B",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:15:53.618Z"
+    },
+    "J03WMX_P1_F12133": {
+      "person": "B",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:15:59.623Z"
+    },
+    "J03WMX_P2_F119897": {
+      "person": "B",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:16:11.970Z"
+    },
+    "J03WR9_P1_F16153": {
+      "person": "B",
+      "label": 0,
+      "confidence": 3,
+      "notes": "sedang dalam penguasaan kiper lawan",
+      "utc": "2026-11-02T17:16:31.700Z"
+    }
+  }
+}

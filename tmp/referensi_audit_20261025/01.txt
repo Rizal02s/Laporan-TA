@@ -1,0 +1,421 @@
+PAGE 1
+A Graph Neural Network deep-dive into successful
+counterattacks
+Joris Bekkers 1,2,3 and Amod Sahasrabudhe 1
+1U.S. Soccer Federation
+2PySport
+3UnravelSports
+October 2024
+Abstract
+A counterattack in soccer is a high speed, high intensity direct attack that can occur
+when a team transitions from a defensive state to an attacking state after regaining posses-
+sion of the ball. The aim is to create a goal-scoring opportunity by covering a lot of ground
+with minimal passes before the opposing team can recover their defensive shape. The pur-
+pose of this research is to build gender-specific, first-of-their-kind Graph Neural Networks
+to model the likelihood of a counterattack being successful and uncover what factors make
+them successful in both men’s and women’s professional soccer. These models are trained
+on a total of 20,863 frames of algorithmically identified counterattacking sequences from
+synchronized StatsPerform on-ball event data and SkillCorner spatiotemporal (broadcast)
+tracking data. This dataset is derived from 632 games of MLS (2022), NWSL (2022) and
+international women’s soccer (2020-2022). With this data we demonstrate that gender-
+specific Graph Neural Networks outperform architecturally identical gender-ambiguous
+models in predicting the successful outcome of counterattacks. We show, using Permu-
+tation Feature Importance, that byline to byline speed, angle to the goal, angle to the
+ball and sideline to sideline speed are the node features with the highest impact on model
+performance.
+Additionally, we offer some illustrative examples on how to navigate the infinite solution
+search space to aid in identifying improvements for player decision making.
+This research is accompanied by an open-source repository containing all data and
+Python code hosted on the official U.S. Soccer Federation GitHub. It is also accompanied
+by an open-source Python package, unravelsports, which simplifies converting spatiotem-
+poral data into graphs, and facilitates testing, validation, training, and prediction with
+this data. This should allow the reader to replicate and improve upon our research more
+easily.
+1 Introduction
+Over the past couple of years, the engagement with the women’s game has increased significantly
+compared to years prior. The United States 2-0 victory over the Netherlands in the 2019
+World Cup final became the most watched Women’s World Cup match ever with an increased
+viewership of 56% compared to the 2015 final [ fifa2019]. Live viewers for the 2022 EURO
+increased by more than 50% compared to 2017 and 214% compared to 2013 [ uefa]. The
+1
+arXiv:2411.17450v1  [cs.LG]  26 Nov 2024
+
+PAGE 2
+NWSL reported a 71% increase in viewers for the 2022 Championship final compared to 2021
+[nwsl]. Not only did the women’s game make these great strides forward on engagement, but
+it also did financially. FIFA more than tripled the prize money for the 2019 World Cup to
+$50 million (from $15 million in 2015) [ fifa20192]. In 2022 U.S. Soccer, the USWNTPA and
+the USNSTPA agreed to a collective bargaining agreement that achieved equal pay through
+identical economic terms for both senior national teams [ ussf]. And the creation of more
+women’s national competitions has ensured more women can play professionally.
+This increase in fan engagement and financial opportunity should be followed by an increase
+in data availability and subsequent data analysis to add additional support for the growth of the
+women’s game. Unfortunately, existing research into women’s soccer tactical decision-making
+is still scarce, but researchers have successfully mapped differences between genders in shooting
+tendencies [bransen21, pappalardo, worville] and [ statsbomb2] used women’s event and
+freeze-frame positional data to profile passing in different competitions. To the best of our
+knowledge, no research exists to date that leverages tracking data to analyze differences in
+tactical tendencies between the men’s and women’s game.
+1.1 Research
+This research is the first of its kind to use a full season of women’s and men’s professional soccer
+spatiotemporal broadcast tracking data (synced with on-ball event data). We use this data to
+train gender-specific state-of-the-art binary classification Graph Neural Networks (GNNs) with
+the aim of predicting the successful outcome of counterattacks.
+Counterattacks (or attacking transitions) are an important part of soccer strategy, and they
+play a prominent role in the U.S. Soccer Federation’s internal style of play guide.
+In general, a counterattack in soccer can be defined as a high speed, high intensity direct
+attack that can occur when a team transitions from a defensive state to an attacking state after
+regaining possession of the ball. The aim is to create a goal-scoring opportunity by covering a
+lot of ground with minimal passes before the opposing team can recover their defensive shape
+[osmanbasic].
+As per our algorithm described in Section 2, 7.5% of all shots attempted came from a
+counterattack in the 2022 MLS season. These counterattacking shots lead to 9.7% of goals
+scored. Similarly, in the 2022 NWSL season 6.2% of total shots came from counterattacks.
+These shots lead to 9.5% of all goals scored during that season.
+1.2 Graphs
+Graph Neural Networks rely on graph representations of frames of soccer data to capture the
+relevant information within it. In graph theory, a graph consists of a set of points (nodes)
+linked together by lines (edges). Historically, on-ball event data has been used to analyze
+The Beautiful Game with such graphs by describing team, match and/or season aggregate
+information to represent players as the nodes of the graph and passes as the edges between
+these nodes, because the on-ball event data does not contain information of players off the ball.
+Researchers have used these graph representations of soccer to describe games in the form of
+pass networks [bekkers17, mullenberg], create adjacency matrices of all passes in a team to
+calculate the importance of players in a pass network [clemente15] and flow motifs to identify
+unique playing styles from passing behavior of teams and players [ bekkers19, gyarmati14,
+pena12].
+With the advent of (broadcast) tracking data – consisting of x, y coordinates of all players
+and the ball at 10 or 25 frames per second – it becomes possible to represent individual frames
+2
+
+PAGE 3
+of tracking data with a similar graph representation. In these graphs, the players are still the
+nodes, but the edges now simply describe the relationship between all players on the pitch
+during a particular frame. Figure 1 depicts a schematic, stylized representation of two teams
+(red and blue) connected to all their teammates and to the opposing team through the ball (in
+the center).
+Most contemporary research that leverages neural networks in soccer use a range of different
+image representations of the player and ball coordinates [bauer23, fernandez21, statsperfrom]
+to communicate the information in a frame of soccer data to the neural network, because con-
+ventional convolutional neural networks are built to process images, not graphs. Starting only
+a few years ago, when GNNs started to become more mainstream due to their integration
+within machine learning packages [fey19, grattarola21, hu2020open], did we see researchers
+try their hand at representing on-ball event data [ minogue] and coordinate tracking data
+[friends, stockl21, xenopoulos21] as graphs.
+Figure 1: Schematic stylized graph representation of a single frame of tracking data
+Representing frames of tracking data as graphs allows us to not only incorporate the position
+of the players, but it makes it considerably simpler to add information to each node of the graph
+about a player’s speed, acceleration, distance to goal or even their preferred shoe color if we
+thought that mattered. Similarly, the edge features of the graph contain information on the
+connections between players, such as the inter-player distances or the inter-player angles.
+The ability to add this level of granular detail to the models allows us to manage the issues
+raised in [ statsperfrom] such as incomplete frames and games with less than 22 players on
+the pitch (due to red cards, injuries, or data inconsistencies etc.). Because we do not have
+to convert the set of coordinates to an image (and thereby losing valuable and interpretable
+information), and because we can include more detail into each graph, we can get a better
+understanding of which features have an impact on the model performance.
+2 Methodology
+In this research we build different GNNs on three datasets (a women’s dataset, a men’s dataset,
+and a combined dataset) with the aim of predicting the outcome (successful or unsuccessful)
+of sequences of play considered a counterattack according to a rules-based algorithm. Subse-
+quently, we use the different models built with these datasets to learn more about the differences
+between the men’s and women’s game by calculating the impact each of the individual features
+has on the model accuracy. Finally, we dive more deeply into some example situations to see
+what situationally dependent adjustments players could have made to improve their chances of
+successfully completing a counterattack according to our models.
+3
+
+PAGE 4
+To accomplish this, we use synchronized StatsPerform on-ball event data, and SkillCorner
+broadcast spatiotemporal (10Hz) tracking data of a total of 632 recent games from the National
+Women’s Soccer League, International Women’s Friendlies, SheBelieves Cup, Olympic Women’s
+Tournament and Major League Soccer.
+Due to the nature of broadcast tracking data some players will periodically be out of view of
+the camera. Even though GNNs can deal with different amounts of players in different graphs
+we use SkillCorner’s predicted coordinates for these out-of-view players to be able to have 22
+players in most frames. We ensure the models are built on good quality data by only using
+games that have a SkillCorner player and ball quality ratings of 4 out of 5 or above.
+To build a Graph Neural Network model to predict the successful outcome of counterattacks
+requires us to first identify phases of play that can be labeled as part of a counterattack in
+both the men’s and women’s game. Because [ bauer21] has shown us how manually labeling
+specific situations in soccer can be a time intensive task, we have opted to algorithmically
+identify counterattacks and subsequently label them successful or unsuccessful using a set of
+on-ball event driven rules comprised and verified in collaboration with USWNT and USMNT
+Performance Analysts, and in accordance with the U.S. Soccer Federation’s internal style of
+play guide.
+Though the exact set of rules can be found in the Appendix, it is important to note – due
+to the limited number of goal attempts in our dataset – we consider a successful counterattack
+to end with the attacking team moving the ball in the opposing team’s penalty area, either via
+a successful on-ball run, or by receiving the ball in the box successfully.
+The algorithmic approach yields a set of sequences of on-ball events considered to be a coun-
+terattack. We use this set of sequences to label all individual frames of SkillCorner broadcast
+tracking data as part of a successful counterattack (1) or part of an unsuccessful counterattack
+(0) and we omit all frames not considered part of a counterattack.
+This means that our model only uses individual frames (without timeseries components),
+and each frame is labeled with the future outcome (successful or unsuccessful) of the sequence
+within which it lies.
+In the on-ball event data model VAEP (Valuing Actions by Estimating Probabilities)
+[decroos20] a similar forward-looking labeling technique is used, but instead each on-ball
+action is annotated when a goal is scored or conceded within 10 actions from the current
+action.
+2.1 Model Architecture
+The individual raw tracking data frames are converted into a graph representation to train the
+GNNs with the Python library Spektral [grattarola21]. The graph representation consists of
+individual matrices with node features, edge features and an adjacency matrix for each frame.
+The node features are comprised of normalized player’s coordinates, velocity, angle of motion,
+distance to goal, angle to goal, distance to the ball, angle to the ball and an attacking team
+flag. The edge features consist of inter-player angles (in the form of a sine and cosine value) and
+normalized inter-player distances. Within the adjacency matrix players from the same team are
+connected to each other and every player is connected to the ball node, as shown in Figure 1.
+Figure 2 depicts the GNN model architecture. It contains three CrystalConv layers [ xie18]
+(a method originally built to predict crystalline properties using connections of atoms) to di-
+rectly learn game state properties from the connections between players in each graph, a Global
+Average Pool layer, a Dense layer with ReLu activation, a Dropout layer and ultimately a Sig-
+moid activation function.
+4
+
+PAGE 5
+Figure 2: Graph Neural Network model architecture
+2.2 Dataset
+The GNNs are trained on a balanced training set (consisting of 70% of samples) containing
+50% successful, and 50% unsuccessful counterattacks. One model is trained on only women’s
+data, one on only men’s data and one combined model trained using all men and women’s data.
+Due to the lower number of samples available for the women’s data (due to fewer games), the
+models trained using the women’s data are trained on 100 epochs whereas the other models are
+trained on 200 epochs. Table 1 describes the data used for training these models.
+Women Men Combined
+Competitions NWSL
+Int. Friendlies
+SheBelieves Cup
+Olympics
+MLS NWSL
+Int. Friendlies (W)
+SheBelieves Cup
+Olympics (W)
+MLS
+Games 157 475 632
+Counterattacks 942 3782 4727
+Counterattack frames 3720 17143 20863
+T able 1: Data breakdown
+2.3 Open Source
+In the interest of expanding the research conducted using women’s spatiotemporal data, to give
+others an opportunity to build on top of our models and more importantly to try to improve
+them, we have made both the dataset (in its anonymized graph representation form as used
+in this research), and an interactive Python Jupyter Notebook used to train our models avail-
+able for download on the U.S. Soccer Federation’s Official GitHub page [ussfgh]. Additionally,
+the open-source Python package unravelsports [unravelsports] has been released to aid re-
+searchers in converting spatiotemporal data into Graphs and subsequently training, validating,
+testing and predicting using built-in support for the Spektral package [grattarola21].
+We encourage readers to try to improve our models’ results by including different node and
+5
+
+PAGE 6
+edge features and by trying out different types of adjacency matrices (all of which have been
+included in the downloadable datasets) in addition to examining different model architectures.
+3 Results
+To evaluate our model performance, we compare the gender-specific models to a naive baseline
+model that assumes a 50/50 class split (resulting in a naive Log-Loss of 0.693 and an ROC-AUC
+of 0.50) and we compare it to the model trained on the combined dataset.
+Table 2 shows the Log-Loss and ROC-AUC scores for the naive model, the combined model,
+and the gender-specific models. The lower Log-Loss and the higher ROC-AUC scores for the
+gender-specific models indicate that it pays to train gender-specific models to improve model
+performance, and it can achieve this with a significantly smaller sample size (as shown in
+Table 1).
+The seemingly high Log-Loss for all models can, for the most part, be attributed to the
+predictions made on frames where play is concentrated in the center of the pitch. In this area,
+predictions mostly lie within the 40-60% success range, meaning that we are essentially trying
+to predict the outcome of a coin-flip. With this in mind, we do believe that even though our
+model architecture can most likely be improved, our models already performed well given the
+difficulty of the prediction problem.
+Women Men Combined Naive
+Testing Log Loss 0.48 0.51 0.56 0.69
+ROC-AUC 0.83 0.78 0.76 0.50
+T able 2: Model performance metrics
+3.1 Model Calibration
+Due to the pseudo-probabilistic nature of the predictions, they can only aid in our understanding
+of the game if they are well-calibrated. We can measure the calibration by calculating the
+Expected Calibration Error (ECE). The ECE gives a weighted average over the difference
+between the absolute accuracy and the confidence, calculated per probability bin. The ECE
+values for the men’s and women’s model are 0.15 and 0.18 respectively.
+The Calibration Curves (displayed in Figure 3) represent the distribution of the predicted
+probabilities for the men’s model and women’s model.
+The ECE values and the Calibrations curves clearly indicated that our models are indeed
+well calibrated.
+3.2 Feature Importance
+The increased model performance in both the men and women’s model compared to the com-
+bined model indicates that these gender-specific models must weigh their respective model’s
+features differently to achieve these improved results. We use Permutation Feature Importance
+[altmann] to calculate the feature importance within both gender’s models to uncover where
+these differences lie. Permutation Feature Importance allows us to identify the importance of
+each individual feature by measuring the increase in prediction error when breaking the relation-
+ship between individual features and the observed result through the application of a random
+6
+
+PAGE 7
+Figure 3: CrystalConv model calibration curves
+permutation to the feature’s values. In other words, we use the test set to randomly shuffle the
+values for one feature and recalculate the model error [molnar]. Next, we return those shuffled
+values to their true state and repeat the process for every other feature individually.
+Applying multiple independent random shuffles and calculating the model’s error for each
+individual shuffle allows us to analyze both the average and the spread of the acquired model
+errors for each feature.
+The feature importance is measured by subtracting the AUC obtained after randomly shuf-
+fling the values for a feature from the AUC of the actual model.
+In Figure 4 we show the results of applying this Permutation Feature Importance random
+shuffle to each of the 10 node features 15 times, both for the attacking players (on the left) and
+for the defending players (on the right) for both gender-specific models. Because it is impossible
+to shuffle the edge features without completely breaking the logic of the individual graphs, we
+have left those out of the scope of this feature importance analysis.
+In Figure 4 we see that the x-component of the velocity vector (in other words, the players’
+speed from byline to byline) and the players’ angle to the goal are the two features with the
+highest impact on our model’s performance. The ball angle between each player and the ball,
+the y-component of the velocity vector (sideline to sideline speed) and each player’s distance
+to the ball are also relatively important. Finally, we see how the x and y coordinates, the
+speed and the direction of movement are the least impactful. This can be partially attributed
+to the fact that these values are highly correlated with the distance and angle to the goal, and
+the components of the velocity vector respectively. Finally, notice how the defending team’s
+features are more important to the model’s performance than the attacking players features.
+This could be because, by definition, a counterattack exists solely during a phase of disorganized
+defending.
+4 Application
+The impact of the differences between these gender-specific models on an aggregated node
+feature level is challenging to translate into actionable insights from a figure like Figure 4,
+nor are they easily understood (at this time) by visually inspecting frames and comparing the
+differences to their respective counterattack success probability like in Figure 5. More research
+is needed to translate the information from Figure 4 into actionable insights, and to connect
+that knowledge into a direct understanding of the probabilistic differences between Figure 5.
+The importance of these gender-specific models at the time of writing lies in the opportunity
+to offer a Women’s team’s coaching staff the ability to interact with a model that is trained
+7
+
+PAGE 8
+Figure 4: Attacking and Defending Feature Importance for the Women’s and Men’s models
+specifically on women’s data, because currently most, if not all, models are trained primarily
+on men’s data. It is therefore better suited to offer input for analysis and visual inspection of
+sequences of play relevant to the women’s game.
+4.1 An Infinite Search Space
+The models created for this research can be highly valuable when they are built into an inter-
+active tool such as [ bekkers22]. Tools like this allow coaches, technical staff, analytics staff,
+and players alike to interactively navigate the infinite optimization search space of individual
+frames or even specific sequences of play. This can help them to find small improvements or
+novel solutions for their tactical approaches and their positioning and movement decisions, both
+from an attacking and a defending perspective.
+Figure 6 shows an example of a search for an improved attacking run during a counterattack.
+8
+
+PAGE 9
+(a) The women’s model predicts this
+situation to end in the opponents box 49.5%
+of the time.
+(b) The men’s model predicts this situation
+to end in the opponents box 56.5% of the
+time.
+Figure 5: An example prediction on the same situation using both models.
+The blue team is attacking left to right
+(a) An improved run trajectory for the right
+winger up to 49.2% from 47.4%
+(b) An improved run trajectory for the left
+winger up to 49.4% from 47.4%
+Figure 6: Improved run trajectories for both wingers. The faint arrow represents the original trajectory
+of the player. Pitch control added for visual guidance only
+To offer some additional visual guidance we have reinforced the figure with a Pitch Control
+model [spearman17]. To find this improvement (and the improvements shown in Figure 6b
+7, 8a and 8b) we have changed the highlighted player’s movement direction by increments of
+15° to uncover a potentially improved run trajectory. Finding these improvements in practice
+could be accomplished with a computer-assisted interactive search tool.
+When the right winger’s trajectory in Figure 6a is rotated by 30° to the inside the probability
+of successfully completing this counterattack increases by 1.8 percentage points.
+Using the same frame again in Figure 6b but now rotating the left winger’s trajectory
+outwards by 30° increases the prediction by 2 percentage points. In this case, running away from
+the direction of the defensive player, and running into a channel with more space, increases the
+likelihood of a successful counterattack. Figure 7 shows how both improvements simultaneously
+can help increase the success probability by 3.8 percentage points.
+In the next on-ball action, the right winger has taken control of the ball. The left winger
+can now choose to position more centrally as shown in Figure 8a. This results in the model
+prediction dropping down by 1.4 percentage points, because that run is directed towards a part
+9
+
+PAGE 10
+Figure 7: An improved run trajectory for both the right winger and left winger. Successful
+counterattack probability up to 51.2% from 47.4%. The faint arrow represents the original trajectory of
+the player. Pitch control added for visual guidance only
+(a) A worse run trajectory down to 74.8%
+from 76.2%
+(b) An improved run trajectory up to
+77.6% from 76.2%
+Figure 8: A comparison of run trajectories for the left winger. The faint arrow represents the
+original trajectory of the player. Pitch control added for visual guidance only
+of the pitch which would be dominated by the opposition team.
+On the other hand, a run in the wide channel as depicted in Figure 8b, will lead to the
+highlighted player occupying more open space. This leads to an increase of 1.4 percentage
+points in the probability of successfully completing the counterattack.
+In addition to searching for these run optimizations, these models can be used to evalu-
+ate both player and team performance in counterattacks, to uncover players that help reduce
+their team’s likelihood of conceding a successful counterattack, or player that can improve
+their team’s chance of completing a successful counterattack via their positioning or their run
+selection.
+5 Discussion
+Within this research we have built and open-sourced two gender-specific Graph Neural Network
+models to predict the outcome of counterattacks, leveraging individual frames of spatiotemporal
+tracking data by algorithmically assigning labels to them from on-ball event data.
+In comparison to Expected Possession Value (EPV) models [ fernandez22] build using
+10
+
+PAGE 11
+conventional convolutional neural networks, our GNN models can incorporate more features,
+such as speed and direction of motion. A major difference between this EPV model and our
+models is the use of the penalty area as the target for successfully completing a counterattack.
+We would have preferred to use (expected) goals (or goal attempts) as the successful end-
+product; however, we did not have enough samples to satisfy this preference. This means that,
+for example, the improvements found in Section 4.1 will help us control the ball inside the box,
+but they might also reduce the chance of scoring a goal.
+In contrast to on-ball event data-based models, our implementation allows us to value each
+individual player’s contribution, both on and off the ball, primarily due to the nature of the
+spatiotemporal data. But, contrary to VAEP it does not evaluate the risk of conceding a new
+counterattack for the current attacking team. Our output is simply an assessment of the threat
+going forward, like Expected Threat [ singh].
+Additionally, we need to acknowledge that even though we attempted to reduce the risk
+of over-fitting (especially on the smaller women’s dataset) by reducing the number of epochs
+during training this research certainly lacks a thorough validation of the model performance.
+Furthermore, we need to accept that the use of an on-ball event-based algorithm to identify
+counterattacks is not a perfect solution. However, we feel that manually annotating counter-
+attacks for both genders is perhaps even more prone to introducing biases into the training
+sample.
+To extend this work we would like to conduct more research on the interpretation of the
+feature importances, and how they can be narrowed down further into actionable insights. Sup-
+plementing our approach with a model that predicts the likelihood of a counterattack starting
+given all the players’ positioning, speed and directionality values could help us streamline the
+model’s usage.
+Unfortunately, after finalizing this research we became aware of [ statsbomb]. This Ex-
+pected Goals research conducted by StatsBomb describes a gender-aware approach. In this
+third option – gender-specific and a simple combined setup being the other two – a feature is
+added to their tabular data to indicate the gender of the player taking the shot. Even though
+this seems obvious in hindsight, due to the non-tabular nature of our GNN datasets, it was
+not immediately evident to us to attempt to add such a variable at the time of conducting our
+research. As a result, we suggest future gendered GNN research incorporated a female/male
+variable (as a node features) to uncover if this makes a difference.
+Finally, to facilitate more public research into gendered counterattacking GNNs we have
+released an additional (imbalanced) Graph dataset on GitHub [ ussfgh]. This dataset consists
+of 210,000 frames belonging to counterattacking phases of play split equally between women
+and men. Approximately 5% of frames in this dataset are labeled a success as they belong to
+counterattacks that lead to a goal.
+6 Conclusion
+We have demonstrated that it is possible to build gender-specific Graph Neural Network models
+that outperform gender-ambiguous models in predicting the successful outcome of counterat-
+tacks while relying on a significantly smaller sample size (especially for the Women’s model).
+With the help of Permutation Feature Importance, we have shown that byline to byline speed
+and angle to the goal have the biggest impact on model performance for both genders, in at-
+tack and defense. Using the same technique, we have also uncovered that the defending players’
+node features have more impact on model performance than of their attacking counterparts. To
+better understand these implications, we propose an interactive tool to help navigate the infi-
+nite movement, speed, and positioning search space to aid players and coaching staff in finding
+11
+
+PAGE 12
+small improvements or novel solutions for their tactical approaches and their positioning and
+movement decisions, both from an attacking and a defending perspective. Finally, we challenge
+the reader to improve our model architecture and the choices we have made for the node and
+edge features, by using the models and data provided in the U.S. Soccer Federation GitHub
+repository, and to use the unravelsports package to more easily apply the techniques discussed
+in this paper to bespoke data.
+12

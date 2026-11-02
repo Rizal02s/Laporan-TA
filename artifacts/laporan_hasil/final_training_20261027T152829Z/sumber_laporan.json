@@ -1,0 +1,86 @@
+{
+  "source_run": "final_training_20261027T152829Z",
+  "source_status": "final_training_complete",
+  "seed": 42,
+  "test_episodes": 323,
+  "test_matches": 1,
+  "source_annotation_sha256": "805c8db341ffd5f8ffbd4c00bd8853b71f124253a252211d0404ae7847e5206a",
+  "checks": {
+    "ID episode unik": true,
+    "ID anotasi unik": true,
+    "Pasangan model dan episode unik": true,
+    "Satu pertandingan hanya dalam satu split": true,
+    "Semua split tersedia": true,
+    "Label anotasi biner": true,
+    "Probabilitas valid": true,
+    "Keputusan sesuai threshold tersimpan": true,
+    "Satu threshold tersimpan per model": true,
+    "Label manifest sama dengan anotasi beku": true,
+    "logistic_regression: episode lengkap": true,
+    "logistic_regression: label/split/pertandingan sama": true,
+    "xgboost: episode lengkap": true,
+    "xgboost: label/split/pertandingan sama": true,
+    "temporal_gnn: episode lengkap": true,
+    "temporal_gnn: label/split/pertandingan sama": true,
+    "Ada hash artefak run yang diperiksa": true,
+    "Hash artefak run cocok": true
+  },
+  "checked_source_hashes": [
+    {
+      "file": "frozen_annotations.csv",
+      "cocok": true
+    },
+    {
+      "file": "annotation_audit_summary.csv",
+      "cocok": true
+    },
+    {
+      "file": "annotation_review_queue.csv",
+      "cocok": true
+    },
+    {
+      "file": "baseline\\logistic_regression.joblib",
+      "cocok": true
+    },
+    {
+      "file": "baseline\\xgboost.joblib",
+      "cocok": true
+    },
+    {
+      "file": "temporal_gnn\\temporal_gnn.pt",
+      "cocok": true
+    },
+    {
+      "file": "evaluation\\split_metrics.csv",
+      "cocok": true
+    },
+    {
+      "file": "evaluation\\match_metrics.csv",
+      "cocok": true
+    }
+  ],
+  "metrics_recomputed_match_saved": true,
+  "report_environment": {
+    "python": "3.13.3",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "nbformat": "5.11.1",
+    "nbclient": "0.11.0"
+  },
+  "training_environment": {
+    "python": "3.13.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "torch": "2.12.0+cu130",
+    "torch_geometric": "2.8.0.post1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "scikit_learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "git_commit": "bec29fc185fd2ba40d29c77e7029370812f288a3",
+    "git_dirty": true
+  },
+  "ap_definition": "sklearn.metrics.average_precision_score",
+  "test_threshold_optimization": false
+}

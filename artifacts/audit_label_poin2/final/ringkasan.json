@@ -1,0 +1,15 @@
+{
+  "source_sha256": "805c8db341ffd5f8ffbd4c00bd8853b71f124253a252211d0404ae7847e5206a",
+  "final_sha256": "5b2c545c017c6863203eaff86509652a44c7eebfd7d7f5e2502ce270b0b3ffa4",
+  "n": 1873,
+  "label_counts": {
+    "1": 1595,
+    "0": 278
+  },
+  "n_prioritas": 9,
+  "n_sampel": 70,
+  "n_perbedaan": 21,
+  "kesepakatan_sampel_sebelum_diskusi": 0.7285714285714285,
+  "kappa_sampel_sebelum_diskusi": 0.4571428571428572,
+  "catatan": "Kesepakatan pada sampel berstrata, bukan estimasi prevalensi populasi."
+}

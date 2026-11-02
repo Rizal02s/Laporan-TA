@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en-US" xml:lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>
+		Hyperparameter optimization of graph neural networks for predicting complex network dynamics using bayesian meta-learning
+							| Jurnal Mandiri IT
+			</title>
+
+	
+<link rel="icon" href="https://ejournal.isha.or.id/public/journals/4/favicon_en_US.png">
+<meta name="generator" content="Open Journal Systems 3.3.0.14">
+<meta name="google-site-verification" content="wOPjbWrFXMvf4j1BGPgnfioPTUKvw6FL4MhnkuOUUYE" />
+<meta name="gs_meta_revision" content="1.1"/>
+<meta name="citation_journal_title" content="Jurnal Mandiri IT"/>
+<meta name="citation_journal_abbrev" content="Mandiri"/>
+<meta name="citation_issn" content="2809-1884"/> 
+<meta name="citation_author" content="Hondor Saragih"/>
+<meta name="citation_author_institution" content="Universitas Pertahanan Republik Indonesia, Bogor, Indonesia"/>
+<meta name="citation_author" content="Jonson Manurung"/>
+<meta name="citation_author_institution" content="Universitas Pertahanan Republik Indonesia, Bogor, Indonesia"/>
+<meta name="citation_author" content="Muhammad Azhar Prabukusumo"/>
+<meta name="citation_author_institution" content="Universitas Pertahanan Republik Indonesia, Bogor, Indonesia"/>
+<meta name="citation_author" content="Eryan Ahmad Firdaus"/>
+<meta name="citation_author_institution" content="Universitas Pertahanan Republik Indonesia, Bogor, Indonesia"/>
+<meta name="citation_title" content="Hyperparameter optimization of graph neural networks for predicting complex network dynamics using bayesian meta-learning"/>
+<meta name="citation_language" content="en"/>
+<meta name="citation_date" content="2025/10/28"/>
+<meta name="citation_volume" content="14"/>
+<meta name="citation_issue" content="2"/>
+<meta name="citation_firstpage" content="281"/>
+<meta name="citation_lastpage" content="291"/>
+<meta name="citation_doi" content="10.35335/mandiri.v14i2.469"/>
+<meta name="citation_abstract_html_url" content="https://ejournal.isha.or.id/index.php/Mandiri/article/view/469"/>
+<meta name="citation_keywords" xml:lang="en" content="Bayesian Meta-Learning"/>
+<meta name="citation_keywords" xml:lang="en" content="Graph Neural Network"/>
+<meta name="citation_keywords" xml:lang="en" content=" Hyperparameter Optimization"/>
+<meta name="citation_keywords" xml:lang="en" content="Network Dynamics Prediction"/>
+<meta name="citation_keywords" xml:lang="en" content="Probabilistic Inference"/>
+<meta name="citation_pdf_url" content="https://ejournal.isha.or.id/index.php/Mandiri/article/download/469/469"/>
+<meta name="citation_reference" content="Ahmed, M. J., Mozo, A., &amp; Karamchandani, A. (2025). A survey on graph neural networks, machine learning and deep learning techniques for time series applications in industry. PeerJ Computer Science, 11, e3097."/>
+<meta name="citation_reference" content="Ali, Y. A., Awwad, E. M., Al-Razgan, M., &amp; Maarouf, A. (2023). Hyperparameter Search for Machine Learning Algorithms for Optimizing the Computational Complexity. Processes, 11(2), 349. https://doi.org/10.3390/pr11020349"/>
+<meta name="citation_reference" content="Asif, N. A., Sarker, Y., Chakrabortty, R. K., Ryan, M. J., Ahamed, M. H., Saha, D. K., Badal, F. R., Das, S. K., Ali, M. F., Moyeen, S. I., Islam, M. R., &amp; Tasneem, Z. (2021). Graph Neural Network: A Comprehensive Review on Non-Euclidean Space. IEEE Access, 9, 60588–60606. https://doi.org/10.1109/ACCESS.2021.3071274"/>
+<meta name="citation_reference" content="Bergstra, J., &amp; Bengio, Y. (2012). Random search for hyper-parameter optimization. The Journal of Machine Learning Research, 13(1), 281–305."/>
+<meta name="citation_reference" content="Budihal, S., Kawale, S. R., Junnarkar, A. A., Begam, H. F., &amp; M., G. (2023). A Comparative Study of Machine Learning Models for Heart Disease Prediction. Advances and Challenges in Science and Technology Vol. 2, 8(01), 59–71. https://doi.org/10.9734/bpi/acst/v2/6348c"/>
+<meta name="citation_reference" content="Chen, Q., Bu, S., Wang, H., &amp; Lei, C. (2024). Real-time Multi-stability Risk Assessment and Visualization of Power Systems: A Graph Neural Network-based Method. IEEE Transactions on Power Systems."/>
+<meta name="citation_reference" content="Corradini, F., Gerosa, F., Gori, M., Lucheroni, C., Piangerelli, M., &amp; Zannotti, M. (2025). A Systematic Literature Review of Spatio-Temporal Graph Neural Network Models for Time Series Forecasting and Classification. ArXiv Preprint ArXiv:2410.22377. http://arxiv.org/abs/2410.22377"/>
+<meta name="citation_reference" content="Gad, A. G. (2022). Particle swarm optimization algorithm and its applications: A systematic review. Archives of Computational Methods in Engineering, 29(5)."/>
+<meta name="citation_reference" content="Hasanzadeh, A., Hajiramezanali, E., Boluki, S., Zhou, M., Duffield, N., Narayanan, K., &amp; Qian, X. (2020). Bayesian graph neural networks with adaptive connection sampling. International Conference on Machine Learning, 4094–4104."/>
+<meta name="citation_reference" content="Iqbal, J., Khan, M., Talha, M., Farman, H., Jan, B., Muhammad, A., &amp; Khattak, H. A. (2018). A generic internet of things architecture for controlling electrical energy consumption in smart homes. Sustainable Cities and Society, 43, 443–450. https://doi.org/10.1016/j.scs.2018.09.020"/>
+<meta name="citation_reference" content="Jing, Y. (2023). Efficient representation learning with graph neural networks."/>
+<meta name="citation_reference" content="Liu, J., &amp; Wang, H. (2021). Graph Isomorphism Network for Speech Emotion Recognition. Interspeech, 3405–3409."/>
+<meta name="citation_reference" content="Maldini, A. (2024). Review of Meta-Heuristics Methods for Machine Learning with Graph Neural Network. 1, 1–5."/>
+<meta name="citation_reference" content="Manurung, J., &amp; Saragih, H. (2024). Performance comparison of naive bayes and support vector machine algorithms in spambot classification in emails. International Journal of Basic and Applied Science, 13(3), 137–145. https://doi.org/10.35335/ijobas.v13i3.522"/>
+<meta name="citation_reference" content="Manurung, J., Sihombing, P., Budiman, M. A., &amp; Sawaluddin, S. (2025). Deep learning approaches for analyzing and controlling rumor spread in social networks using graph neural networks. Bulletin of Electrical Engineering and Informatics, 14(1), 581–586."/>
+<meta name="citation_reference" content="Manurung, J., &amp; Sihotang, H. T. (2025). Recurrent neural network for adaptive cyber attack prediction on critical defense systems. Journal of Defense Technology and Engineering, 1(1), 52–64."/>
+<meta name="citation_reference" content="Munikoti, S., Agarwal, D., Das, L., Halappanavar, M., &amp; Natarajan, B. (2024). Challenges and Opportunities in Deep Reinforcement Learning With Graph Neural Networks: A Comprehensive Review of Algorithms and Applications. IEEE Transactions on Neural Networks and Learning Systems, 35(11), 15051–15071. https://doi.org/10.1109/TNNLS.2023.3283523"/>
+<meta name="citation_reference" content="Oladele Junior Adeyeye, &amp; Ibrahim Akanbi. (2024). Artificial Intelligence for Systems Engineering Complexity: a Review on the Use of Ai and Machine Learning Algorithms. Computer Science &amp; IT Research Journal, 5(4), 787–808. https://doi.org/10.51594/csitrj.v5i4.1026"/>
+<meta name="citation_reference" content="Ponzi, V., &amp; Napoli, C. (2025). Graph Neural Networks: Architectures, Applications, and Future Directions. IEEE Access, 13, 62870–62891. https://doi.org/10.1109/ACCESS.2025.3558752"/>
+<meta name="citation_reference" content="Rane, N., Paramesha, M., Choudhary, S., &amp; Rane, J. (2024). Artificial Intelligence, Machine Learning, and Deep Learning for Advanced Business Strategies: a Review. SSRN Electronic Journal, 2(3), 147–171. https://doi.org/10.2139/ssrn.4835661"/>
+<meta name="citation_reference" content="Sarkar, D., Roy, S., Malakar, S., &amp; Sarkar, R. (2023). A modified GNN architecture with enhanced aggregator and message passing functions. Engineering Applications of Artificial Intelligence, 122, 106077."/>
+<meta name="citation_reference" content="Sharma, K., Lee, Y. C., Nambi, S., Salian, A., Shah, S., Kim, S. W., &amp; Kumar, S. (2024). A Survey of Graph Neural Networks for Social Recommender Systems. ACM Computing Surveys, 56(10), 1–34. https://doi.org/10.1145/3661821"/>
+<meta name="citation_reference" content="Tahkola, M. (2019). Developing dynamic machine learning surrogate models of physics-based industrial process simulation models. M. Tahkola."/>
+<meta name="citation_reference" content="Vincent, A. M., Jidesh, P., &amp; Bini, A. A. (2025). Optimizing Hyperparameters in Meta-Learning for Enhanced Image Classification. IEEE Access, 13, 130816–130831. https://doi.org/10.1109/ACCESS.2025.3591142"/>
+<meta name="citation_reference" content="Vrahatis, A. G., Lazaros, K., &amp; Kotsiantis, S. (2024). Graph attention networks: a comprehensive review of methods and applications. Future Internet, 16(9), 318."/>
+<meta name="citation_reference" content="Waikhom, L., &amp; Patgiri, R. (2023). A survey of graph neural networks in various learning paradigms: methods, applications, and challenges. Artificial Intelligence Review, 56(7), 6295–6364. https://doi.org/10.1007/s10462-022-10321-2"/>
+<meta name="citation_reference" content="Yang, L., Chatelain, C., &amp; Adam, S. (2024). Dynamic graph representation learning with neural networks: A survey. Ieee Access, 12, 43460–43484."/>
+<meta name="citation_reference" content="Yuan, Y., Wang, W., &amp; Pang, W. (2021). A Genetic Algorithm with Tree-structured Mutation for Hyperparameter Optimisation of Graph Neural Networks. 2021 IEEE Congress on Evolutionary Computation, CEC 2021 - Proceedings, 482–489. https://doi.org/10.1109/CEC45853.2021.9504717"/>
+<meta name="citation_reference" content="Zhou, J., Liu, L., Wei, W., &amp; Fan, J. (2023). Network Representation Learning: From Preprocessing, Feature Extraction to Node Embedding. ACM Computing Surveys, 55(2), 1–35. https://doi.org/10.1145/3491206"/>
+<meta name="citation_reference" content="Zhou, Y. (2025). Meta-Learned Dynamic Distillation for Automated Hyperparameter Optimization in Machine Learning Systems. Journal of Engineering Systems and Applications, 1(1), 8–18. https://doi.org/10.63802/jesa.v1.i1.33"/>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Creator.PersonalName" content="Hondor Saragih"/>
+<meta name="DC.Creator.PersonalName" content="Jonson Manurung"/>
+<meta name="DC.Creator.PersonalName" content="Muhammad Azhar Prabukusumo"/>
+<meta name="DC.Creator.PersonalName" content="Eryan Ahmad Firdaus"/>
+<meta name="DC.Date.created" scheme="ISO8601" content="2025-10-28"/>
+<meta name="DC.Date.dateSubmitted" scheme="ISO8601" content="2025-10-17"/>
+<meta name="DC.Date.issued" scheme="ISO8601" content="2025-10-30"/>
+<meta name="DC.Date.modified" scheme="ISO8601" content="2025-10-30"/>
+<meta name="DC.Description" xml:lang="en" content="The rapid growth of graph-structured data in domains such as transportation, social networks, and biological systems has increased the demand for more adaptive and efficient Graph Neural Network (GNN) architectures. However, GNN performance remains highly sensitive to hyperparameter configurations, which are often tuned through computationally expensive manual or heuristic methods. This study proposes a novel Bayesian Meta-Learning (BML)-based framework for hyperparameter optimization of GNNs aimed at improving the prediction accuracy of complex network dynamics. The framework integrates Bayesian optimization with a meta-learning prior adaptation mechanism, enabling the model to learn optimal hyperparameter distributions across multiple graph tasks. Experimental evaluations conducted on three benchmark datasets—Cora, Citeseer, and PubMed—comprising up to 20,000 nodes with diverse structural complexities, demonstrate that the proposed BML-GNN framework achieves faster convergence, lower validation loss, and higher predictive accuracy than both baseline GNN and traditional Bayesian Optimization approaches. Quantitatively, the BML-GNN model attains an R² score exceeding 0.97 with a significant reduction in RMSE, confirming its strong generalization capability. Although the method shows notable performance improvements, its computational overhead during meta-training and reliance on well-defined prior distributions represent potential limitations. Overall, the integration of Bayesian Meta-Learning provides a robust, scalable, and uncertainty-aware optimization strategy that advances the development of reliable GNN models for complex network modeling and intelligent system design."/>
+<meta name="DC.Format" scheme="IMT" content="application/pdf"/>
+<meta name="DC.Identifier" content="469"/>
+<meta name="DC.Identifier.pageNumber" content="281-291"/>
+<meta name="DC.Identifier.DOI" content="10.35335/mandiri.v14i2.469"/>
+<meta name="DC.Identifier.URI" content="https://ejournal.isha.or.id/index.php/Mandiri/article/view/469"/>
+<meta name="DC.Language" scheme="ISO639-1" content="en"/>
+<meta name="DC.Rights" content="Copyright (c) 2025 Hondor Saragih, Jonson Manurung, Muhammad Azhar Prabukusumo, Eryan Ahmad Firdaus"/>
+<meta name="DC.Rights" content="https://creativecommons.org/licenses/by-nc/4.0"/>
+<meta name="DC.Source" content="Jurnal Mandiri IT"/>
+<meta name="DC.Source.ISSN" content="2809-1884"/>
+<meta name="DC.Source.Issue" content="2"/>
+<meta name="DC.Source.Volume" content="14"/>
+<meta name="DC.Source.URI" content="https://ejournal.isha.or.id/index.php/Mandiri"/>
+<meta name="DC.Subject" xml:lang="en" content="Bayesian Meta-Learning"/>
+<meta name="DC.Subject" xml:lang="en" content="Graph Neural Network"/>
+<meta name="DC.Subject" xml:lang="en" content=" Hyperparameter Optimization"/>
+<meta name="DC.Subject" xml:lang="en" content="Network Dynamics Prediction"/>
+<meta name="DC.Subject" xml:lang="en" content="Probabilistic Inference"/>
+<meta name="DC.Title" content="Hyperparameter optimization of graph neural networks for predicting complex network dynamics using bayesian meta-learning"/>
+<meta name="DC.Type" content="Text.Serial.Journal"/>
+<meta name="DC.Type.articleType" content="Articles"/>
+	<link rel="stylesheet" href="https://ejournal.isha.or.id/index.php/Mandiri/$$$call$$$/page/page/css?name=stylesheet" type="text/css" /><link rel="stylesheet" href="https://ejournal.isha.or.id/index.php/Mandiri/$$$call$$$/page/page/css?name=font" type="text/css" /><link rel="stylesheet" href="https://ejournal.isha.or.id/lib/pkp/styles/fontawesome/fontawesome.css?v=3.3.0.14" type="text/css" /><link rel="stylesheet" href="https://ejournal.isha.or.id/public/journals/4/styleSheet?d=2025-03-23+05%3A03%3A12" type="text/css" />
+</head>
+<body class="pkp_page_article pkp_op_view has_site_logo" dir="ltr">
+
+	<div class="pkp_structure_page">
+
+				<header class="pkp_structure_head" id="headerNavigationContainer" role="banner">
+						 <nav class="cmp_skip_to_content" aria-label="Jump to content links">
+	<a href="#pkp_content_main">Skip to main content</a>
+	<a href="#siteNav">Skip to main navigation menu</a>
+		<a href="#pkp_content_footer">Skip to site footer</a>
+</nav>
+
+			<div class="pkp_head_wrapper">
+
+				<div class="pkp_site_name_wrapper">
+					<button class="pkp_site_nav_toggle">
+						<span>Open Menu</span>
+					</button>
+										<div class="pkp_site_name">
+																<a href="						https://ejournal.isha.or.id/index.php/Mandiri/index
+					" class="is_img">
+							<img src="https://ejournal.isha.or.id/public/journals/4/pageHeaderLogoImage_en_US.png" width="2908" height="354" alt="logo" />
+						</a>
+										</div>
+				</div>
+
+				
+				<nav class="pkp_site_nav_menu" aria-label="Site Navigation">
+					<a id="siteNav"></a>
+					<div class="pkp_navigation_primary_row">
+						<div class="pkp_navigation_primary_wrapper">
+																				<ul id="navigationPrimary" class="pkp_navigation_primary pkp_nav_list">
+								<li class="">
+				<a href="http://ejournal.isha.or.id/index.php/Mandiri/index">
+					Home
+				</a>
+							</li>
+								<li class="">
+				<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/current">
+					Current
+				</a>
+							</li>
+								<li class="">
+				<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/archive">
+					Archives
+				</a>
+							</li>
+															<li class="">
+				<a href="https://ejournal.isha.or.id/index.php/Mandiri/about">
+					About
+				</a>
+									<ul>
+																					<li class="">
+									<a href="https://ejournal.isha.or.id/index.php/Mandiri/about">
+										About the Journal
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ejournal.isha.or.id/index.php/Mandiri/about/submissions">
+										Submissions
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ejournal.isha.or.id/index.php/Mandiri/about/editorialTeam">
+										Editorial Team
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ejournal.isha.or.id/index.php/Mandiri/about/privacy">
+										Privacy Statement
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ejournal.isha.or.id/index.php/Mandiri/about/contact">
+										Contact
+									</a>
+								</li>
+																		</ul>
+							</li>
+			</ul>
+
+				
+
+																						<div class="pkp_navigation_search_wrapper">
+									<a href="https://ejournal.isha.or.id/index.php/Mandiri/search" class="pkp_search pkp_search_desktop">
+										<span class="fa fa-search" aria-hidden="true"></span>
+										Search
+									</a>
+								</div>
+													</div>
+					</div>
+					<div class="pkp_navigation_user_wrapper" id="navigationUserWrapper">
+							<ul id="navigationUser" class="pkp_navigation_user pkp_nav_list">
+								<li class="profile">
+				<a href="https://ejournal.isha.or.id/index.php/Mandiri/user/register">
+					Register
+				</a>
+							</li>
+								<li class="profile">
+				<a href="https://ejournal.isha.or.id/index.php/Mandiri/login">
+					Login
+				</a>
+							</li>
+										</ul>
+
+					</div>
+				</nav>
+			</div><!-- .pkp_head_wrapper -->
+		</header><!-- .pkp_structure_head -->
+
+						<div class="pkp_structure_content has_sidebar">
+			<div class="pkp_structure_main" role="main">
+				<a id="pkp_content_main"></a>
+
+<div class="page page_article">
+			<nav class="cmp_breadcrumbs" role="navigation" aria-label="You are here:">
+	<ol>
+		<li>
+			<a href="https://ejournal.isha.or.id/index.php/Mandiri/index">
+				Home
+			</a>
+			<span class="separator">/</span>
+		</li>
+		<li>
+			<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/archive">
+				Archives
+			</a>
+			<span class="separator">/</span>
+		</li>
+					<li>
+				<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/50">
+					Vol. 14 No. 2 (2025): October: Computer Science and Field
+				</a>
+				<span class="separator">/</span>
+			</li>
+				<li class="current" aria-current="page">
+			<span aria-current="page">
+									Articles
+							</span>
+		</li>
+	</ol>
+</nav>
+	
+		  	 <article class="obj_article_details">
+
+		
+	<h1 class="page_title">
+		Hyperparameter optimization of graph neural networks for predicting complex network dynamics using bayesian meta-learning
+	</h1>
+
+	
+	<div class="row">
+		<div class="main_entry">
+
+							<section class="item authors">
+					<h2 class="pkp_screen_reader">Authors</h2>
+					<ul class="authors">
+											<li>
+							<span class="name">
+								Hondor Saragih
+							</span>
+															<span class="affiliation">
+									Universitas Pertahanan Republik Indonesia, Bogor, Indonesia
+																	</span>
+																				</li>
+											<li>
+							<span class="name">
+								Jonson Manurung
+							</span>
+															<span class="affiliation">
+									Universitas Pertahanan Republik Indonesia, Bogor, Indonesia
+																	</span>
+																				</li>
+											<li>
+							<span class="name">
+								Muhammad Azhar Prabukusumo
+							</span>
+															<span class="affiliation">
+									Universitas Pertahanan Republik Indonesia, Bogor, Indonesia
+																	</span>
+																				</li>
+											<li>
+							<span class="name">
+								Eryan Ahmad Firdaus
+							</span>
+															<span class="affiliation">
+									Universitas Pertahanan Republik Indonesia, Bogor, Indonesia
+																	</span>
+																				</li>
+										</ul>
+				</section>
+			
+																												<section class="item doi">
+						<h2 class="label">
+														DOI:
+						</h2>
+						<span class="value">
+							<a href="https://doi.org/10.35335/mandiri.v14i2.469">
+								https://doi.org/10.35335/mandiri.v14i2.469
+							</a>
+						</span>
+					</section>
+							
+									<section class="item keywords">
+				<h2 class="label">
+										Keywords:
+				</h2>
+				<span class="value">
+											Bayesian Meta-Learning, 											Graph Neural Network, 											 Hyperparameter Optimization, 											Network Dynamics Prediction, 											Probabilistic Inference									</span>
+			</section>
+			
+										<section class="item abstract">
+					<h2 class="label">Abstract</h2>
+					<p>The rapid growth of graph-structured data in domains such as transportation, social networks, and biological systems has increased the demand for more adaptive and efficient Graph Neural Network (GNN) architectures. However, GNN performance remains highly sensitive to hyperparameter configurations, which are often tuned through computationally expensive manual or heuristic methods. This study proposes a novel Bayesian Meta-Learning (BML)-based framework for hyperparameter optimization of GNNs aimed at improving the prediction accuracy of complex network dynamics. The framework integrates Bayesian optimization with a meta-learning prior adaptation mechanism, enabling the model to learn optimal hyperparameter distributions across multiple graph tasks. Experimental evaluations conducted on three benchmark datasets—Cora, Citeseer, and PubMed—comprising up to 20,000 nodes with diverse structural complexities, demonstrate that the proposed BML-GNN framework achieves faster convergence, lower validation loss, and higher predictive accuracy than both baseline GNN and traditional Bayesian Optimization approaches. Quantitatively, the BML-GNN model attains an R² score exceeding 0.97 with a significant reduction in RMSE, confirming its strong generalization capability. Although the method shows notable performance improvements, its computational overhead during meta-training and reliance on well-defined prior distributions represent potential limitations. Overall, the integration of Bayesian Meta-Learning provides a robust, scalable, and uncertainty-aware optimization strategy that advances the development of reliable GNN models for complex network modeling and intelligent system design.</p>
+				</section>
+			
+			
+
+																																								
+										<section class="item references">
+					<h2 class="label">
+						References
+					</h2>
+					<div class="value">
+																					<p>Ahmed, M. J., Mozo, A., &amp; Karamchandani, A. (2025). A survey on graph neural networks, machine learning and deep learning techniques for time series applications in industry. PeerJ Computer Science, 11, e3097. </p>
+															<p>Ali, Y. A., Awwad, E. M., Al-Razgan, M., &amp; Maarouf, A. (2023). Hyperparameter Search for Machine Learning Algorithms for Optimizing the Computational Complexity. Processes, 11(2), 349. <a href="https://doi.org/10.3390/pr11020349">https://doi.org/10.3390/pr11020349</a> </p>
+															<p>Asif, N. A., Sarker, Y., Chakrabortty, R. K., Ryan, M. J., Ahamed, M. H., Saha, D. K., Badal, F. R., Das, S. K., Ali, M. F., Moyeen, S. I., Islam, M. R., &amp; Tasneem, Z. (2021). Graph Neural Network: A Comprehensive Review on Non-Euclidean Space. IEEE Access, 9, 60588–60606. <a href="https://doi.org/10.1109/ACCESS.2021.3071274">https://doi.org/10.1109/ACCESS.2021.3071274</a> </p>
+															<p>Bergstra, J., &amp; Bengio, Y. (2012). Random search for hyper-parameter optimization. The Journal of Machine Learning Research, 13(1), 281–305. </p>
+															<p>Budihal, S., Kawale, S. R., Junnarkar, A. A., Begam, H. F., &amp; M., G. (2023). A Comparative Study of Machine Learning Models for Heart Disease Prediction. Advances and Challenges in Science and Technology Vol. 2, 8(01), 59–71. <a href="https://doi.org/10.9734/bpi/acst/v2/6348c">https://doi.org/10.9734/bpi/acst/v2/6348c</a> </p>
+															<p>Chen, Q., Bu, S., Wang, H., &amp; Lei, C. (2024). Real-time Multi-stability Risk Assessment and Visualization of Power Systems: A Graph Neural Network-based Method. IEEE Transactions on Power Systems. </p>
+															<p>Corradini, F., Gerosa, F., Gori, M., Lucheroni, C., Piangerelli, M., &amp; Zannotti, M. (2025). A Systematic Literature Review of Spatio-Temporal Graph Neural Network Models for Time Series Forecasting and Classification. ArXiv Preprint ArXiv:2410.22377. <a href="http://arxiv.org/abs/2410.22377">http://arxiv.org/abs/2410.22377</a> </p>
+															<p>Gad, A. G. (2022). Particle swarm optimization algorithm and its applications: A systematic review. Archives of Computational Methods in Engineering, 29(5). </p>
+															<p>Hasanzadeh, A., Hajiramezanali, E., Boluki, S., Zhou, M., Duffield, N., Narayanan, K., &amp; Qian, X. (2020). Bayesian graph neural networks with adaptive connection sampling. International Conference on Machine Learning, 4094–4104. </p>
+															<p>Iqbal, J., Khan, M., Talha, M., Farman, H., Jan, B., Muhammad, A., &amp; Khattak, H. A. (2018). A generic internet of things architecture for controlling electrical energy consumption in smart homes. Sustainable Cities and Society, 43, 443–450. <a href="https://doi.org/10.1016/j.scs.2018.09.020">https://doi.org/10.1016/j.scs.2018.09.020</a> </p>
+															<p>Jing, Y. (2023). Efficient representation learning with graph neural networks. </p>
+															<p>Liu, J., &amp; Wang, H. (2021). Graph Isomorphism Network for Speech Emotion Recognition. Interspeech, 3405–3409. </p>
+															<p>Maldini, A. (2024). Review of Meta-Heuristics Methods for Machine Learning with Graph Neural Network. 1, 1–5. </p>
+															<p>Manurung, J., &amp; Saragih, H. (2024). Performance comparison of naive bayes and support vector machine algorithms in spambot classification in emails. International Journal of Basic and Applied Science, 13(3), 137–145. <a href="https://doi.org/10.35335/ijobas.v13i3.522">https://doi.org/10.35335/ijobas.v13i3.522</a> </p>
+															<p>Manurung, J., Sihombing, P., Budiman, M. A., &amp; Sawaluddin, S. (2025). Deep learning approaches for analyzing and controlling rumor spread in social networks using graph neural networks. Bulletin of Electrical Engineering and Informatics, 14(1), 581–586. </p>
+															<p>Manurung, J., &amp; Sihotang, H. T. (2025). Recurrent neural network for adaptive cyber attack prediction on critical defense systems. Journal of Defense Technology and Engineering, 1(1), 52–64. </p>
+															<p>Munikoti, S., Agarwal, D., Das, L., Halappanavar, M., &amp; Natarajan, B. (2024). Challenges and Opportunities in Deep Reinforcement Learning With Graph Neural Networks: A Comprehensive Review of Algorithms and Applications. IEEE Transactions on Neural Networks and Learning Systems, 35(11), 15051–15071. <a href="https://doi.org/10.1109/TNNLS.2023.3283523">https://doi.org/10.1109/TNNLS.2023.3283523</a> </p>
+															<p>Oladele Junior Adeyeye, &amp; Ibrahim Akanbi. (2024). Artificial Intelligence for Systems Engineering Complexity: a Review on the Use of Ai and Machine Learning Algorithms. Computer Science &amp; IT Research Journal, 5(4), 787–808. <a href="https://doi.org/10.51594/csitrj.v5i4.1026">https://doi.org/10.51594/csitrj.v5i4.1026</a> </p>
+															<p>Ponzi, V., &amp; Napoli, C. (2025). Graph Neural Networks: Architectures, Applications, and Future Directions. IEEE Access, 13, 62870–62891. <a href="https://doi.org/10.1109/ACCESS.2025.3558752">https://doi.org/10.1109/ACCESS.2025.3558752</a> </p>
+															<p>Rane, N., Paramesha, M., Choudhary, S., &amp; Rane, J. (2024). Artificial Intelligence, Machine Learning, and Deep Learning for Advanced Business Strategies: a Review. SSRN Electronic Journal, 2(3), 147–171. <a href="https://doi.org/10.2139/ssrn.4835661">https://doi.org/10.2139/ssrn.4835661</a> </p>
+															<p>Sarkar, D., Roy, S., Malakar, S., &amp; Sarkar, R. (2023). A modified GNN architecture with enhanced aggregator and message passing functions. Engineering Applications of Artificial Intelligence, 122, 106077. </p>
+															<p>Sharma, K., Lee, Y. C., Nambi, S., Salian, A., Shah, S., Kim, S. W., &amp; Kumar, S. (2024). A Survey of Graph Neural Networks for Social Recommender Systems. ACM Computing Surveys, 56(10), 1–34. <a href="https://doi.org/10.1145/3661821">https://doi.org/10.1145/3661821</a> </p>
+															<p>Tahkola, M. (2019). Developing dynamic machine learning surrogate models of physics-based industrial process simulation models. M. Tahkola. </p>
+															<p>Vincent, A. M., Jidesh, P., &amp; Bini, A. A. (2025). Optimizing Hyperparameters in Meta-Learning for Enhanced Image Classification. IEEE Access, 13, 130816–130831. <a href="https://doi.org/10.1109/ACCESS.2025.3591142">https://doi.org/10.1109/ACCESS.2025.3591142</a> </p>
+															<p>Vrahatis, A. G., Lazaros, K., &amp; Kotsiantis, S. (2024). Graph attention networks: a comprehensive review of methods and applications. Future Internet, 16(9), 318. </p>
+															<p>Waikhom, L., &amp; Patgiri, R. (2023). A survey of graph neural networks in various learning paradigms: methods, applications, and challenges. Artificial Intelligence Review, 56(7), 6295–6364. <a href="https://doi.org/10.1007/s10462-022-10321-2">https://doi.org/10.1007/s10462-022-10321-2</a> </p>
+															<p>Yang, L., Chatelain, C., &amp; Adam, S. (2024). Dynamic graph representation learning with neural networks: A survey. Ieee Access, 12, 43460–43484. </p>
+															<p>Yuan, Y., Wang, W., &amp; Pang, W. (2021). A Genetic Algorithm with Tree-structured Mutation for Hyperparameter Optimisation of Graph Neural Networks. 2021 IEEE Congress on Evolutionary Computation, CEC 2021 - Proceedings, 482–489. <a href="https://doi.org/10.1109/CEC45853.2021.9504717">https://doi.org/10.1109/CEC45853.2021.9504717</a> </p>
+															<p>Zhou, J., Liu, L., Wei, W., &amp; Fan, J. (2023). Network Representation Learning: From Preprocessing, Feature Extraction to Node Embedding. ACM Computing Surveys, 55(2), 1–35. <a href="https://doi.org/10.1145/3491206">https://doi.org/10.1145/3491206</a> </p>
+															<p>Zhou, Y. (2025). Meta-Learned Dynamic Distillation for Automated Hyperparameter Optimization in Machine Learning Systems. Journal of Engineering Systems and Applications, 1(1), 8–18. <a href="https://doi.org/10.63802/jesa.v1.i1.33">https://doi.org/10.63802/jesa.v1.i1.33</a> </p>
+																		</div>
+				</section>
+			
+		</div><!-- .main_entry -->
+
+		<div class="entry_details">
+
+										<div class="item cover_image">
+					<div class="sub_item">
+													<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/50">
+								<img src="https://ejournal.isha.or.id/public/journals/4/cover_issue_50_en_US.jpg" alt="">
+							</a>
+											</div>
+				</div>
+			
+										<div class="item galleys">
+					<h2 class="pkp_screen_reader">
+						Downloads
+					</h2>
+					<ul class="value galleys_links">
+													<li>
+								
+	
+							
+
+<a class="obj_galley_link pdf" href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/469/469">
+
+		
+	PDF
+
+	</a>
+							</li>
+											</ul>
+				</div>
+						
+						<div class="item published">
+				<section class="sub_item">
+					<h2 class="label">
+						Published
+					</h2>
+					<div class="value">
+																			<span>2025-10-28</span>
+																	</div>
+				</section>
+							</div>
+			
+										<div class="item citation">
+					<section class="sub_item citation_display">
+						<h2 class="label">
+							How to Cite
+						</h2>
+						<div class="value">
+							<div id="citationOutput" role="region" aria-live="polite">
+								<div class="csl-bib-body">
+  <div class="csl-entry">Saragih, H., Manurung, J., Prabukusumo, M. A., &#38; Firdaus, E. A. (2025). Hyperparameter optimization of graph neural networks for predicting complex network dynamics using bayesian meta-learning. <i>Jurnal Mandiri IT</i>, <i>14</i>(2), 281–291. https://doi.org/10.35335/mandiri.v14i2.469</div>
+</div>
+							</div>
+							<div class="citation_formats">
+								<button class="cmp_button citation_formats_button" aria-controls="cslCitationFormats" aria-expanded="false" data-csl-dropdown="true">
+									More Citation Formats
+								</button>
+								<div id="cslCitationFormats" class="citation_formats_list" aria-hidden="true">
+									<ul class="citation_formats_styles">
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/acm-sig-proceedings?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/acm-sig-proceedings?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													ACM
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/acs-nano?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/acs-nano?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													ACS
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/apa?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/apa?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													APA
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/associacao-brasileira-de-normas-tecnicas?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/associacao-brasileira-de-normas-tecnicas?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													ABNT
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/chicago-author-date?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/chicago-author-date?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													Chicago
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/harvard-cite-them-right?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/harvard-cite-them-right?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													Harvard
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/ieee?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/ieee?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													IEEE
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/modern-language-association?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/modern-language-association?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													MLA
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/turabian-fullnote-bibliography?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/turabian-fullnote-bibliography?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													Turabian
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/vancouver?submissionId=469&amp;publicationId=469"
+													data-load-citation
+													data-json-href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/get/vancouver?submissionId=469&amp;publicationId=469&amp;return=json"
+												>
+													Vancouver
+												</a>
+											</li>
+																			</ul>
+																			<div class="label">
+											Download Citation
+										</div>
+										<ul class="citation_formats_styles">
+																							<li>
+													<a href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/download/ris?submissionId=469&amp;publicationId=469">
+														<span class="fa fa-download"></span>
+														Endnote/Zotero/Mendeley (RIS)
+													</a>
+												</li>
+																							<li>
+													<a href="https://ejournal.isha.or.id/index.php/Mandiri/citationstylelanguage/download/bibtex?submissionId=469&amp;publicationId=469">
+														<span class="fa fa-download"></span>
+														BibTeX
+													</a>
+												</li>
+																					</ul>
+																	</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			
+										<div class="item issue">
+
+											<section class="sub_item">
+							<h2 class="label">
+								Issue
+							</h2>
+							<div class="value">
+								<a class="title" href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/50">
+									Vol. 14 No. 2 (2025): October: Computer Science and Field
+								</a>
+							</div>
+						</section>
+					
+											<section class="sub_item">
+							<h2 class="label">
+								Section
+							</h2>
+							<div class="value">
+								Articles
+							</div>
+						</section>
+					
+									</div>
+			
+															
+										<div class="item copyright">
+					<h2 class="label">
+						License
+					</h2>
+																										<p>Copyright (c) 2025 Hondor Saragih, Jonson Manurung, Muhammad Azhar Prabukusumo, Eryan Ahmad Firdaus</p>
+														<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" src="//i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><p>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.</p>
+																
+				</div>
+			
+			
+
+		</div><!-- .entry_details -->
+	</div><!-- .row -->
+
+</article>
+
+	<div id="articlesBySameAuthorList">
+						<h3>Most read articles by the same author(s)</h3>
+
+			<ul>
+																													<li>
+													Eryan Ahmad Firdaus,
+													Jonson Manurung,
+													Hondor Saragih,
+													Muhammad Azhar Prabukusumo,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/468">
+							Optimization of XGBoost hyperparameters using grid search and random search for credit card default prediction
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/50">
+							Jurnal Mandiri IT: Vol. 14 No. 2 (2025): October: Computer Science and Field
+						</a>
+					</li>
+																													<li>
+													Jonson Manurung,
+													Hondor Saragih,
+													Muhammad Azhar Prabukusumo,
+													Eryan Ahmad Firdaus,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/466">
+							Optimizing the performance of the K-Nearest Neighbors algorithm using grid search and feature scaling to improve data classification accuracy
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/50">
+							Jurnal Mandiri IT: Vol. 14 No. 2 (2025): October: Computer Science and Field
+						</a>
+					</li>
+																													<li>
+													Dicky Daniel Simarmata,
+													Ajeng Hidayati ,
+													Hondor Saragih,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/402">
+							Evaluation of free nutritious food program distribution in Tanah Sareal sub-district with ANOVA
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/46">
+							Jurnal Mandiri IT: Vol. 14 No. 1 (2025): July: Computer Science and Field.
+						</a>
+					</li>
+																													<li>
+													Firdaus Laia,
+													Ferdinand Tharorogo Wau,
+													Jonson Manurung,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/401">
+							Optimization of quicksort algorithm for real-time data processing in IoT systems with random pivot division and tail recursion
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/46">
+							Jurnal Mandiri IT: Vol. 14 No. 1 (2025): July: Computer Science and Field.
+						</a>
+					</li>
+																													<li>
+													Evi Rianto,
+													Jonson  Manurung,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/95">
+							Total Prediction Decision Support System Bakery and Cake Production Using Mamdani Fuzzy Method
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/20">
+							Jurnal Mandiri IT: Vol. 10 No. 2 (2022): January: Computer Science and Field.
+						</a>
+					</li>
+																													<li>
+													Ananda Friska Utami,
+													Jonson  Manurung,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/96">
+							Expert System To Diagnose Beengal Cat Disease With Case Based Reasoning Method
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/20">
+							Jurnal Mandiri IT: Vol. 10 No. 2 (2022): January: Computer Science and Field.
+						</a>
+					</li>
+																													<li>
+													Johan Adrian Sitanggang,
+													Bagus Hendra Saputra,
+													Ajeng Hidayati,
+													Hondor Saragih,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/481">
+							Design and development of the spacelog web application for inventory management and asset tracking using QR codes at the Cyber Defense Center of the Ministry of Defense
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/51">
+							Jurnal Mandiri IT: Vol. 14 No. 3 (2026): Jan: Computer Science and Field
+						</a>
+					</li>
+																													<li>
+													Zerusealtin David Naibaho,
+													Hondor Saragih,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/492">
+							Automated news monitoring and sentiment analysis system using web scraping and large language models
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/51">
+							Jurnal Mandiri IT: Vol. 14 No. 3 (2026): Jan: Computer Science and Field
+						</a>
+					</li>
+																													<li>
+													Khaerul Imam Phatoni,
+													Rochedi Idul Adha,
+													Jonson Manurung,
+													M Azhar Prabukusumo,
+													Rizqullah Aryaputra Piliang,
+													Muhammad Sulthan Nasyira,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/478">
+							Implementation of gaming In the cloud through construct engine applications on heroku infrastructure
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/51">
+							Jurnal Mandiri IT: Vol. 14 No. 3 (2026): Jan: Computer Science and Field
+						</a>
+					</li>
+																													<li>
+													Rio Bintang Sadewa,
+													Hondor Saragih,
+													Nadiza Lediwara,
+												<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/334">
+							Development of android-based weapon monitoring application in the armory
+						</a>,
+						<a href="https://ejournal.isha.or.id/index.php/Mandiri/issue/view/39">
+							Jurnal Mandiri IT: Vol. 13 No. 2 (2024): CALL FOR PAPER !!!  Scope Computer Science
+						</a>
+					</li>
+							</ul>
+			<div id="articlesBySameAuthorPages">
+				<strong>1</strong>&nbsp;<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/469?articlesBySameAuthorPage=2#articlesBySameAuthor">2</a>&nbsp;<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/469?articlesBySameAuthorPage=2#articlesBySameAuthor">&gt;</a>&nbsp;<a href="https://ejournal.isha.or.id/index.php/Mandiri/article/view/469?articlesBySameAuthorPage=2#articlesBySameAuthor">&gt;&gt;</a>&nbsp;
+			</div>
+			</div>
+
+
+</div><!-- .page -->
+
+	</div><!-- pkp_structure_main -->
+
+									<div class="pkp_structure_sidebar left" role="complementary" aria-label="Sidebar">
+				<div class="pkp_block block_custom" id="customblock-accreditation">
+	<h2 class="title">Accreditation Certificate</h2>
+	<div class="content">
+		<p><a href="https://drive.google.com/file/d/1H5P1ymjJdLrngYPjwT3GA7ByQxeanVcB/view" target="_blank" rel="noopener"><img src="https://ejournal.isha.or.id/public/site/images/u4370617_ejournal/unnamed-11-5b7ee50c5b6e238d214cdb1254d0a39b.png" alt="" width="100%" height="100%"></a></p>
+<hr>
+<p><a href="https://sinta.kemdikbud.go.id/journals/profile/8971" target="_blank" rel="noopener"><img src="https://ejournal.isha.or.id/public/site/images/u4370617_ejournal/mandiri-it.jpg" alt="" width="1280" height="905"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-quick-menu">
+	<h2 class="title pkp_screen_reader">QUICK MENU</h2>
+	<div class="content">
+		<div class="content">
+<div style="margin: 0px 0px 0px 0px;"><span class="title">QUICK MENU</span></div>
+<div class="content">
+<ul>
+<li class="show"><a href="http://ejournal.isha.or.id/index.php/Mandiri/about/editorialTeam">Editorial Team</a></li>
+<li class="show"><a href="http://ejournal.isha.or.id/index.php/Mandiri/reviewer" target="_blank" rel="noopener">Reviewer</a></li>
+<li class="show"><a title="Peer Review Process" href="http://ejournal.isha.or.id/index.php/Mandiri/PRP" target="_blank" rel="noopener">Peer Review Process</a></li>
+<li class="show"><a title="Author Guideline" href="https://ejournal.isha.or.id/index.php/Mandiri/AG" target="_blank" rel="noopener">Author Guideline</a></li>
+<li class="show"><a title="Focus &amp; Scope" href="https://ejournal.isha.or.id/index.php/Mandiri/FS" target="_blank" rel="noopener">Focus &amp; Scope</a></li>
+<li class="show"><a title="Online Submission" href="https://ejournal.isha.or.id/index.php/Mandiri/OS" target="_blank" rel="noopener">Online Submission</a></li>
+<li class="show"><a title="Pulication Ethics" href="https://ejournal.isha.or.id/index.php/Mandiri/ep">Pulication Ethics</a></li>
+<li class="show"><a title="Author Fees" href="https://ejournal.isha.or.id/index.php/Mandiri/AF">Journal Fee</a></li>
+<li class="show"><a title="Copyright Notice" href="https://ejournal.isha.or.id/index.php/Mandiri/CN#" target="_blank" rel="noopener">Copyright Notice</a></li>
+<li class="show"><a href="http://statcounter.com/p12709723/summary/?guest=1">Visitor</a></li>
+<li class="show"><a href="https://ejournal.isha.or.id/index.php/Mandiri/indexing" target="_blank" rel="noopener">Indexing</a></li>
+</ul>
+</div>
+<div class="content">
+<div style="margin: 0px 0px 0px 0px;"><span class="title">TEMPLATE</span></div>
+<div class="content">
+<div style="margin: 0px 0px 0px 0px;"><br><a href="https://drive.google.com/file/d/1vDZ4BxVxm9w-1dAsRgxUPkj_9QLkTpYc/view?usp=sharing" target="_blank" rel="noopener"><img src="http://ejournal.isha.or.id/public/site/images/u4370617_ejournal/itos.png" alt="" width="66" height="81"><img src="http://ejournal.isha.or.id/public/site/images/u4370617_ejournal/instruction1.png" alt="" width="66" height="80"></a></div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+<div class="pkp_block block_web_feed">
+	<h2 class="title">Current Issue</h2>
+	<div class="content">
+		<ul>
+			<li>
+				<a href="https://ejournal.isha.or.id/index.php/Mandiri/gateway/plugin/WebFeedGatewayPlugin/atom">
+					<img src="https://ejournal.isha.or.id/lib/pkp/templates/images/atom.svg" alt="Atom logo">
+				</a>
+			</li>
+			<li>
+				<a href="https://ejournal.isha.or.id/index.php/Mandiri/gateway/plugin/WebFeedGatewayPlugin/rss2">
+					<img src="https://ejournal.isha.or.id/lib/pkp/templates/images/rss20_logo.svg" alt="RSS2 logo">
+				</a>
+			</li>
+			<li>
+				<a href="https://ejournal.isha.or.id/index.php/Mandiri/gateway/plugin/WebFeedGatewayPlugin/rss">
+					<img src="https://ejournal.isha.or.id/lib/pkp/templates/images/rss10_logo.svg" alt="RSS1 logo">
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="pkp_block block_language">
+	<h2 class="title">
+		Language
+	</h2>
+
+	<div class="content">
+		<ul>
+							<li class="locale_en_US current" lang="en-US">
+					<a href="https://ejournal.isha.or.id/index.php/Mandiri/user/setLocale/en_US?source=%2Findex.php%2FMandiri%2Farticle%2Fview%2F469">
+						English
+					</a>
+				</li>
+							<li class="locale_id_ID" lang="id-ID">
+					<a href="https://ejournal.isha.or.id/index.php/Mandiri/user/setLocale/id_ID?source=%2Findex.php%2FMandiri%2Farticle%2Fview%2F469">
+						Bahasa Indonesia
+					</a>
+				</li>
+					</ul>
+	</div>
+</div><!-- .block_language -->
+<div class="pkp_block block_information">
+	<h2 class="title">Information</h2>
+	<div class="content">
+		<ul>
+							<li>
+					<a href="https://ejournal.isha.or.id/index.php/Mandiri/information/readers">
+						For Readers
+					</a>
+				</li>
+										<li>
+					<a href="https://ejournal.isha.or.id/index.php/Mandiri/information/authors">
+						For Authors
+					</a>
+				</li>
+										<li>
+					<a href="https://ejournal.isha.or.id/index.php/Mandiri/information/librarians">
+						For Librarians
+					</a>
+				</li>
+					</ul>
+	</div>
+</div>
+
+			</div><!-- pkp_sidebar.left -->
+			</div><!-- pkp_structure_content -->
+
+<div class="pkp_structure_footer_wrapper" role="contentinfo">
+	<a id="pkp_content_footer"></a>
+
+	<div class="pkp_structure_footer">
+
+					<div class="pkp_footer_content">
+				<h3><a href="http://ejournal.isha.or.id/index.php/Mandiri/index" target="_blank" rel="bookmark noopener">Jurnal Mandiri IT</a></h3>
+<p><a href="https://iocscience.org/" target="_blank" rel="noopener">Institute of Computer Science (IOCS)</a><br />Alamat: Perumahan Romeby Lestari Blok C, No C14 Deliserdang, Sumatera Utara, Indonesia<br />email : jmandiri@iocspublisher.org<br /><img src="https://licensebuttons.net/l/by-nc/3.0/88x31.png" /><strong><br />Jurnal Mandiri IT</strong><br />is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a></p>
+<p><a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank" rel="noopener"><img src="https://c.statcounter.com/12709723/0/3bf610ed/1/" alt="Web Analytics Made Easy - Statcounter" /></a></p>
+			</div>
+		
+		<div class="pkp_brand_footer" role="complementary">
+			<a href="https://ejournal.isha.or.id/index.php/Mandiri/about/aboutThisPublishingSystem">
+				<img alt="More information about the publishing system, Platform and Workflow by OJS/PKP." src="https://ejournal.isha.or.id/templates/images/ojs_brand.png">
+			</a>
+		</div>
+	</div>
+</div><!-- pkp_structure_footer_wrapper -->
+
+</div><!-- pkp_structure_page -->
+
+<script src="https://ejournal.isha.or.id/lib/pkp/lib/vendor/components/jquery/jquery.min.js?v=3.3.0.14" type="text/javascript"></script><script src="https://ejournal.isha.or.id/lib/pkp/lib/vendor/components/jqueryui/jquery-ui.min.js?v=3.3.0.14" type="text/javascript"></script><script src="https://ejournal.isha.or.id/plugins/themes/default/js/lib/popper/popper.js?v=3.3.0.14" type="text/javascript"></script><script src="https://ejournal.isha.or.id/plugins/themes/default/js/lib/bootstrap/util.js?v=3.3.0.14" type="text/javascript"></script><script src="https://ejournal.isha.or.id/plugins/themes/default/js/lib/bootstrap/dropdown.js?v=3.3.0.14" type="text/javascript"></script><script src="https://ejournal.isha.or.id/plugins/themes/default/js/main.js?v=3.3.0.14" type="text/javascript"></script><script src="https://ejournal.isha.or.id/plugins/generic/citationStyleLanguage/js/articleCitation.js?v=3.3.0.14" type="text/javascript"></script>
+
+
+</body>
+</html>

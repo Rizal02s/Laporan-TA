@@ -1,0 +1,560 @@
+{
+  "hash": "805c8db341ffd5f8ffbd4c00bd8853b71f124253a252211d0404ae7847e5206a",
+  "role": "penilai_kedua",
+  "person": "A",
+  "answers": {
+    "J03WR9_P1_F16153": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Karena tim merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:14:11.357Z"
+    },
+    "J03WOH_P2_F109895": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:51:35.350Z"
+    },
+    "J03WPY_P1_F18898": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah mundur untuk melakukan defense",
+      "utc": "2026-11-02T16:52:48.986Z"
+    },
+    "J03WOY_P1_F53622": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:54:17.347Z"
+    },
+    "J03WN1_P1_F18331": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:54:36.115Z"
+    },
+    "J03WQQ_P1_F40421": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali",
+      "utc": "2026-11-02T16:54:56.577Z"
+    },
+    "J03WN1_P1_F14097": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:55:06.469Z"
+    },
+    "J03WMX_P1_F11238": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:55:14.665Z"
+    },
+    "J03WQQ_P1_F34290": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "berhasil melakukan blocking",
+      "utc": "2026-11-02T16:55:29.698Z"
+    },
+    "J03WN1_P1_F11312": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:55:40.761Z"
+    },
+    "J03WOH_P2_F144413": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:55:57.479Z"
+    },
+    "J03WMX_P2_F173779": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:56:06.618Z"
+    },
+    "J03WOY_P2_F110487": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:56:15.075Z"
+    },
+    "J03WN1_P1_F16874": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:56:22.755Z"
+    },
+    "J03WPY_P2_F151871": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:56:33.789Z"
+    },
+    "J03WPY_P2_F164008": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali2",
+      "utc": "2026-11-02T16:56:43.154Z"
+    },
+    "J03WMX_P1_F73879": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim melakukan defense normal tanpa pressing",
+      "utc": "2026-11-02T16:57:07.644Z"
+    },
+    "J03WN1_P1_F18114": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T16:57:24.556Z"
+    },
+    "J03WN1_P1_F12725": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali",
+      "utc": "2026-11-02T16:57:47.092Z"
+    },
+    "J03WMX_P2_F136239": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "terjadi kemelut di mulut gawang",
+      "utc": "2026-11-02T16:58:15.655Z"
+    },
+    "J03WOY_P1_F48730": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali",
+      "utc": "2026-11-02T16:58:22.027Z"
+    },
+    "J03WOH_P1_F41098": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali",
+      "utc": "2026-11-02T16:58:29.646Z"
+    },
+    "J03WR9_P1_F20354": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah melakukan serangan",
+      "utc": "2026-11-02T16:58:40.864Z"
+    },
+    "J03WR9_P2_F168795": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah melakukan serangan",
+      "utc": "2026-11-02T16:58:54.939Z"
+    },
+    "J03WR9_P2_F142425": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali",
+      "utc": "2026-11-02T16:59:02.977Z"
+    },
+    "J03WPY_P2_F152650": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:00:03.137Z"
+    },
+    "J03WQQ_P1_F68330": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali",
+      "utc": "2026-11-02T17:00:15.377Z"
+    },
+    "J03WMX_P2_F119897": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah tidak melakukan pressing ke bola",
+      "utc": "2026-11-02T17:00:31.575Z"
+    },
+    "J03WMX_P1_F12133": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali",
+      "utc": "2026-11-02T17:00:40.501Z"
+    },
+    "J03WR9_P1_F41036": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah tidak melakukan press ke bola",
+      "utc": "2026-11-02T17:00:59.571Z"
+    },
+    "J03WOY_P2_F113162": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali",
+      "utc": "2026-11-02T17:01:09.833Z"
+    },
+    "J03WMX_P1_F72996": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan sehingga mendapatkan bola kembali",
+      "utc": "2026-11-02T17:01:19.501Z"
+    },
+    "J03WOY_P2_F151362": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah melakukan defense ke kotak penalty",
+      "utc": "2026-11-02T17:01:35.674Z"
+    },
+    "J03WQQ_P1_F65601": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "tim merah berhasil mengambil bola dan melakukan counter attack",
+      "utc": "2026-11-02T17:02:16.840Z"
+    },
+    "J03WR9_P1_F51151": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:02:34.754Z"
+    },
+    "J03WN1_P1_F11184": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah mundur teratur untuk melakukan antisipasi serangan balik lawn",
+      "utc": "2026-11-02T17:03:16.521Z"
+    },
+    "J03WR9_P2_F104901": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:03:29.733Z"
+    },
+    "J03WPY_P1_F43062": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:03:39.263Z"
+    },
+    "J03WOH_P2_F104593": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:03:44.859Z"
+    },
+    "J03WOY_P1_F52330": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:03:54.357Z"
+    },
+    "J03WN1_P1_F11408": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "bola kemelut",
+      "utc": "2026-11-02T17:04:07.137Z"
+    },
+    "J03WR9_P2_F131322": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "vola kemelut di gawang",
+      "utc": "2026-11-02T17:04:23.168Z"
+    },
+    "J03WOY_P2_F164692": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah kebobolan",
+      "utc": "2026-11-02T17:04:38.218Z"
+    },
+    "J03WMX_P2_F118073": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:04:52.105Z"
+    },
+    "J03WMX_P1_F18417": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:05:25.993Z"
+    },
+    "J03WOH_P1_F74851": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "bola kemelut",
+      "utc": "2026-11-02T17:05:46.423Z"
+    },
+    "J03WPY_P1_F37619": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "belum ada pressing di bola",
+      "utc": "2026-11-02T17:06:18.718Z"
+    },
+    "J03WMX_P2_F135025": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "bola kemelut",
+      "utc": "2026-11-02T17:06:32.383Z"
+    },
+    "J03WOY_P2_F140470": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "defense menumpuk pemain di kotak penalty",
+      "utc": "2026-11-02T17:06:51.851Z"
+    },
+    "J03WOY_P2_F159287": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:07:02.207Z"
+    },
+    "J03WPY_P2_F135477": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:07:08.471Z"
+    },
+    "J03WQQ_P1_F58875": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:07:15.937Z"
+    },
+    "J03WMX_P1_F73826": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:07:21.533Z"
+    },
+    "J03WOH_P2_F116154": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:07:32.603Z"
+    },
+    "J03WOH_P1_F67732": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah melakukan serangan",
+      "utc": "2026-11-02T17:07:46.455Z"
+    },
+    "J03WMX_P1_F23089": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:07:55.111Z"
+    },
+    "J03WQQ_P2_F103359": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:08:36.626Z"
+    },
+    "J03WR9_P1_F69031": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:08:46.537Z"
+    },
+    "J03WPY_P1_F75152": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "tim merah kehilangan bola",
+      "utc": "2026-11-02T17:09:06.264Z"
+    },
+    "J03WPY_P1_F10752": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:09:14.202Z"
+    },
+    "J03WOH_P2_F103255": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:09:19.788Z"
+    },
+    "J03WOH_P2_F154253": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:09:28.458Z"
+    },
+    "J03WR9_P1_F14353": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:09:34.932Z"
+    },
+    "J03WMX_P1_F35105": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:09:43.066Z"
+    },
+    "J03WQQ_P2_F116346": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "bola kemelut",
+      "utc": "2026-11-02T17:09:53.961Z"
+    },
+    "J03WOY_P2_F110229": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:10:01.162Z"
+    },
+    "J03WN1_P1_F11356": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "oemain merah menumpuk pemain di kotak penalty untuk defense",
+      "utc": "2026-11-02T17:10:26.073Z"
+    },
+    "J03WN1_P1_F10817": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:10:32.659Z"
+    },
+    "J03WOH_P2_F132873": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:10:40.105Z"
+    },
+    "J03WQQ_P1_F69930": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:10:48.587Z"
+    },
+    "J03WOY_P2_F163982": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:11:53.951Z"
+    },
+    "J03WMX_P1_F51445": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "melakukan defense ke belkang",
+      "utc": "2026-11-02T17:12:06.905Z"
+    },
+    "J03WPY_P1_F58413": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:12:13.267Z"
+    },
+    "J03WMX_P2_F115687": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:12:20.504Z"
+    },
+    "J03WMX_P2_F104384": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:12:30.947Z"
+    },
+    "J03WQQ_P2_F101350": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:13:01.910Z"
+    },
+    "J03WOH_P2_F136947": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:13:12.155Z"
+    },
+    "J03WQQ_P1_F78927": {
+      "person": "A",
+      "label": 0,
+      "confidence": 3,
+      "notes": "bola kemelut",
+      "utc": "2026-11-02T17:13:22.531Z"
+    },
+    "J03WR9_P2_F147903": {
+      "person": "A",
+      "label": 1,
+      "confidence": 3,
+      "notes": "Tim Merah melakukan pressing bersamaan",
+      "utc": "2026-11-02T17:13:43.897Z"
+    }
+  }
+}

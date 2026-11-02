@@ -259,6 +259,7 @@ def train_temporal_gnn(
     learning_rate: float = 1e-3,
     weight_decay: float = 1e-4,
     minimum_per_class_per_split: int = 5,
+    threshold_selector=choose_validation_threshold,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series]:
     """Train with validation early stopping and evaluate once on test."""
 
@@ -364,7 +365,7 @@ def train_temporal_gnn(
         loaders["validation"],
         device,
     )
-    threshold = choose_validation_threshold(
+    threshold = threshold_selector(
         validation_truth,
         validation_probability,
     )

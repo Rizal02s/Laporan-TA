@@ -174,6 +174,8 @@ def run_baseline_training(
     final_run: bool,
     random_state: int = 42,
     minimum_per_class_per_split: int = 5,
+    model_names: tuple[str, ...] | None = None,
+    threshold_selector=choose_validation_threshold,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series]:
     """Train baselines and save models, predictions, metrics, and metadata."""
 
@@ -203,6 +205,8 @@ def run_baseline_training(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     models = _build_models(random_state)
+    if model_names is not None:
+        models = {name: models[name] for name in model_names}
     metric_records = []
     prediction_records = []
 
@@ -222,7 +226,7 @@ def run_baseline_training(
         validation_probabilities = model.predict_proba(
             validation[BASELINE_FEATURE_COLUMNS]
         )[:, 1]
-        threshold = choose_validation_threshold(
+        threshold = threshold_selector(
             validation["gegenpressing_label"].astype(int).to_numpy(),
             validation_probabilities,
         )

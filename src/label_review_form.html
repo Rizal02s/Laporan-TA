@@ -1,0 +1,39 @@
+<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tinjauan episode gegenpressing</title>
+<style>body{max-width:880px;margin:20px auto;padding:0 12px;font:16px system-ui;color:#173037}h1{font-size:24px}canvas{width:100%;background:#285e4b}input,textarea,select,button{font:inherit;padding:5px;margin:3px}textarea{width:94%}button{cursor:pointer}small{display:block}#msg{font-weight:bold}</style>
+<h1>Tinjauan episode gegenpressing</h1>
+<p id="role"></p><p>Amati 0–2 detik sesudah kehilangan bola. Lingkaran merah adalah tim yang kehilangan bola, segitiga biru adalah lawan, dan titik kuning adalah bola. Pilih 1 bila pemain segera dan secara berkelanjutan menekan pembawa bola atau menutup opsi umpan di sekitarnya. Pilih 0 bila tidak tampak tekanan segera atau tim mundur. Pilih ragu bila bukti tidak cukup, misalnya saat duel atau permainan terhenti.</p>
+<label>Nama atau inisial penilai <input id="person" autocomplete="off"></label>
+<p><select aria-label="Episode" id="cases"></select> <span id="progress"></span></p>
+<canvas id="field" width="840" height="544" aria-label="Animasi pelacakan dua tim dan bola"></canvas>
+<p><button id="play">Putar / jeda</button><input aria-label="Waktu" id="slider" type="range" min="0" max="50" value="0"><span id="sec"></span></p>
+<p><label>Label <select id="label"><option value="">Pilih</option><option value="1">1 · Gegenpressing</option><option value="0">0 · Bukan gegenpressing</option><option value="-1">−1 · Ragu</option></select></label>
+<label>Keyakinan <select id="confidence"><option value="">Pilih</option><option value="1">1 · Rendah</option><option value="2">2 · Sedang</option><option value="3">3 · Tinggi</option></select></label></p>
+<textarea id="notes" rows="2" placeholder="Alasan singkat berdasarkan gerakan yang terlihat"></textarea>
+<p><button id="save">Simpan keputusan</button><button id="download">Unduh jawaban JSON</button></p>
+<p id="msg" role="status"></p><small>Simpan setiap keputusan, lalu unduh JSON sebagai cadangan sebelum menutup halaman. Untuk melanjutkan di browser lain, buka cadangan di bawah. Penilai kedua mengembalikan JSON setelah semua episode selesai.</small>
+<input aria-label="Muat cadangan" type="file" id="restore" accept=".json">
+<script>
+const data=__DATA__, $=id=>document.getElementById(id), ids=Object.keys(data.episodes), key="vaep-p2-"+data.hash+"-"+data.role+"-"+ids.join("|");
+let saved={}, wi=0, timer=null;
+function load(a){if(a.hash!==data.hash||a.role!==data.role||!a.answers||typeof a.answers!=="object"||Object.keys(a.answers).some(id=>!ids.includes(id)))throw Error("Cadangan berbeda.");saved=a.answers;$("person").value=a.person||""}
+try{const raw=localStorage.getItem(key);if(raw)load(JSON.parse(raw))}catch{}
+function record(){return {hash:data.hash,role:data.role,person:$("person").value.trim(),answers:saved}}
+$("role").textContent=data.title;
+for(const [i,id] of ids.entries())$("cases").add(new Option((i+1)+" · "+id,id));
+function draw(){const a=data.episodes[$("cases").value],ctx=$("field").getContext("2d"),w=840,h=544;
+ctx.clearRect(0,0,w,h);ctx.strokeStyle="#c9dbc8";ctx.lineWidth=2;const X=x=>15+810*x/1000,Y=y=>15+514*y/1000;
+ctx.strokeRect(15,15,810,514);ctx.beginPath();ctx.moveTo(420,15);ctx.lineTo(420,529);ctx.stroke();ctx.beginPath();ctx.arc(420,272,70,0,7);ctx.stroke();for(const x of [15,825-127])ctx.strokeRect(x,120,127,304);
+const frame=a.frames[wi];for(let i=0;i<a.teams.length;i++){const x=X(frame[2*i]),y=Y(frame[2*i+1]),team=a.teams[i];ctx.beginPath();ctx.fillStyle=team===2?"#ffdb41":team===1?"#f57872":"#80c6ff";ctx.strokeStyle="#162832";if(team===0){ctx.moveTo(x,y-6);ctx.lineTo(x-6,y+5);ctx.lineTo(x+6,y+5);ctx.closePath()}else ctx.arc(x,y,team===2?4:6,0,7);ctx.fill();ctx.stroke()}
+$("sec").textContent=(wi/25).toFixed(2)+" detik";$("slider").value=wi}
+function stop(){clearInterval(timer);timer=null}
+function show(){stop();wi=0;const v=saved[$("cases").value]||{};for(const k of ["label","confidence","notes"])$(k).value=v[k]??"";$("progress").textContent=Object.keys(saved).length+" / "+ids.length+" tersimpan";draw()}
+$("cases").onchange=show;$("play").onclick=()=>{if(timer){stop();return}if(wi===50)wi=0;timer=setInterval(()=>{wi++;draw();if(wi===50)stop()},40)};
+$("slider").oninput=()=>{stop();wi=Number($("slider").value);draw()};
+$("save").onclick=()=>{let person=$("person").value.trim(),id=$("cases").value;if(!person||!$("notes").value.trim()||!$("confidence").value||!$("label").value){$("msg").textContent="Isi nama, label, keyakinan dan alasan.";return}
+saved[id]={person,label:Number($("label").value),confidence:Number($("confidence").value),notes:$("notes").value.trim(),utc:new Date().toISOString()};let msg="Tersimpan.";try{localStorage.setItem(key,JSON.stringify(record()))}catch{msg="Unduh JSON sekarang agar keputusan tersimpan di disk."}
+const next=ids.find(id=>!saved[id]);if(next)$("cases").value=next;show();$("msg").textContent=msg+" "+(next?"":"Semua selesai. Unduh jawaban JSON.")};
+$("download").onclick=()=>{if(!Object.keys(saved).length){$("msg").textContent="Belum ada keputusan tersimpan. Isi nama, label, keyakinan dan alasan, lalu klik Simpan keputusan.";alert($("msg").textContent);return}let link=document.createElement("a");link.href=URL.createObjectURL(new Blob([JSON.stringify(record(),null,2)],{type:"application/json"}));link.download=data.role+".json";link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000)};
+$("restore").onchange=async e=>{try{const backup=JSON.parse(await e.target.files[0].text());if(!Object.keys(backup.answers||{}).length)throw Error("Cadangan kosong. Jawaban saat ini tetap tersedia.");load(backup);show();$("msg").textContent="Cadangan dimuat."}catch(err){$("msg").textContent=err.message}};
+show();
+</script></html>
